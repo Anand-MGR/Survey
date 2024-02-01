@@ -764,12 +764,6 @@
     <Content Include="Views\ProjectSurvey\AssignSurvey.cshtml" />
     <Content Include="Views\ProjectSurvey\GetAssign.cshtml" />
     <Content Include="Views\ProjectSurvey\_PGetAssign.cshtml" />
-    <Content Include="Views\Questions\CLPM.cshtml" />
-    <Content Include="Views\Questions\CLPE.cshtml" />
-    <Content Include="Views\Questions\HDPM.cshtml" />
-    <Content Include="Views\Questions\HDPE.cshtml" />
-    <Content Include="Views\Questions\PEPM.cshtml" />
-    <Content Include="Views\Questions\PMPE.cshtml" />
     <Content Include="Views\Questions\ReviewRating.cshtml" />
     <Content Include="Views\ProjectSurvey\ProjectSurveyAssign.cshtml" />
     <Content Include="Views\Questions\GetClData.cshtml" />
@@ -793,9 +787,6 @@
     <Content Include="Views\User\UserRole.cshtml" />
     <Content Include="Views\User\_UserRoleDashboard.cshtml" />
     <Content Include="Views\Questions\_QuestionsTypeDashboard.cshtml" />
-    <Content Include="Views\Questions\PESA.cshtml" />
-    <Content Include="Views\Questions\PMSA.cshtml" />
-    <Content Include="Views\Questions\SAPE.cshtml" />
     <Content Include="Views\Questions\QuestionsTypeDashboard.cshtml" />
     <Content Include="Views\Questions\QuestionsTypeForm.cshtml" />
     <Content Include="Views\ProjectSurvey\EmailTemplate.cshtml" />
@@ -805,6 +796,7 @@
     <Content Include="Views\ProjectSurvey\_EmailDashboard.cshtml" />
     <Content Include="Views\ProjectSurvey\_EmailMapDashboard.cshtml" />
     <Content Include="Views\Questions\ReviewRatingpage.cshtml" />
+    <Content Include="Views\Questions\RatingPage.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

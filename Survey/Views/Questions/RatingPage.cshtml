@@ -1,11 +1,13 @@
-﻿@model Survey.Models.CLPEModel
+﻿@model Survey.Models.RatingPageModel
 @{
-    ViewBag.Title = "CLPE";
-    // Layout = "~/Views/Shared/_LayoutSurvey.cshtml";
+    ViewBag.Title = "RatingPage";
+    //Layout = "~/Views/Shared/_LayoutSurvey.cshtml";
 }
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css">
 <link href="~/Css/Ratepagenew.css" rel="stylesheet" />
-<h2 style="font-family: 'Times New Roman';text-align:center;">Client Rating To Project Engineer</h2>
+
+
+<h2 style="font-family: 'Times New Roman';text-align:center;">@Model.objTotalQtype.Q_Qus</h2>
 
 <div>
     <p style="float:left;font-size:2rem;font-family:'Times New Roman';">Project Name :@Model.RatingHeader.PS_ProjectName</p>
@@ -13,7 +15,7 @@
 <br />
 <br />
 <div>
-    <p style="float:left;font-size:2rem;font-family:'Times New Roman';">Rating From :<b id="Fromrating">@Model.RatingHeader.RatingFrom</b></p>
+    <p style="float:left;font-size:2rem;font-family:'Times New Roman';">Rating From :<b id="Fromrating">@Model.RatingHeader.RatingFrom</b> </p>
 </div>
 
 <div>
@@ -25,18 +27,21 @@
 
 
 <br />
+
 <div>
     @if (Model.RatingHeader.SurveyStatus == false)
     {
+
         foreach (var x in Model.QuestionnaireLst)
         {
             <div>
                 <br />
                 <label>@x.Q_Questions</label><br />
 
-                <div class="stars">
+                <div class="stars" style=" font-family: 'Times New Roman'; font-size: medium;">
                     <form>
-                  
+                        @*@Html.HiddenFor(m => m.Question_@x.QuestionID)
+                            @Html.HiddenFor(m => m.Answer,@x.QuestionID)*@
                         <input class="star star5" id="star5-@x.QuestionID" type="radio" name="star" value="5-@x.QuestionID" onclick="ratingclick(5,1)" />
                         <label class="star star5" for="star5-@x.QuestionID"></label>
                         <input class="star star4" id="star4-@x.QuestionID" type="radio" name="star" value="4-@x.QuestionID" onclick="ratingclick(4,1)" />
@@ -50,10 +55,16 @@
                     </form>
                 </div>
             </div>
+            <div id="QType" style="display:none;">@x.QuestionType</div>
         }
 
+
+
+
+
+        <br />
         <div id="selectedratings" style="display:none;"></div>
-        <button type="submit" id="submitRatings" class="btn btn-primary btn-lg"  onclick="submitbtnclick()">Submit</button>
+        <button type="submit" id="submitRatings" class="btn btn-primary btn-lg" onclick="submitbtnclick()">Submit</button>
     }
     else
     {
@@ -64,7 +75,11 @@
     }
 </div>
 
+
+
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+
 
 <script type="text/javascript">
     $(document).ready(function () {
@@ -84,15 +99,17 @@
 
             var psId = $("#PSId").text();
             var prId = $("#PRId").text();
+            var QType = $("#QType").text();
             var ratingFrom = $("#Fromrating").text();
 
             $.ajax({
                 type: "POST",
-                url: "/Questions/CLPE",
+                url: "/Questions/RatingPage",
                 data: {
                     ratings: ratings,
                     psId: psId,
                     prId: prId,
+                    QType: QType,
                     ratingFrom: ratingFrom
                 },
                 success: function (result) {
@@ -106,55 +123,3 @@
         });
     });
 </script>
-
-@*<script  type="text/javascript">
-    $(document).ready(function () {
-
-        $("#submitRatingsclpe").click(function () {
-            alert("hi");
-
-            var ratingsclpe = [];
-
-
-            $('input[name="star"]:checked').each(function () {
-
-                var ratingValue = $(this).val().split('-')[0];
-                var questionID = $(this).val().split('-')[1];
-
-                ratings.push({ Question: questionID, Answer: ratingValue });
-            });
-
-            var PSIDCLPE = $("#PSIdclpe").text();
-            var PRIDCLPE = $("#PRIdclpe").text();
-            var ratingFromCLPE = $("#Fromratingclpe").text();
-
-            $.ajax({
-                type: "POST",
-                url: "/Questions/CLPE",
-                data: {
-                    var ratingsclpe: ratingsclpe,
-                    PSIDCLPE: PSIDCLPE,
-                    PRIDCLPE: PRIDCLPE,
-                    ratingFromCLPE: ratingFromCLPE
-                },
-                success: function (result) {
-
-                    console.log(result);
-                },
-                error: function (error) {
-
-                    console.log(error);
-                }
-            });
-        });
-    });
-</script>*@
-
-
-
-
-
-
-
-
-
