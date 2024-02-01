@@ -108,8 +108,7 @@ namespace Survey.Controllers
             }
 
             ViewData["Mode"] = "edit";
-
-           
+                       
             ObjSurveyMaster.objFBModel = SuvEnt.Database.SqlQuery<FeedbackViewModel>("usp_GetFeedBackDetailsBasedID @p0", FD_ID).FirstOrDefault();
             //ObjSurveyMaster.ddlUserStatus = SuvEnt.Database.SqlQuery<UserStatus>("usp_GetUserstatusUST").Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.Name }).ToList();
 
