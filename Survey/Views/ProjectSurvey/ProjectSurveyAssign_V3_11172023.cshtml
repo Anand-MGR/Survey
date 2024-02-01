@@ -1,0 +1,347 @@
+﻿@model Survey.Models.ProjectMasterModel
+
+@{
+    ViewBag.Title = "ProjectSurveyAssign";
+    Layout = "~/Views/Shared/_LayoutSurvey.cshtml";
+}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+
+<h2>Assign Project Survey </h2>
+
+@using (Html.BeginForm("ProjectSurveyAssign", "ProjectSurvey", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <button type="button" class="btn btn-primary" style="float:right;" id="backtodashboard">
+            Back To Dashboard
+        </button>
+
+
+        <br />
+        <hr />
+        <div>
+            @*@Html.ValidationSummary(true, "", new { @class = "text-danger" })*@
+            <form control="" class="form-group">
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.objProjectsurveymodel.PS_ProjectName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.HiddenFor(model => model.objProjectsurveymodel.PS_ID, new { htmlAttributes = new { @class = "form-control" } })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.objProjectsurveymodel.PS_ProjectName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.objProjectsurveymodel.PS_ProjectName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.objProjectsurveymodel.PS_ProjectCode, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.objProjectsurveymodel.PS_ProjectCode, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.objProjectsurveymodel.PS_ProjectCode, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.objProjectsurveymodel.PS_ClientName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.objProjectsurveymodel.PS_ClientName, new { htmlAttributes = new { @class = "form-control", id = "PS_ClientName" } })
+                        @Html.ValidationMessageFor(model => model.objProjectsurveymodel.PS_ClientName, "", new { @class = "text-danger" })
+                        <!--<p id="suggestion-container" class="form-group" style="display:none;">-->
+                        <!-- New dropdown options will be added here -->
+                        <!--</p>-->
+                    </div>
+
+                    <p id="suggestion-container" class="form-control" style="display:none; width:30%;">
+
+                    </p>
+                    <div id="dropdownContainer" style="display:none;"></div>
+
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.objProjectsurveymodel.PS_Client_Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.objProjectsurveymodel.PS_Client_Email, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.objProjectsurveymodel.PS_Client_Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.objProjectsurveymodel.PS_PM_Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.objProjectsurveymodel.PS_PM_Name, new { htmlAttributes = new { @class = "form-control", id = "PS_PM_Name" } })
+                        @Html.ValidationMessageFor(model => model.objProjectsurveymodel.PS_PM_Name, "", new { @class = "text-danger" })
+                    </div>
+                    <p id="suggestion-containerpm" class="form-control" style="display:none; width:30%;">
+
+                    </p>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.objProjectsurveymodel.PS_PM_Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.objProjectsurveymodel.PS_PM_Email, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.objProjectsurveymodel.PS_PM_Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.objProjectsurveymodel.PS_PE_Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.objProjectsurveymodel.PS_PE_Name, new { htmlAttributes = new { @class = "form-control", id = "PS_PE_Name" } })
+                        @Html.ValidationMessageFor(model => model.objProjectsurveymodel.PS_PE_Name, "", new { @class = "text-danger" })
+                    </div>
+                    <p id="suggestion-containerpe" class="form-control" style="display: none; width: 30%;">
+
+                    </p>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.objProjectsurveymodel.PS_PE_Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.objProjectsurveymodel.PS_PE_Email, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.objProjectsurveymodel.PS_PE_Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.objProjectsurveymodel.PS_HD_Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.objProjectsurveymodel.PS_HD_Name, new { htmlAttributes = new { @class = "form-control", id = "PS_HD_Name" } })
+                        @Html.ValidationMessageFor(model => model.objProjectsurveymodel.PS_HD_Name, "", new { @class = "text-danger" })
+                    </div>
+                    <p id="suggestion-containerhd" class="form-control" style="display: none; width: 30%;">
+
+                    </p>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.objProjectsurveymodel.PS_HD_Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.objProjectsurveymodel.PS_HD_Email, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.objProjectsurveymodel.PS_HD_Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Create" class="btn btn-default" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+}
+<script>
+    document.getElementById("backtodashboard").onclick = function () {
+        location.href = '@Url.Action("GetCLData","Questions")';
+    };
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#PS_ClientName').keyup(function () {
+            var inputVal = $(this).val();
+            var URid = "6";
+            var arraylist = "";
+            if (inputVal.length == "0") {
+                $('#objProjectsurveymodel_PS_Client_Email').val('');
+                $('#suggestion-container').html('');
+                $('#suggestion-container').hide();
+            }
+
+            if (inputVal.length) {
+                $.get('@Url.Action("GetSuggestions", "ProjectSurvey")', { input: inputVal, URid: URid }, function (data) {
+                    if (data.length === 0) {
+                        $('#suggestion-container').html('');
+                        $('#suggestion-container').hide();
+                    } else {
+                        var suggestionOptions = '';
+                        $.each(data, function (index, value) {
+                            suggestionOptions += '<span class="suggestion-item" style="cursor: pointer">' + value + '</span><br>';
+                        });
+
+                        $('#suggestion-container').html(suggestionOptions);
+                        $('#suggestion-container').show();
+
+                        $('.suggestion-item').on('click', function () {
+                            var selectedValue = $(this).text();
+                            $('#PS_ClientName').val(selectedValue);
+                            $.get('@Url.Action("GetClientEmail", "ProjectSurvey")', { clientName: selectedValue, URid: URid },
+                                function (data) {
+                                    $('#objProjectsurveymodel_PS_Client_Email').val(data);
+                                });
+                            $('#suggestion-container').hide();
+                        });
+                    }
+                });
+            }
+        });
+
+        // Event listener for clearing the suggestion container when input is empty
+        $('#PS_ClientName').keyup(function () {
+            if ($(this).val() === '') {
+                $('#suggestion-container').html('');
+                $('#suggestion-container').hide();
+            }
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        $('#PS_PM_Name').keyup(function () {
+            var inputVal = $(this).val();
+            var URid = "2";
+            var arraylist = "";
+            if (inputVal.length == "0") {
+                $('#objProjectsurveymodel_PS_PM_Email').val('');
+                $('#suggestion-containerpm').html('');
+                $('#suggestion-containerpm').hide();
+            }
+
+            if (inputVal.length) {
+                $.get('@Url.Action("GetSuggestions", "ProjectSurvey")', { input: inputVal, URid: URid }, function (data) {
+                    if (data.length === 0) {
+                        $('#suggestion-containerpm').html('');
+                        $('#suggestion-containerpm').hide();
+                    } else {
+                        var suggestionOptions = '';
+                        $.each(data, function (index, value) {
+                            suggestionOptions += '<span class="suggestion-item" style="cursor: pointer">' + value + '</span><br>';
+                        });
+
+                        $('#suggestion-containerpm').html(suggestionOptions);
+                        $('#suggestion-containerpm').show();
+
+                        $('.suggestion-item').on('click', function () {
+                            var selectedValue = $(this).text();
+                            $('#PS_PM_Name').val(selectedValue);
+                            $.get('@Url.Action("GetClientEmail", "ProjectSurvey")', { clientName: selectedValue },
+                                function (data) {
+                                  //  alert(data);
+                                    $('#objProjectsurveymodel_PS_PM_Email').val(data);
+                                });
+                            $('#suggestion-containerpm').hide();
+                        });
+                    }
+                });
+            }
+        });
+
+        $('#PS_PM_Name').keyup(function () {
+            if ($(this).val() === '') {
+                $('#suggestion-containerpm').html('');
+                $('#suggestion-containerpm').hide();
+            }
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        $('#PS_PE_Name').keyup(function () {
+            var inputVal = $(this).val();
+            var URid = "3";
+            var arraylist = "";
+            if (inputVal.length == "0") {
+                $('#objProjectsurveymodel_PS_PE_Email').val('');
+                $('#suggestion-containerpe').html('');
+                $('#suggestion-containerpe').hide();
+            }
+
+            if (inputVal.length) {
+                $.get('@Url.Action("GetSuggestions", "ProjectSurvey")', { input: inputVal, URid: URid }, function (data) {
+                    if (data.length === 0) {
+                        $('#suggestion-containerpe').html('');
+                        $('#suggestion-containerpe').hide();
+                    } else {
+                        var suggestionOptions = '';
+                        $.each(data, function (index, value) {
+                            suggestionOptions += '<span class="suggestion-item" style="cursor: pointer">' + value + '</span><br>';
+                        });
+
+                        $('#suggestion-containerpe').html(suggestionOptions);
+                        $('#suggestion-containerpe').show();
+
+                        $('.suggestion-item').on('click', function () {
+                            var selectedValue = $(this).text();
+                            $('#PS_PE_Name').val(selectedValue);
+                            $.get('@Url.Action("GetClientEmail", "ProjectSurvey")', { clientName: selectedValue },
+                                function (data) {
+                                    $('#objProjectsurveymodel_PS_PE_Email').val(data);
+                                });
+                            $('#suggestion-containerpe').hide();
+                        });
+                    }
+                });
+            }
+        });
+
+        $('#PS_PE_Name').keyup(function () {
+            if ($(this).val() === '') {
+                $('#suggestion-containerpe').html('');
+                $('#suggestion-containerpe').hide();
+            }
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        $('#PS_HD_Name').keyup(function () {
+            var inputVal = $(this).val();
+            var URid = "4";
+            var arraylist = "";
+            if (inputVal.length == "0") {
+                $('#objProjectsurveymodel_PS_HD_Email').val('');
+                $('#suggestion-containerhd').html('');
+                $('#suggestion-containerhd').hide();
+            }
+
+            if (inputVal.length) {
+                $.get('@Url.Action("GetSuggestions", "ProjectSurvey")', { input: inputVal, URid: URid }, function (data) {
+                    if (data.length === 0) {
+                        $('#suggestion-containerhd').html('');
+                        $('#suggestion-containerhd').hide();
+                    } else {
+                        var suggestionOptions = '';
+                        $.each(data, function (index, value) {
+                            suggestionOptions += '<span class="suggestion-item" style="cursor: pointer">' + value + '</span><br>';
+                        });
+
+                        $('#suggestion-containerhd').html(suggestionOptions);
+                        $('#suggestion-containerhd').show();
+
+                        $('.suggestion-item').on('click', function () {
+                            var selectedValue = $(this).text();
+                            $('#PS_HD_Name').val(selectedValue);
+                            $.get('@Url.Action("GetClientEmail", "ProjectSurvey")', { clientName: selectedValue },
+                                function (data) {
+                                    $('#objProjectsurveymodel_PS_HD_Email').val(data);
+                                });
+                            $('#suggestion-containerhd').hide();
+                        });
+                    }
+                });
+            }
+        });
+
+        $('#PS_HD_Name').keyup(function () {
+            if ($(this).val() === '') {
+                $('#suggestion-containerhd').html('');
+                $('#suggestion-containerhd').hide();
+            }
+        });
+    });
+</script>
+

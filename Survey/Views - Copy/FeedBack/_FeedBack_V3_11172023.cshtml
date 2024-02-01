@@ -1,0 +1,67 @@
+﻿@model Survey.Models.AssignSurveyMasterModel
+
+<table id="tbldocuments" class="display">
+    <tr>
+        <th>Name</th>
+        <th>Date</th>
+        <th>Subject</th>
+        <th>Description</th>
+        <th>response</th>
+        <th>Edit</th>
+        @*<th>User Role</th>
+            <th>Depot</th>
+            <th>Reset Password</th>
+            <th>Status</th>
+            <th>Edit</th>*@
+    </tr>
+    <tbody>
+        @foreach (var x in Model.LstFbModel)
+        {
+            <tr>
+                <td>@x.FD_Name</td>
+                <td>@x.FD_Date</td>
+                <td>@x.FD_Subject</td>
+                <td>@x.FD_Description</td>
+                <td>@x.FD_Response</td>
+                @*<td>
+                        <img src='~/Images/editu.png' onclick="EditFBDashboard(@x.FD_ID)" width="20" style="cursor:pointer;" title="Edit" />
+                    </td>*@
+                <td><i style='font-size:24px' class='far' onclick="EditFBDashboard(@x.FD_ID)">&#xf044;</i></td>
+            </tr>
+
+        }
+
+    </tbody>
+</table>
+
+<script type="text/javascript">
+
+    function resetdata(x) {
+
+        //alert(x);
+        var result = confirm("Are you sure you want to Reset the Password");
+        if (result) {
+            $.ajax({
+                type: "Post",
+                url: '@Url.Action("Resertpassword", "User")',
+                data: '{ID: "' + x + '"}',
+                contentType: "application/json; charset=utf-8",
+                dataType: "html",
+                success: function (data) {
+
+                }
+            });
+          }
+    }
+
+    function EditFBDashboard(FD_ID) {
+      /*  alert(FD_ID);*/
+           var link = '@Url.Action("EditFeedback", "FeedBack", new { FD_ID = "replace", Mode = "Modes" })';
+        link = link.replace("replace", FD_ID);
+        link = link.replace("Modes", "Edit");
+         window.location.href = link.replace(/&amp;/g, '&');
+
+    }
+
+</script>
+

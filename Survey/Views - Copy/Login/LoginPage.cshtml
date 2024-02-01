@@ -1,0 +1,177 @@
+﻿@model Survey.Models.LoginModel
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+<style>
+    body {
+        overflow: hidden;
+    }
+</style>
+<html lang="en">
+
+<head>
+    <title>Survey Spyder</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    @*<link rel="icon" type="image/png" href="~/images/icons/favicon.ico" />*@
+    @*<img src="~/images/icons/favicon.ico" />*@
+    <!--===============================================================================================-->
+
+    <link href="~/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <!--===============================================================================================-->
+
+    <link href="~/fonts/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <!--===============================================================================================-->
+
+    <link href="~/fonts/Linearicons-Free-v1.0.0/icon-font.min.css" rel="stylesheet" />
+    <!--===============================================================================================-->
+
+    <link href="~/vendor/animate/animate.css" rel="stylesheet" />
+    <!--===============================================================================================-->
+
+    <link href="~/vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" />
+    <!--===============================================================================================-->
+
+    <link href="~/vendor/animsition/css/animsition.css" rel="stylesheet" />
+    <!--===============================================================================================-->
+
+    <link href="~/vendor/select2/select2.min.css" rel="stylesheet" />
+    <!--===============================================================================================-->
+
+    <link href="~/vendor/daterangepicker/daterangepicker.css" rel="stylesheet" />
+    <!--===============================================================================================-->
+
+    <link href="~/Css/util.css" rel="stylesheet" />
+
+    <link href="~/Css/main.css" rel="stylesheet" />
+    <!--===============================================================================================-->
+</head>
+
+<body>
+    @using (Html.BeginForm())
+    {
+        <div class="limiter">
+            <div class="container-login100">
+                <div class="wrap-login100">
+                    <div class="login100-form-title" style=" background-image: url('../../images/bg-01.jpg');">
+                        <span class="login100-form-title-1">
+                            Sign In
+                        </span>
+                    </div>
+
+                    <form class="login100-form validate-form">
+                        <div id="Messagediv">
+                            @{
+                                if (ViewBag.ErrorMessage != null)
+                                {
+                                    <div class="alert alert-danger">
+                                        @ViewBag.ErrorMessage
+                                    </div>
+                                }
+                            }
+                        </div>
+
+
+                        @*<div class="space">
+                    <label class="lable-field1" for="Name">Username</label>
+                    @Html.TextBoxFor(m => m.UserName, new { autocomplete = "off", @class = "input100", @placeholder = "Username" })
+                    <label class="lable-field1" for="Name">Password</label>
+                    @Html.PasswordFor(m => m.Password, new { autocomplete = "off", @class = "input100", @placeholder = "Password" })
+
+                </div>*@
+                        <div class="wrap-input100 validate-input m-b-26" data-validate="Username is required">
+
+                            <span class="label-input100">Username</span>
+                            @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger", @style = "color:red; margin-left:4%;font-size:12px;" })
+                            @Html.TextBoxFor(m => m.UserName, new { autocomplete = "off", @class = "input100", @placeholder = "Username", maxlength = "25", @id = "Username" })
+
+                            @*<input class="input100" type="text" name="username" placeholder="Enter username">*@
+                            <span class="focus-input100"></span>
+                        </div>
+
+                        <div class="wrap-input100 validate-input m-b-18" data-validate="Password is required">
+                            <span class="label-input100">Password</span>
+
+                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger", @style = "color:red; margin-left:4%;font-size:12px;" })
+                            @Html.PasswordFor(m => m.Password, new { autocomplete = "off", @class = "input100", @placeholder = "Password", maxlength = "20", @id = "Username" })
+                            @*<input class="input100" type="password" name="pass" placeholder="Enter password">*@
+
+                            <span class="focus-input100"></span>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-9 col-md-offset-2 col-sm-9 col-sm-offset-1">
+                                <div class="btn-office hvr-bounce-in" onclick="location.href='@Url.Action("SignIn", "Login")'">
+                                    @*<img class="img-responsive office" style="width:5%;height:5%;margin-left:5%;margin-top:2%" src="~/Images/office.jpeg" />
+                            <span style="color: white; margin-top:-10px" class="officetext">Sign in with Office 365</span>*@
+                                    <button>Office365</button>
+                                </div>
+                            </div>
+                        </div>
+                
+                <div class="form-group row">
+                    <div class="col-md-9 col-md-offset-2 col-sm-9 col-sm-offset-1">
+                        <div class="btn-office hvr-bounce-in" onclick="location.href='@Url.Action("SignOut", "Login")'">
+                            @*<img class="img-responsive office" style="width:5%;height:5%;margin-left:5%;margin-top:2%" src="~/Images/office.jpeg" />
+                    <span style="color: white; margin-top:-10px" class="officetext">Sign in with Office 365</span>*@
+                            <button>Office365 SignOut</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="container-login100-form-btn">
+                    <button class="login100-form-btn" type="submit">
+                        Login
+                    </button>
+                </div>
+                </form>
+            </div>
+            </div>
+        </div>
+    }
+
+    <!--===============================================================================================-->
+
+    <script src="~/vendor/jquery/jquery-3.2.1.min.js"></script>
+    <!--===============================================================================================-->
+
+    <script src="~/vendor/animsition/js/animsition.min.js"></script>
+    <!--===============================================================================================-->
+
+    <script src="~/vendor/bootstrap/js/popper.js"></script>
+
+    <script src="~/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!--===============================================================================================-->
+
+    <script src="~/vendor/select2/select2.min.js"></script>
+    <!--===============================================================================================-->
+
+    <script src="~/vendor/daterangepicker/moment.min.js"></script>
+
+    <script src="~/vendor/daterangepicker/daterangepicker.js"></script>
+    <!--===============================================================================================-->
+
+    <script src="~/vendor/countdowntime/countdowntime.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/js/main.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+</body>
+</html>
+
+<script>
+    
+    $('#Username').keyup(function () {
+        
+            $('#Messagediv').hide(); 
+        });
+    
+</script>
+<style>
+    body {
+        overflow: hidden;
+    }
+</style>

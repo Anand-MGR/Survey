@@ -1,0 +1,724 @@
+﻿@model Survey.Models.ReviewSummaryModel
+@{
+    ViewBag.Title = "ReviewRating";
+    Layout = "~/Views/Shared/_LayoutSurvey.cshtml";
+}
+
+
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css">
+<link href="~/Css/Ratepagenew.css" rel="stylesheet" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
+
+@Html.ActionLink("Back To DashBoard", "GetCLData", "Questions", new { @class = "backtodashboard" })
+<br /><br />
+
+@foreach (var q in Model.Final)
+{
+    <div style="display:none;">
+        @Html.DisplayFor(m => q, new { @id = q })
+    </div>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $("#@q").attr('checked', true);
+        });
+
+    </script>
+}
+<div>
+    <p class="firstP" style="font-size:20px !important;">Project  :@Model.ProjectName</p>
+
+    @if (Model.PS_Status == true)
+    {<p style="float: left;padding-left:30%; color: green; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; font-size: 20px;font-weight:bold;">Status : Completed</p> }
+    else
+    { <p style="float: left; padding-left: 30%; color: red; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; font-size: 15px; font-weight: bold; "> Status : Not Completed</p>}
+    <p style="float: right; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; font-size: 20px;">Assigned Date:@Model.PS_Date.ToString("MM/dd/yyyy")</p><br /><br />
+</div>
+
+    <hr />
+
+
+    <div>
+        @if (Model.LstReview.Count() > 0)
+        {
+            if (Model.LstReview.Where(o => o.PRType == "CLPM").Count() > 0)
+            {
+                <h2 style="font-family: Algerian;text-align:center;">Client Rating To Project Manager</h2>
+                <br />
+                <p class="firstP">Client  : @Model.LstReview.Where(o => o.PRType == "CLPM").Select(o => o.PR_From).FirstOrDefault()</p>
+                <p class="secondP">Project Manager: @Model.LstReview.Where(o => o.PRType == "CLPM").Select(o => o.PR_RatingTo).FirstOrDefault()</p>
+                <p class="Sdate">Submitted Date : @Model.LstReview.Where(o => o.PRType == "CLPM").Select(o => o.PSD_CreatedDate.ToString("MM/dd/yyyy")).FirstOrDefault()</p>
+                <br />
+                <hr />
+
+                <div>
+                    <div>
+
+                        <label>Did your project manager communicate effectively and often?</label><br />
+
+                        <div class="stars">
+                            <form>
+                                <input class="star star5" id="star5-1" type="radio" name="star" value="5-1" disabled />
+                                <label class="star star5" for="star5-1"></label>
+                                <input class="star star4" id="star4-1" type="radio" name="star" value="4-1" disabled />
+                                <label class="star star4" for="star4-1"></label>
+                                <input class="star star3" id="star3-1" type="radio" name="star" value="3-1" disabled />
+                                <label class="star star3" for="star3-1"></label>
+                                <input class="star star2" id="star2-1" type="radio" name="star" value="2-1" disabled />
+                                <label class="star star2" for="star2-1"></label>
+                                <input class="star star1" id="star1-1" type="radio" name="star" value="1-1" disabled />
+                                <label class="star star1" for="star1-1"></label>
+                            </form>
+                        </div>
+                    </div>
+                    <div>
+                        <label>
+                            Was your project implemented in a timely fashion following the workplan?
+                        </label><br />
+                        <div class="stars">
+                            <form>
+                                <input class="star star5" id="star5-2" type="radio" name="star" value="5-2" disabled />
+                                <label class="star star5" for="star5-2"></label>
+                                <input class="star star4" id="star4-2" type="radio" name="star" value="4-2" disabled />
+                                <label class="star star4" for="star4-2"></label>
+                                <input class="star star3" id="star3-2" type="radio" name="star" value="3-2" disabled />
+                                <label class="star star3" for="star3-2"></label>
+                                <input class="star star2" id="star2-2" type="radio" name="star" value="2-2" disabled />
+                                <label class="star star2" for="star2-2"></label>
+                                <input class="star star1" id="star1-2" type="radio" name="star" value="1-2" disabled />
+                                <label class="star star1" for="star1-2"></label>
+                            </form>
+                        </div>
+                    </div>
+                    <div>
+                        <label>Did your project manager assist with answering questions and providing answers to help better understand your project?</label><br />
+                        <div class="stars">
+                            <form>
+                                <input class="star star5" id="star5-3" type="radio" name="star" value="5-3" disabled />
+                                <label class="star star5" for="star5-3"></label>
+                                <input class="star star4" id="star4-3" type="radio" name="star" value="4-3" disabled />
+                                <label class="star star4" for="star4-3"></label>
+                                <input class="star star3" id="star3-3" type="radio" name="star" value="3-3" disabled />
+                                <label class="star star3" for="star3-3"></label>
+                                <input class="star star2" id="star2-3" type="radio" name="star" value="2-3" disabled />
+                                <label class="star star2" for="star2-3"></label>
+                                <input class="star star1" id="star1-3" type="radio" name="star" value="1-3" disabled />
+                                <label class="star star1" for="star1-3"></label>
+                            </form>
+                        </div>
+                    </div>
+                    <div>
+                        <label>Was the project implemented with a process that was easy to follow and understand?</label><br />
+                        <div class="stars">
+                            <form>
+                                <input class="star star5" id="star5-4" type="radio" name="star" value="5-4" disabled />
+                                <label class="star star5" for="star5-4"></label>
+                                <input class="star star4" id="star4-4" type="radio" name="star" value="4-4" disabled />
+                                <label class="star star4" for="star4-4"></label>
+                                <input class="star star3" id="star3-4" type="radio" name="star" value="3-4" disabled />
+                                <label class="star star3" for="star3-4"></label>
+                                <input class="star star2" id="star2-4" type="radio" name="star" value="2-4" disabled />
+                                <label class="star star2" for="star2-4"></label>
+                                <input class="star star1" id="star1-4" type="radio" name="star" value="1-4" disabled />
+                                <label class="star star1" for="star1-4"></label>
+                            </form>
+                        </div>
+                    </div>
+                    <div>
+                        <label>Was your Project Manager helpful in driving your project to completion</label><br />
+                        <div class="stars">
+                            <form>
+                                <input class="star star5" id="star5-5" type="radio" name="star" value="5-5" disabled />
+                                <label class="star star5" for="star5-5"></label>
+                                <input class="star star4" id="star4-5" type="radio" name="star" value="4-5" disabled />
+                                <label class="star star4" for="star4-5"></label>
+                                <input class="star star3" id="star3-5" type="radio" name="star" value="3-5" disabled />
+                                <label class="star star3" for="star3-5"></label>
+                                <input class="star star2" id="star2-5" type="radio" name="star" value="2-5" disabled />
+                                <label class="star star2" for="star2-5"></label>
+                                <input class="star star1" id="star1-5" type="radio" name="star" value="1-5" disabled />
+                                <label class="star star1" for="star1-5"></label>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <hr />
+            }
+
+            if (Model.LstReview.Where(o => o.PRType == "CLPE").Count() > 0)
+            {
+                <h2 style="font-family: Algerian;text-align:center;">Client Rating To Project Engineer</h2><br />
+                <p class="firstP">Client  : @Model.LstReview.Where(o => o.PRType == "CLPE").Select(o => o.PR_From).FirstOrDefault()</p>
+                <p class="secondP">Project Engineer: @Model.LstReview.Where(o => o.PRType == "CLPE").Select(o => o.PR_RatingTo).FirstOrDefault()</p>
+                <p class="Sdate">Submitted Date : @Model.LstReview.Where(o => o.PRType == "CLPE").Select(o => o.PSD_CreatedDate.ToString("MM/dd/yyyy")).FirstOrDefault()</p>
+                <br />
+                <hr />
+                <div>
+                    <div>
+                        <label>Was your project engineer knowledgeable of the solution(s) being implemented?</label><br />
+                        <div class="stars">
+                            <form>
+                                <input class="star star5" id="star5-6" type="radio" name="star" value="5-6" disabled />
+                                <label class="star star5" for="star5-6"></label>
+                                <input class="star star4" id="star4-6" type="radio" name="star" value="4-6" disabled />
+                                <label class="star star4" for="star4-6"></label>
+                                <input class="star star3" id="star3-6" type="radio" name="star" value="3-6" disabled />
+                                <label class="star star3" for="star3-6"></label>
+                                <input class="star star2" id="star2-6" type="radio" name="star" value="2-6" disabled />
+                                <label class="star star2" for="star2-6"></label>
+                                <input class="star star1" id="star1-6" type="radio" name="star" value="1-6" disabled />
+                                <label class="star star1" for="star1-6"></label>
+                            </form>
+                        </div>
+                    </div>
+                    <div>
+                        <label>
+                            Was your Project Engineer on time and professional when working on the project?
+
+                        </label><br />
+                        <div class="stars">
+                            <form>
+                                <input class="star star5" id="star5-7" type="radio" name="star" value="5-7" disabled />
+                                <label class="star star5" for="star5-7"></label>
+                                <input class="star star4" id="star4-7" type="radio" name="star" value="4-7" disabled />
+                                <label class="star star4" for="star4-7"></label>
+                                <input class="star star3" id="star3-7" type="radio" name="star" value="3-7" disabled />
+                                <label class="star star3" for="star3-7"></label>
+                                <input class="star star2" id="star2-7" type="radio" name="star" value="2-7" disabled />
+                                <label class="star star2" for="star2-7"></label>
+                                <input class="star star1" id="star1-7" type="radio" name="star" value="1-7" disabled />
+                                <label class="star star1" for="star1-7"></label>
+                            </form>
+                        </div>
+                    </div>
+                    <div>
+                        <label>Do you feel your project engineer was Thorough and detailed in their explanations of the work being performed and changes that may occur?</label><br />
+                        <div class="stars">
+                            <form>
+                                <input class="star star5" id="star5-8" type="radio" name="star" value="5-8" disabled />
+                                <label class="star star5" for="star5-8"></label>
+                                <input class="star star4" id="star4-8" type="radio" name="star" value="4-8" disabled />
+                                <label class="star star4" for="star4-8"></label>
+                                <input class="star star3" id="star3-8" type="radio" name="star" value="3-8" disabled />
+                                <label class="star star3" for="star3-8"></label>
+                                <input class="star star2" id="star2-8" type="radio" name="star" value="2-8" disabled />
+                                <label class="star star2" for="star2-8"></label>
+                                <input class="star star1" id="star1-8" type="radio" name="star" value="1-8" disabled />
+                                <label class="star star1" for="star1-8"></label>
+                            </form>
+                        </div>
+                    </div>
+                    <div>
+                        <label>Did your Project Engineer take time for training with users if required?</label><br />
+                        <div class="stars">
+                            <form>
+                                <input class="star star5" id="star5-9" type="radio" name="star" value="5-9" disabled />
+                                <label class="star star5" for="star5-9"></label>
+                                <input class="star star4" id="star4-9" type="radio" name="star" value="4-9" disabled />
+                                <label class="star star4" for="star4-9"></label>
+                                <input class="star star3" id="star3-9" type="radio" name="star" value="3-9" disabled />
+                                <label class="star star3" for="star3-9"></label>
+                                <input class="star star2" id="star2-9" type="radio" name="star" value="2-9" disabled />
+                                <label class="star star2" for="star2-9"></label>
+                                <input class="star star1" id="star1-9" type="radio" name="star" value="1-9" disabled />
+                                <label class="star star1" for="star1-9"></label>
+                            </form>
+                        </div>
+                    </div>
+                    <div>
+                        <label>Was your Project Engineer neat and tidy with their work?</label><br />
+                        <div class="stars">
+                            <form>
+                                <input class="star star5" id="star5-10" type="radio" name="star" value="5-10" disabled />
+                                <label class="star star5" for="star5-10"></label>
+                                <input class="star star4" id="star4-10" type="radio" name="star" value="4-10" disabled />
+                                <label class="star star4" for="star4-10"></label>
+                                <input class="star star3" id="star3-10" type="radio" name="star" value="3-10" disabled />
+                                <label class="star star3" for="star3-10"></label>
+                                <input class="star star2" id="star2-10" type="radio" name="star" value="2-10" disabled />
+                                <label class="star star2" for="star2-10"></label>
+                                <input class="star star1" id="star1-10" type="radio" name="star" value="1-10" disabled />
+                                <label class="star star1" for="star1-10"></label>
+                            </form>
+                        </div>
+                    </div>
+                    <div>
+                        <label>
+                            How likely are you to work on future projects with Proven IT?
+                        </label><br />
+                        <div class="stars">
+                            <form>
+                                <input class="star star5" id="star5-11" type="radio" name="star" value="5-11" disabled />
+                                <label class="star star5" for="star5-11"></label>
+                                <input class="star star4" id="star4-11" type="radio" name="star" value="4-11" disabled />
+                                <label class="star star4" for="star4-11"></label>
+                                <input class="star star3" id="star3-11" type="radio" name="star" value="3-11" disabled />
+                                <label class="star star3" for="star3-11"></label>
+                                <input class="star star2" id="star2-11" type="radio" name="star" value="2-11" disabled />
+                                <label class="star star2" for="star2-11"></label>
+                                <input class="star star1" id="star1-11" type="radio" name="star" value="1-11" disabled />
+                                <label class="star star1" for="star1-11"></label>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                
+                <br />
+                <hr />
+            }
+
+            if (Model.LstReview.Where(o => o.PRType == "HDPM").Count() > 0)
+            {
+                <h2 style="font-family: Algerian;text-align:center;">Help Desk Rating To Project Manager</h2><br />
+                <p class="firstP">Help Desk  :@Model.LstReview.Where(o => o.PRType == "HDPM").Select(o => o.PR_From).FirstOrDefault()</p>
+                <p class="secondP">Project Manager: @Model.LstReview.Where(o => o.PRType == "HDPM").Select(o => o.PR_RatingTo).FirstOrDefault()</p>
+                <p class="Sdate">Submitted Date : @Model.LstReview.Where(o => o.PRType == "HDPM").Select(o => o.PSD_CreatedDate.ToString("MM/dd/yyyy")).FirstOrDefault()</p>
+                <br />
+                <hr />
+                <div>
+                    <div>
+                        <label>The Project Manager communicated clearly with the team leads of upcoming changes based on the project?</label><br />
+                        <div class="stars">
+                            <form>
+                                <input class="star star5" id="star5-12" type="radio" name="star" value="5-12" disabled />
+                                <label class="star star5" for="star5-12"></label>
+                                <input class="star star4" id="star4-12" type="radio" name="star" value="4-12" disabled />
+                                <label class="star star4" for="star4-12"></label>
+                                <input class="star star3" id="star3-12" type="radio" name="star" value="3-12" disabled />
+                                <label class="star star3" for="star3-12"></label>
+                                <input class="star star2" id="star2-12" type="radio" name="star" value="2-12" disabled />
+                                <label class="star star2" for="star2-12"></label>
+                                <input class="star star1" id="star1-12" type="radio" name="star" value="1-12" disabled />
+                                <label class="star star1" for="star1-12"></label>
+                            </form>
+                        </div>
+                    </div>
+                    <div>
+                        <label>
+                            The PM requested resource assistance from the Team Lead prior to discussing with the HD engineer?
+                        </label><br />
+                        <div class="stars">
+                            <form>
+                                <input class="star star5" id="star5-13" type="radio" name="star" value="5-13" disabled />
+                                <label class="star star5" for="star5-13"></label>
+                                <input class="star star4" id="star4-13" type="radio" name="star" value="4-13" disabled />
+                                <label class="star star4" for="star4-13"></label>
+                                <input class="star star3" id="star3-13" type="radio" name="star" value="3-13" disabled />
+                                <label class="star star3" for="star3-13"></label>
+                                <input class="star star2" id="star2-13" type="radio" name="star" value="2-13" disabled />
+                                <label class="star star2" for="star2-13"></label>
+                                <input class="star star1" id="star1-13" type="radio" name="star" value="1-13" disabled />
+                                <label class="star star1" for="star1-13"></label>
+                            </form>
+                        </div>
+                    </div>
+                    <div>
+                        <label>The Project was implemented correctly to help aid in a more stable environment for the HD Team?</label><br />
+                        <div class="stars">
+                            <form>
+                                <input class="star star5" id="star5-14" type="radio" name="star" value="5-14" disabled />
+                                <label class="star star5" for="star5-14"></label>
+                                <input class="star star4" id="star4-14" type="radio" name="star" value="4-14" disabled />
+                                <label class="star star4" for="star4-14"></label>
+                                <input class="star star3" id="star3-14" type="radio" name="star" value="3-14" disabled />
+                                <label class="star star3" for="star3-14"></label>
+                                <input class="star star2" id="star2-14" type="radio" name="star" value="2-14" disabled />
+                                <label class="star star2" for="star2-14"></label>
+                                <input class="star star1" id="star1-14" type="radio" name="star" value="1-14" disabled />
+                                <label class="star star1" for="star1-14"></label>
+                            </form>
+                        </div>
+                    </div>
+                    <div>
+                        <label>
+                            The PM performed a hand off call to the help desk about the implemented Project?
+                        </label><br />
+                        <div class="stars">
+                            <form>
+                                <input class="star star5" id="star5-15" type="radio" name="star" value="5-15" disabled />
+                                <label class="star star5" for="star5-15"></label>
+                                <input class="star star4" id="star4-15" type="radio" name="star" value="4-15" disabled />
+                                <label class="star star4" for="star4-15"></label>
+                                <input class="star star3" id="star3-15" type="radio" name="star" value="3-15" disabled />
+                                <label class="star star3" for="star3-15"></label>
+                                <input class="star star2" id="star2-15" type="radio" name="star" value="2-15" disabled />
+                                <label class="star star2" for="star2-15"></label>
+                                <input class="star star1" id="star1-15" type="radio" name="star" value="1-15" disabled />
+                                <label class="star star1" for="star1-15"></label>
+                            </form>
+                        </div>
+                    </div>
+                    <div>
+                        <label>The Project Information was updated correctly in IT Glue and documentation was updated as needed?</label><br />
+                        <div class="stars">
+                            <form>
+                                <input class="star star5" id="star5-16" type="radio" name="star" value="5-16" disabled />
+                                <label class="star star5" for="star5-16"></label>
+                                <input class="star star4" id="star4-16" type="radio" name="star" value="4-16" disabled />
+                                <label class="star star4" for="star4-16"></label>
+                                <input class="star star3" id="star3-16" type="radio" name="star" value="3-16" disabled />
+                                <label class="star star3" for="star3-16"></label>
+                                <input class="star star2" id="star2-16" type="radio" name="star" value="2-16" disabled />
+                                <label class="star star2" for="star2-16"></label>
+                                <input class="star star1" id="star1-16" type="radio" name="star" value="1-16" disabled />
+                                <label class="star star1" for="star1-16"></label>
+                            </form>
+                        </div>
+                    </div>
+                    <br />
+                    <hr />
+                </div>
+
+            }
+
+            if (Model.LstReview.Where(o => o.PRType == "HDPE").Count() > 0)
+            {
+                <h2 style="font-family: Algerian;text-align:center;">Help Desk Rating To Project Engineer</h2><br />
+                <p class="firstP">Help Desk  : @Model.LstReview.Where(o => o.PRType == "HDPE").Select(o => o.PR_From).FirstOrDefault()</p>
+                <p class="secondP">Project Engineer:@Model.LstReview.Where(o => o.PRType == "HDPE").Select(o => o.PR_RatingTo).FirstOrDefault()</p>
+                <p class="Sdate">Submitted Date : @Model.LstReview.Where(o => o.PRType == "HDPE").Select(o => o.PSD_CreatedDate.ToString("MM/dd/yyyy")).FirstOrDefault()</p>
+                <br />
+                <hr />
+                <div>
+                    <div>
+                        <label>The Project Engineer followed the best practices during implementation?</label><br />
+                        <div class="stars">
+                            <form>
+                                <input class="star star5" id="star5-17" type="radio" name="star" value="5-17" disabled />
+                                <label class="star star5" for="star5-17"></label>
+                                <input class="star star4" id="star4-17" type="radio" name="star" value="4-17" disabled />
+                                <label class="star star4" for="star4-17"></label>
+                                <input class="star star3" id="star3-17" type="radio" name="star" value="3-17" disabled />
+                                <label class="star star3" for="star3-17"></label>
+                                <input class="star star2" id="star2-17" type="radio" name="star" value="2-17" disabled />
+                                <label class="star star2" for="star2-17"></label>
+                                <input class="star star1" id="star1-17" type="radio" name="star" value="1-17" disabled />
+                                <label class="star star1" for="star1-17"></label>
+                            </form>
+                        </div>
+                    </div>
+                    <div>
+                        <label>
+                            IT Glue has appropriate information input regarding the changes made during the project?
+                        </label><br />
+                        <div class="stars">
+                            <form>
+                                <input class="star star5" id="star5-18" type="radio" name="star" value="5-18" disabled />
+                                <label class="star star5" for="star5-18"></label>
+                                <input class="star star4" id="star4-18" type="radio" name="star" value="4-18" disabled />
+                                <label class="star star4" for="star4-18"></label>
+                                <input class="star star3" id="star3-18" type="radio" name="star" value="3-18" disabled />
+                                <label class="star star3" for="star3-18"></label>
+                                <input class="star star2" id="star2-18" type="radio" name="star" value="2-18" disabled />
+                                <label class="star star2" for="star2-18"></label>
+                                <input class="star star1" id="star1-18" type="radio" name="star" value="1-18" disabled />
+                                <label class="star star1" for="star1-18"></label>
+                            </form>
+                        </div>
+                    </div>
+                    <div>
+                        <label>The Project Engineer performed a thorough hand off to the Help Desk after project was complete?</label><br />
+                        <div class="stars">
+                            <form>
+                                <input class="star star5" id="star5-19" type="radio" name="star" value="5-19" disabled />
+                                <label class="star star5" for="star5-19"></label>
+                                <input class="star star4" id="star4-19" type="radio" name="star" value="4-19" disabled />
+                                <label class="star star4" for="star4-19"></label>
+                                <input class="star star3" id="star3-19" type="radio" name="star" value="3-19" disabled />
+                                <label class="star star3" for="star3-19"></label>
+                                <input class="star star2" id="star2-19" type="radio" name="star" value="2-19" disabled />
+                                <label class="star star2" for="star2-19"></label>
+                                <input class="star star1" id="star1-19" type="radio" name="star" value="1-19" disabled />
+                                <label class="star star1" for="star1-19"></label>
+                            </form>
+                        </div>
+                    </div>
+                    <div>
+                        <label>
+                            Cleanup/Decommission occurred after the initial cut over for project?
+                        </label><br />
+                        <div class="stars">
+                            <form>
+                                <input class="star star5" id="star5-20" type="radio" name="star" value="5-20" disabled />
+                                <label class="star star5" for="star5-20"></label>
+                                <input class="star star4" id="star4-20" type="radio" name="star" value="4-20" disabled />
+                                <label class="star star4" for="star4-20"></label>
+                                <input class="star star3" id="star3-20" type="radio" name="star" value="3-20" disabled />
+                                <label class="star star3" for="star3-20"></label>
+                                <input class="star star2" id="star2-20" type="radio" name="star" value="2-20" disabled />
+                                <label class="star star2" for="star2-20"></label>
+                                <input class="star star1" id="star1-20" type="radio" name="star" value="1-20" disabled />
+                                <label class="star star1" for="star1-20"></label>
+                            </form>
+                        </div>
+                    </div>
+                    <div>
+                        <label>The Engineer assisted and handled the help desk tickets that were placed during the implementation of the project and during post support?</label><br />
+                        <div class="stars">
+                            <form>
+                                <input class="star star5" id="star5-21" type="radio" name="star" value="5-21" disabled />
+                                <label class="star star5" for="star5-21"></label>
+                                <input class="star star4" id="star4-21" type="radio" name="star" value="4-21" disabled />
+                                <label class="star star4" for="star4-21"></label>
+                                <input class="star star3" id="star3-21" type="radio" name="star" value="3-21" disabled />
+                                <label class="star star3" for="star3-21"></label>
+                                <input class="star star2" id="star2-21" type="radio" name="star" value="2-21" disabled />
+                                <label class="star star2" for="star2-21"></label>
+                                <input class="star star1" id="star1-21" type="radio" name="star" value="1-21" disabled />
+                                <label class="star star1" for="star1-21"></label>
+                            </form>
+                        </div>
+                    </div>
+                    <br />
+                    <hr />
+                </div>
+            }
+
+            if (Model.LstReview.Where(o => o.PRType == "PEPM").Count() > 0)
+            {
+                <h2 style="font-family: Algerian;text-align:center;">Project Engineer Rating To Project Manager</h2><br />
+                <p class="firstP">Project Engineer: @Model.LstReview.Where(o => o.PRType == "PEPM").Select(o => o.PR_From).FirstOrDefault()</p>
+                <p class="secondP">Project Manager  : @Model.LstReview.Where(o => o.PRType == "PEPM").Select(o => o.PR_RatingTo).FirstOrDefault()</p>
+                <p class="Sdate">Submitted Date : @Model.LstReview.Where(o => o.PRType == "PEPM").Select(o => o.PSD_CreatedDate.ToString("MM/dd/yyyy")).FirstOrDefault()</p>
+                <br />
+                <hr />
+                <div>
+                    <div>
+                        <label>The Project Manager communicated thoroughly throughout the course of the Project?</label><br />
+                        <div class="stars">
+                            <form>
+                                <input class="star star5" id="star5-22" type="radio" name="star" value="5-22" disabled />
+                                <label class="star star5" for="star5-22"></label>
+                                <input class="star star4" id="star4-22" type="radio" name="star" value="4-22" disabled />
+                                <label class="star star4" for="star4-22"></label>
+                                <input class="star star3" id="star3-22" type="radio" name="star" value="3-22" disabled />
+                                <label class="star star3" for="star3-22"></label>
+                                <input class="star star2" id="star2-22" type="radio" name="star" value="2-22" disabled />
+                                <label class="star star2" for="star2-22"></label>
+                                <input class="star star1" id="star1-22" type="radio" name="star" value="1-22" disabled />
+                                <label class="star star1" for="star1-22"></label>
+                            </form>
+                        </div>
+                    </div>
+                    <div>
+                        <label>
+                            The Project Manager scheduled the work correctly during the project?
+                        </label><br />
+                        <div class="stars">
+                            <form>
+                                <input class="star star5" id="star5-23" type="radio" name="star" value="5-23" disabled />
+                                <label class="star star5" for="star5-23"></label>
+                                <input class="star star4" id="star4-23" type="radio" name="star" value="4-23" disabled />
+                                <label class="star star4" for="star4-23"></label>
+                                <input class="star star3" id="star3-23" type="radio" name="star" value="3-23" disabled />
+                                <label class="star star3" for="star3-23"></label>
+                                <input class="star star2" id="star2-23" type="radio" name="star" value="2-23" disabled />
+                                <label class="star star2" for="star2-23"></label>
+                                <input class="star star1" id="star1-23" type="radio" name="star" value="1-23" />
+                                <label class="star star1" for="star1-23"></label>
+                            </form>
+                        </div>
+                    </div>
+                    <div>
+                        <label>The Work Plan was created with the Project Engineer to ensure all deliverables were accounted for and successfully tracked for implementation?</label><br />
+                        <div class="stars">
+                            <form>
+                                <input class="star star5" id="star5-24" type="radio" name="star" value="5-24" disabled />
+                                <label class="star star5" for="star5-24"></label>
+                                <input class="star star4" id="star4-24" type="radio" name="star" value="4-24" disabled />
+                                <label class="star star4" for="star4-24"></label>
+                                <input class="star star3" id="star3-24" type="radio" name="star" value="3-24" disabled />
+                                <label class="star star3" for="star3-24"></label>
+                                <input class="star star2" id="star2-24" type="radio" name="star" value="2-24" disabled />
+                                <label class="star star2" for="star2-24"></label>
+                                <input class="star star1" id="star1-24" type="radio" name="star" value="1-24" disabled />
+                                <label class="star star1" for="star1-24"></label>
+                            </form>
+                        </div>
+                    </div>
+                    <div>
+                        <label>
+                            The Project Manager assisted in helping find solutions throughout the Project?
+                        </label><br />
+                        <div class="stars">
+                            <form>
+                                <input class="star star5" id="star5-25" type="radio" name="star" value="5-25" disabled />
+                                <label class="star star5" for="star5-25"></label>
+                                <input class="star star4" id="star4-25" type="radio" name="star" value="4-25" disabled />
+                                <label class="star star4" for="star4-25"></label>
+                                <input class="star star3" id="star3-25" type="radio" name="star" value="3-25" disabled />
+                                <label class="star star3" for="star3-25"></label>
+                                <input class="star star2" id="star2-25" type="radio" name="star" value="2-25" disabled />
+                                <label class="star star2" for="star2-25"></label>
+                                <input class="star star1" id="star1-25" type="radio" name="star" value="1-25" disabled />
+                                <label class="star star1" for="star1-25"></label>
+                            </form>
+                        </div>
+                    </div>
+                    <div>
+                        <label>The Project Manager kept the project within scope and minimized any scope creep during the project that the engineer had to perform?</label><br />
+                        <div class="stars">
+                            <form>
+                                <input class="star star5" id="star5-26" type="radio" name="star" value="5-26" disabled />
+                                <label class="star star5" for="star5-26"></label>
+                                <input class="star star4" id="star4-26" type="radio" name="star" value="4-26" disabled />
+                                <label class="star star4" for="star4-26"></label>
+                                <input class="star star3" id="star3-26" type="radio" name="star" value="3-26" disabled />
+                                <label class="star star3" for="star3-26"></label>
+                                <input class="star star2" id="star2-26" type="radio" name="star" value="2-26" disabled />
+                                <label class="star star2" for="star2-26"></label>
+                                <input class="star star1" id="star1-26" type="radio" name="star" value="1-26" disabled />
+                                <label class="star star1" for="star1-26"></label>
+                            </form>
+                        </div>
+                    </div>
+                    <br />
+                    <hr />
+                </div>
+            }
+
+            if (Model.LstReview.Where(o => o.PRType == "PMPE").Count() > 0)
+            {
+                <h2 style="font-family: Algerian;text-align:center;">Project Manager Rating To Project Engineer</h2><br />
+                <p class="firstP">Project Manager  : @Model.LstReview.Where(o => o.PRType == "PMPE").Select(o => o.PR_From).FirstOrDefault()</p>
+                <p class="secondP">Project Engineer: @Model.LstReview.Where(o => o.PRType == "PMPE").Select(o => o.PR_RatingTo).FirstOrDefault()</p>
+                <p class="Sdate">Submitted Date : @Model.LstReview.Where(o => o.PRType == "PMPE").Select(o => o.PSD_CreatedDate.ToString("MM/dd/yyyy")).FirstOrDefault()</p>
+                <br />
+                <hr />
+                <div>
+                    <div>
+                        <label>The Project Engineer was knowledgeable in the Project/Implementation?</label><br />
+                        <div class="stars">
+                            <form>
+                                <input class="star star5" id="star5-27" type="radio" name="star" value="5-27" disabled />
+                                <label class="star star5" for="star5-27"></label>
+                                <input class="star star4" id="star4-27" type="radio" name="star" value="4-27" disabled />
+                                <label class="star star4" for="star4-27"></label>
+                                <input class="star star3" id="star3-27" type="radio" name="star" value="3-27" disabled />
+                                <label class="star star3" for="star3-27"></label>
+                                <input class="star star2" id="star2-27" type="radio" name="star" value="2-27" disabled />
+                                <label class="star star2" for="star2-27"></label>
+                                <input class="star star1" id="star1-27" type="radio" name="star" value="1-27" disabled />
+                                <label class="star star1" for="star1-27"></label>
+
+                            </form>
+
+                        </div>
+                    </div>
+                    <div>
+                        <label>
+                            The Project Engineer communicated and provided thorough and timely updates?
+                        </label><br />
+                        <div class="stars">
+                            <form>
+                                <input class="star star5" id="star5-28" type="radio" name="star" value="5-28" disabled />
+                                <label class="star star5" for="star5-28"></label>
+                                <input class="star star4" id="star4-28" type="radio" name="star" value="4-28" disabled />
+                                <label class="star star4" for="star4-28"></label>
+                                <input class="star star3" id="star3-28" type="radio" name="star" value="3-28" disabled />
+                                <label class="star star3" for="star3-28"></label>
+                                <input class="star star2" id="star2-28" type="radio" name="star" value="2-28" disabled />
+                                <label class="star star2" for="star2-28"></label>
+                                <input class="star star1" id="star1-28" type="radio" name="star" value="1-28" disabled />
+                                <label class="star star1" for="star1-28"></label>
+
+                            </form>
+                        </div>
+                    </div>
+                    <div>
+                        <label>The Project Engineer provided detailed notes and assistance in the Work Plan Build?</label><br />
+                        <div class="stars">
+                            <form>
+                                <input class="star star5" id="star5-29" type="radio" name="star" value="5-29" disabled />
+                                <label class="star star5" for="star5-29"></label>
+                                <input class="star star4" id="star4-29" type="radio" name="star" value="4-29" disabled />
+                                <label class="star star4" for="star4-29"></label>
+                                <input class="star star3" id="star3-29" type="radio" name="star" value="3-29" disabled />
+                                <label class="star star3" for="star3-29"></label>
+                                <input class="star star2" id="star2-29" type="radio" name="star" value="2-29" disabled />
+                                <label class="star star2" for="star2-29"></label>
+                                <input class="star star1" id="star1-29" type="radio" name="star" value="1-29" disabled />
+                                <label class="star star1" for="star1-29"></label>
+                            </form>
+                        </div>
+                    </div>
+                    <div>
+                        <label>
+                            The Project Engineer attended all calls and meetings Internally and Externally?
+                        </label><br />
+                        <div class="stars">
+                            <form>
+                                <input class="star star5" id="star5-30" type="radio" name="star" value="5-30" disabled />
+                                <label class="star star5" for="star5-30"></label>
+                                <input class="star star4" id="star4-30" type="radio" name="star" value="4-30" disabled />
+                                <label class="star star4" for="star4-30"></label>
+                                <input class="star star3" id="star3-30" type="radio" name="star" value="3-30" disabled />
+                                <label class="star star3" for="star3-30"></label>
+                                <input class="star star2" id="star2-30" type="radio" name="star" value="2-30" disabled />
+                                <label class="star star2" for="star2-30"></label>
+                                <input class="star star1" id="star1-30" type="radio" name="star" value="1-30" disabled />
+                                <label class="star star1" for="star1-30"></label>
+                            </form>
+                        </div>
+                    </div>
+                    <div>
+                        <label>The Project Engineer performed the tasks required during the scheduled times?</label><br />
+                        <div class="stars">
+                            <form>
+                                <input class="star star5" id="star5-31" type="radio" name="star" value="5-31" disabled />
+                                <label class="star star5" for="star5-31"></label>
+                                <input class="star star4" id="star4-31" type="radio" name="star" value="4-31" disabled />
+                                <label class="star star4" for="star4-31"></label>
+                                <input class="star star3" id="star3-31" type="radio" name="star" value="3-31" disabled />
+                                <label class="star star3" for="star3-31"></label>
+                                <input class="star star2" id="star2-31" type="radio" name="star" value="2-31" disabled />
+                                <label class="star star2" for="star2-31"></label>
+                                <input class="star star1" id="star1-31" type="radio" name="star" value="1-31" disabled />
+                                <label class="star star1" for="star1-31"></label>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+
+        else
+        {
+            <div>
+                <p style=" font-family: Algerian;text-align:center;font-size:30px;">Survey Not Completed!!</p>
+            </div>
+        }
+
+    </div>
+
+
+    <style type="text/css">
+        .backtodashboard {
+            float: right;
+        }
+
+        .firstP {
+            float: left;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            font-size: 15px;
+            font-weight:bold;
+            
+        }
+
+        .secondP {
+            float: left;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            font-size: 15px;
+            padding-left: 30%;
+            font-weight: bold;
+        }
+
+        .Sdate {
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            font-size: 15px;
+            float: right;
+            font-weight: bold;
+        }
+    </style>

@@ -1,0 +1,286 @@
+﻿@model Survey.Models.SAPMModel
+@{
+    ViewBag.Title = "PEPM";
+    //Layout = "~/Views/Shared/_LayoutSurvey.cshtml";
+}
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css">
+<link href="~/Css/Ratepagenew.css" rel="stylesheet" />
+<h2 style="font-family: 'Times New Roman';text-align:center;">Solution Architect Rating To Project Manager</h2>
+
+<div>
+    <p style="float:left;font-size:2rem;font-family:'Times New Roman';">Project Name :@Model.RatingHeader.PS_ProjectName</p>
+</div>
+<br />
+<br />
+<div>
+    <p style="float:left;font-size:2rem;font-family:'Times New Roman';">Rating From :<b id="Fromrating">@Model.RatingHeader.RatingFrom</b></p>
+</div>
+
+<div>
+    <p style="float: right; font-size: 2rem; font-family: 'Times New Roman'; "> Rating To :@Model.RatingHeader.RatingTo</p><br />
+</div>
+<div id="PSId" style="display:none;">@Model.RatingHeader.PS_ID</div>
+<div id="PRId" style="display:none;">@Model.RatingHeader.PR_ID</div>
+
+
+
+<br />
+
+<div>
+    @if (Model.RatingHeader.SurveyStatus == false)
+    {
+
+        foreach (var x in Model.QuestionnaireLst)
+        {
+            <div>
+                <br />
+                <label>@x.Q_Questions</label><br />
+
+                @if (x.Q_Ans_Type == "3")
+                {
+                    <div id="QusId" style="display:none;">@x.QuestionID</div>
+                    <div class="multiple-choice">
+                        <form>
+                            <input type="radio" id="yes-@x.QuestionID" name="answer-@x.QuestionID" value="@x.Ans_Options1-@x.QuestionID" />
+                            <label for="yes-@x.QuestionID">@x.Ans_Options1</label>
+                            <input type="radio" id="yes-@x.QuestionID" name="answer-@x.QuestionID" value="@x.Ans_Options2-@x.QuestionID" />
+                            <label for="yes-@x.QuestionID">@x.Ans_Options2</label>
+                            <input type="radio" id="yes-@x.QuestionID" name="answer-@x.QuestionID" value="@x.Ans_Options3-@x.QuestionID" />
+                            <label for="yes-@x.QuestionID">@x.Ans_Options3</label>
+                            <input type="radio" id="yes-@x.QuestionID" name="answer-@x.QuestionID" value="@x.Ans_Options4-@x.QuestionID" />
+                            <label for="yes-@x.QuestionID">@x.Ans_Options4</label>
+                            <input type="radio" id="yes-@x.QuestionID" name="answer-@x.QuestionID" value="@x.Ans_Options5-@x.QuestionID" />
+                            <label for="yes-@x.QuestionID">@x.Ans_Options5</label>
+
+
+
+                        </form>
+                    </div>
+                }
+                @if (x.Q_Ans_Type == "2")
+                {
+                    <div class="yes-no">
+                        <form>
+                            <input type="radio" id="yes-@x.QuestionID" name="answer-@x.QuestionID" value="Yes-@x.QuestionID" onclick="answerClick('Yes', @x.QuestionID)" />
+                            <label for="yes-@x.QuestionID">Yes</label>
+
+                            <input type="radio" id="no-@x.QuestionID" name="answer-@x.QuestionID" value="No-@x.QuestionID" onclick="answerClick('No', @x.QuestionID)" />
+                            <label for="no-@x.QuestionID">No</label>
+
+                        </form>
+                    </div>
+                }
+
+            </div>
+        }
+
+
+        <div id="selectedratings" style="display:none;"></div>
+        <button type="submit" id="submitRatings" class="btn btn-primary btn-lg" onclick="submitbtnclick()">Submit</button>
+    }
+    else
+    {
+
+        <div>
+            <p style=" font-family: Algerian;text-align:center;font-size:30px;">Survey Already Completed!!</p>
+        </div>
+    }
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $("#submitRatings").click(function () {
+            var ratings = [];
+            var Yesorno = [];
+            var Mcq = [];
+
+            // Loop through all questions
+            $(".stars").each(function () {
+                var questionID = $(this).find("input:checked").val();
+                if (questionID) {
+                    var ratingValue = questionID.split('-')[0];
+                    var questionID = questionID.split('-')[1];
+                    ratings.push({ Question: questionID, Answer: ratingValue, AnswerType: "1" });
+                }
+            });
+
+            // Loop through all yes/no questions
+            $(".yes-no").each(function () {
+                var questionID = $(this).find("input:checked").val();
+                if (questionID) {
+                    var answer = questionID.split('-')[0];
+                    var questionID = questionID.split('-')[1];
+                    Yesorno.push({ Question: questionID, Answer: answer, AnswerType: "2" });
+                }
+            });
+
+            // Loop through all multiple-choice questions
+            $(".multiple-choice").each(function () {
+                var questionID = $(this).find("input:checked").val();
+                if (questionID) {
+                    var answer = questionID.split('-')[0];
+                    var questionID = questionID.split('-')[1];
+                    Mcq.push({ Question: questionID, Answer: answer, AnswerType: "3" });
+                }
+            });
+
+            var psId = $("#PSId").text();
+            var prId = $("#PRId").text();
+            var ratingFrom = $("#Fromrating").text();
+
+            $.ajax({
+                type: "POST",
+                url: "/Questions/SAPM",
+                data: {
+                    ratings: ratings,
+                    Yesorno: Yesorno,
+                    Mcq: Mcq,
+                    psId: psId,
+                    prId: prId,
+                    ratingFrom: ratingFrom
+                },
+                success: function (result) {
+                    window.location.href = "/ProjectSurvey/ThankYou";
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        });
+    });
+
+</script>
+
+
+    @*<script>
+        $(document).ready(function () {
+            $("#submitRatings").click(function () {
+                var ratings = [];
+
+                // Loop through all questions
+                $(".stars").each(function () {
+                    var questionID = $(this).find("input:checked").val();
+                    if (questionID) {
+                        var ratingValue = questionID.split('-')[0];
+                        var questionID = questionID.split('-')[1];
+                        ratings.push({ Question: questionID, Answer: ratingValue });
+                    }
+                });
+
+                var psId = $("#PSId").text();
+                var prId = $("#PRId").text();
+                var ratingFrom = $("#Fromrating").text();
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Questions/SAPM",
+                    data: {
+                        ratings: ratings,
+                        psId: psId,
+                        prId: prId,
+                        ratingFrom: ratingFrom
+                    },
+                    success: function (result) {
+                        window.location.href = "/ProjectSurvey/ThankYou";
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
+            });
+    });
+</script>*@
+
+
+
+
+
+@*<script>
+        $(document).ready(function () {
+            $("#submitRatings").click(function () {
+                var ratings = [];
+
+             /*   var questionId = $("#QusId").val();*/
+                var selectedValue = $("input[name='answer-" + questionId + "']:checked").val();
+
+                alert(selectedValue);
+                $('input[name="star"]:checked').each(function () {
+                    var ratingValue = $(this).val().split('-')[0];
+                    var questionID = $(this).val().split('-')[1];
+                    ratings.push({ Question: questionID, Answer: ratingValue });
+                });
+
+                var psId = $("#PSId").text();
+                var prId = $("#PRId").text();
+                var ratingFrom = $("#Fromrating").text();
+                var Choosenval = selectedValue;
+                $.ajax({
+                    type: "POST",
+                    url: "/Questions/SAPM",
+                    data: {
+                        ratings: ratings,
+                        psId: psId,
+                        prId: prId,
+                        ratingFrom: ratingFrom,
+                        Choosenvalue: Choosenval
+                    },
+                    success: function (result) {
+                        window.location.href = "/ProjectSurvey/ThankYou";
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
+            });
+        });
+    </script>*@
+
+
+@*<script>
+        $(document).ready(function () {
+
+            $("#submitRatings").click(function () {
+
+                var ratings = [];
+                var questionId = document.getElementById().value;
+                var selectedValue = $("input[name='answer-" + questionId + "']:checked").val();
+
+                alert(selectedValue);
+                $('input[name="star"]:checked').each(function () {
+
+                    var ratingValue = $(this).val().split('-')[0];
+                    var questionID = $(this).val().split('-')[1];
+
+                    ratings.push({ Question: questionID, Answer: ratingValue });
+                });
+
+                var psId = $("#PSId").text();
+                var prId = $("#PRId").text();
+                var ratingFrom = $("#Fromrating").text();
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Questions/SAPM",
+                    data: {
+                        ratings: ratings,
+                        psId: psId,
+                        prId: prId,
+                        ratingFrom: ratingFrom,
+                        Choosenvalue: Choosenval
+                    },
+                    success: function (result) {
+
+                        window.location.href = "/ProjectSurvey/ThankYou";
+                    },
+                    error: function (error) {
+
+                        console.log(error);
+                    }
+                });
+            });
+        });
+    </script>*@
+
+

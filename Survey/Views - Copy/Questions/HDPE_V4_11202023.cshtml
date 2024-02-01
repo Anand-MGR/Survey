@@ -1,0 +1,227 @@
+﻿@model Survey.Models.HDPEModel
+@{
+    ViewBag.Title = "HDPE";
+   // Layout = "~/Views/Shared/_LayoutSurvey.cshtml";
+}
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css">
+<link href="~/Css/Ratepagenew.css" rel="stylesheet" />
+<h2 style="font-family: Algerian;text-align:center;">Help Desk Rating To Project Engineer</h2>
+<div>
+    <p style="float:left;font-size:2rem;font-family:Algerian;">Project Name :@Model.RatingHeader.PS_ProjectName</p>
+</div>
+<br />
+<br />
+<div>
+    <p style="float:left;font-size:2rem;font-family:Algerian;">Rating From :<b id="Fromrating">@Model.RatingHeader.RatingFrom</b></p>
+</div>
+
+<div>
+    <p style="float: right; font-size: 2rem; font-family: Algerian; "> Rating To :@Model.RatingHeader.RatingTo</p><br />
+</div>
+<div id="PSId" style="display:none;">@Model.RatingHeader.PS_ID</div>
+<div id="PRId" style="display:none;">@Model.RatingHeader.PR_ID</div>
+
+
+
+<br />
+
+<div>
+    @if (Model.RatingHeader.SurveyStatus == false)
+    {
+        <div>
+            <br />
+            <label>The Project Engineer followed the best practices during implementation?</label><br />
+            <div class="stars">
+                <form>
+                    @Html.HiddenFor(m => m.Question17)
+                    @Html.HiddenFor(m => m.Answer17)
+                    <input class="star star5" id="star5-17" type="radio" name="star" value="5-17" onclick="ratingclick(5,17)" />
+                    <label class="star star5" for="star5-17"></label>
+                    <input class="star star4" id="star4-17" type="radio" name="star" value="4-17" onclick="ratingclick(4,17)" />
+                    <label class="star star4" for="star4-17"></label>
+                    <input class="star star3" id="star3-17" type="radio" name="star" value="3-17" onclick="ratingclick(3,17)" />
+                    <label class="star star3" for="star3-17"></label>
+                    <input class="star star2" id="star2-17" type="radio" name="star" value="2-17" onclick="ratingclick(2,17)" />
+                    <label class="star star2" for="star2-17"></label>
+                    <input class="star star1" id="star1-17" type="radio" name="star" value="1-17" onclick="ratingclick(1,17)" />
+                    <label class="star star1" for="star1-17"></label>
+                </form>
+            </div>
+        </div>
+        <div>
+            <label>
+                IT Glue has appropriate information input regarding the changes made during the project?
+            </label><br />
+            <div class="stars">
+                <form>
+                    @Html.HiddenFor(m => m.Question18)
+                    @Html.HiddenFor(m => m.Answer18)
+                    <input class="star star5" id="star5-18" type="radio" name="star" value="5-18" onclick="ratingclick(5,18)" />
+                    <label class="star star5" for="star5-18"></label>
+                    <input class="star star4" id="star4-18" type="radio" name="star" value="4-18" onclick="ratingclick(4,18)" />
+                    <label class="star star4" for="star4-18"></label>
+                    <input class="star star3" id="star3-18" type="radio" name="star" value="3-18" onclick="ratingclick(3,18)" />
+                    <label class="star star3" for="star3-18"></label>
+                    <input class="star star2" id="star2-18" type="radio" name="star" value="2-18" onclick="ratingclick(2,18)" />
+                    <label class="star star2" for="star2-18"></label>
+                    <input class="star star1" id="star1-18" type="radio" name="star" value="1-18" onclick="ratingclick(1,18)" />
+                    <label class="star star1" for="star1-18"></label>
+                </form>
+            </div>
+        </div>
+        <div>
+            <label>The Project Engineer performed a thorough hand off to the Help Desk after project was complete?</label><br />
+            <div class="stars">
+                <form>
+                    @Html.HiddenFor(m => m.Question19)
+                    @Html.HiddenFor(m => m.Answer19)
+                    <input class="star star5" id="star5-19" type="radio" name="star" value="5-19" onclick="ratingclick(5,19)" />
+                    <label class="star star5" for="star5-19"></label>
+                    <input class="star star4" id="star4-19" type="radio" name="star" value="4-19" onclick="ratingclick(4,19)" />
+                    <label class="star star4" for="star4-19"></label>
+                    <input class="star star3" id="star3-19" type="radio" name="star" value="3-19" onclick="ratingclick(3,19)" />
+                    <label class="star star3" for="star3-19"></label>
+                    <input class="star star2" id="star2-19" type="radio" name="star" value="2-19" onclick="ratingclick(2,19)" />
+                    <label class="star star2" for="star2-19"></label>
+                    <input class="star star1" id="star1-19" type="radio" name="star" value="1-19" onclick="ratingclick(1,19)" />
+                    <label class="star star1" for="star1-19"></label>
+                </form>
+            </div>
+        </div>
+        <div>
+            <label>
+                Cleanup/Decommission occurred after the initial cut over for project?
+            </label><br />
+            <div class="stars">
+                <form>
+                    @Html.HiddenFor(m => m.Question20)
+                    @Html.HiddenFor(m => m.Answer20)
+                    <input class="star star5" id="star5-20" type="radio" name="star" value="5-20" onclick="ratingclick(5,20)" />
+                    <label class="star star5" for="star5-20"></label>
+                    <input class="star star4" id="star4-20" type="radio" name="star" value="4-20" onclick="ratingclick(4,20)" />
+                    <label class="star star4" for="star4-20"></label>
+                    <input class="star star3" id="star3-20" type="radio" name="star" value="3-20" onclick="ratingclick(3,20)" />
+                    <label class="star star3" for="star3-20"></label>
+                    <input class="star star2" id="star2-20" type="radio" name="star" value="2-20" onclick="ratingclick(2,20)" />
+                    <label class="star star2" for="star2-20"></label>
+                    <input class="star star1" id="star1-20" type="radio" name="star" value="1-20" onclick="ratingclick(1,20)" />
+                    <label class="star star1" for="star1-20"></label>
+                </form>
+            </div>
+        </div>
+        <div>
+            <label>The Engineer assisted and handled the help desk tickets that were placed during the implementation of the project and during post support?</label><br />
+            <div class="stars">
+                <form>
+                    @Html.HiddenFor(m => m.Question21)
+                    @Html.HiddenFor(m => m.Answer21)
+                    <input class="star star5" id="star5-21" type="radio" name="star" value="5-21" onclick="ratingclick(5,21)" />
+                    <label class="star star5" for="star5-21"></label>
+                    <input class="star star4" id="star4-21" type="radio" name="star" value="4-21" onclick="ratingclick(4,21)" />
+                    <label class="star star4" for="star4-21"></label>
+                    <input class="star star3" id="star3-21" type="radio" name="star" value="3-21" onclick="ratingclick(3,21)" />
+                    <label class="star star3" for="star3-21"></label>
+                    <input class="star star2" id="star2-21" type="radio" name="star" value="2-21" onclick="ratingclick(2,21)" />
+                    <label class="star star2" for="star2-21"></label>
+                    <input class="star star1" id="star1-21" type="radio" name="star" value="1-21" onclick="ratingclick(1,21)" />
+                    <label class="star star1" for="star1-21"></label>
+                </form>
+            </div>
+        </div>
+
+
+        <div id="selectedratings" style="display:none;"></div>
+        <button type="submit" class="btn btn-primary" onclick="submitbtnclick()">submit</button>
+    }
+    else
+    {
+
+        <div>
+            <p style=" font-family: Algerian;text-align:center;font-size:30px;">Survey Already Completed!!</p>
+        </div>
+    }
+</div>
+
+<script type="text/javascript">
+    function ratingclick(val, qst) {
+
+
+        if (qst == "17") {
+
+            $('#Question17').val(qst);
+            $('#Answer17').val(val);
+           // alert($('#Question17').val());
+            //alert($('#Answer17').val());
+
+        }
+        if (qst == "18") {
+            $('#Question18').val(qst);
+            $('#Answer18').val(val);
+
+        }
+        if (qst == "19") {
+
+            $('#Question19').val(qst);
+            $('#Answer19').val(val);
+
+        }
+        if (qst == "20") {
+
+            $('#Question20').val(qst);
+            $('#Answer20').val(val);
+
+        }
+        if (qst == "21") {
+
+            $('#Question21').val(qst);
+            $('#Answer21').val(val);
+
+        }
+
+
+    }
+
+    var psid = document.getElementById("PSId").innerHTML;
+    var prid = document.getElementById("PRId").innerHTML;
+    var Fromrating = document.getElementById("Fromrating").innerHTML;
+
+    function submitbtnclick() {
+        //alert('x');
+        var contact = {
+            Question17: $('#Question17').val(),
+            Answer17: $('#Answer17').val(),
+            Question18: $('#Question18').val(),
+            Answer18: $('#Answer18').val(),
+            Question19: $('#Question19').val(),
+            Answer19: $('#Answer19').val(),
+            Question20: $('#Question20').val(),
+            Answer20: $('#Answer20').val(),
+            Question21: $('#Question21').val(),
+            Answer21: $('#Answer21').val(),
+            PS_ID: psid,
+            PR_ID: prid,
+            RatingFrom: Fromrating
+        };
+
+
+        if ($('#Answer17').val() == 0 || $('#Answer18').val() == 0 || $('#Answer19').val() == 0 || $('#Answer20').val() == 0 || $('#Answer21').val() == 0) {
+            alert('Please select a star rating before submitting');
+            return false;
+        }
+        else {
+            $.ajax({
+                type: 'POST',
+                url: '/Questions/HDPE',
+                //data: JSON.stringify(Clpm),
+                data: '{objModel:' + JSON.stringify(contact) + '}',
+                // data: '{finalrating: "' + finalval + '",finalqst: "' + finalqst + '"}',
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json'
+
+            });
+           // window.location.href = '/ProjectSurvey/ThankYou';
+            window.location.href = '/ProjectSurvey/ThankYou';
+        }
+
+    }
+</script>

@@ -1,0 +1,139 @@
+﻿@model Survey.Models.AssignSurveyMasterModel
+@{
+    ViewBag.Title = "UserManagement";
+    Layout = "~/Views/Shared/_LayoutSurvey.cshtml";
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+<h2>UserManagement</h2>
+
+
+@using (Html.BeginForm("UserManagement", "User", FormMethod.Post, new { @id = "form2", @enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-horizontal">
+        <div id="form2">
+            <div class="col-sm-12">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.objUserModel.U_FirstName, htmlAttributes: new { @class = "control-label col-sm-4" })
+                        <div class="col-sm-8">
+                            @Html.EditorFor(model => model.objUserModel.U_FirstName, new { htmlAttributes = new { @class = "form-control", id = "FirstName" } })
+                            @Html.ValidationMessageFor(model => model.objUserModel.U_FirstName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.objUserModel.U_LastName, htmlAttributes: new { @class = "control-label col-sm-4" })
+                        @Html.HiddenFor(model => model.objUserModel.U_ID, new { htmlAttributes = new { @class = "form-control" } })
+
+                        <div class="col-sm-8">
+                            @Html.EditorFor(model => model.objUserModel.U_LastName, new { htmlAttributes = new { @class = "form-control", id = "LName" } })
+                            @Html.ValidationMessageFor(model => model.objUserModel.U_LastName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="col-sm-12">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.objUserModel.U_UserName, htmlAttributes: new { @class = "control-label col-sm-4" })
+                        <div class="col-sm-8">
+                            @Html.EditorFor(model => model.objUserModel.U_UserName, new { htmlAttributes = new { @class = "form-control", id = "UName" } })
+                            @Html.ValidationMessageFor(model => model.objUserModel.U_UserName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.objUserModel.U_Password, htmlAttributes: new { @class = "control-label col-sm-4" })
+                        <div class="col-sm-8">
+                            @Html.EditorFor(model => model.objUserModel.U_Password, new { htmlAttributes = new { @class = "form-control", @type = "Password", @Value = "12345", @readonly = "readonly", id = "Password" } })
+                            @Html.ValidationMessageFor(model => model.objUserModel.U_Password, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="col-sm-12">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.objUserModel.U_Email, htmlAttributes: new { @class = "control-label col-sm-4" })
+                        <div class="col-sm-8">
+                            @Html.EditorFor(model => model.objUserModel.U_Email, new { htmlAttributes = new { @class = "form-control", id = "Email" } })
+                            @Html.ValidationMessageFor(model => model.objUserModel.U_Email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.objUserModel.U_Mobile, htmlAttributes: new { @class = "control-label col-sm-4" })
+                        <div class="col-sm-8">
+                            @Html.EditorFor(model => model.objUserModel.U_Mobile, new { htmlAttributes = new { @class = "form-control", id = "Mobile" } })
+                            @Html.ValidationMessageFor(model => model.objUserModel.U_Mobile, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="col-sm-12">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.objUserModel.U_Role, htmlAttributes: new { @class = "control-label col-sm-4" })
+                        <div class="col-sm-8">
+                            @Html.DropDownListFor(model => model.objUserModel.U_Role, Model.ddlUserStatus, new { @class = "form-control " })
+                            @*@Html.EditorFor(model => model.objUserModel.U_Role, new { htmlAttributes = new { @class = "form-control", id = "Urole" } })*@
+                            @Html.ValidationMessageFor(model => model.objUserModel.U_Role, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.objUserModel.U_Status, htmlAttributes: new { @class = "control-label col-sm-4" })
+                        <div class="col-sm-1">
+                            @Html.CheckBoxFor(model => model.objUserModel.U_Status, htmlAttributes: new { @checked = true })
+                            @Html.ValidationMessageFor(model => model.objUserModel.U_Status, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="col-sm-12">
+                <div class="col-sm-6">
+
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="col-sm-3">
+                        <button class="btn btn-primary" type="submit" name="Command" value="Add" style="background-color: forestgreen; color: white; padding: 8px; border: none; font-size: 14px; border-radius: 4px; " onclick="if (Savenewuser(Submit)) { return false; }">Save</button>
+                        <button class="btn btn-primary" type="button" name="Command" value="Cancel" style="background-color: red; color: white; padding: 8px; border: none; font-size: 14px; border-radius: 4px; " onclick="location.href='UserDashboard';">Cancel</button>
+                        <button class="btn btn-primary" type="button" name="Command" value="Cancel" style="background-color: darkorange; color: white; padding: 8px; border: none; font-size: 14px; border-radius: 4px; " onclick="clearscreen()">Clear</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+<script>
+
+
+
+    function clearscreen() {
+
+        $("#FirstName").val('');
+        $("#LName").val('');
+        $("#UName").val('');
+        $("#Email").val('');
+        $("#Mobile").val('');
+        $("#Urole").val('');
+
+    }
+
+
+</script>

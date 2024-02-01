@@ -1,0 +1,428 @@
+﻿@model Survey.Models.ProjectMasterModel
+@{
+    ViewBag.Title = "QuestionsForm";
+    Layout = "~/Views/Shared/_LayoutSurvey.cshtml";
+}
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<style>
+    #Question {
+        width: 900px;
+    }
+</style>
+
+@using (Html.BeginForm("QuestionsForm", "Questions", FormMethod.Post, new { @id = "form2", @enctype = "multipart/form-data" }))
+{
+    //"UserManagementUpdate", "User", FormMethod.Post,
+
+
+    @Html.AntiForgeryToken()
+    //Html.ValidationSummary()
+    <h3 style="color: #3853a8;">Questionaire Form</h3>
+    <div id="form2" style="font-family:'Times New Roman', Times, serif; margin-top:4%;">
+
+        <div class="col-sm-12">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        @Html.LabelFor(model => model.QuestionsForm.Q_Type, htmlAttributes: new { @class = "control-label" })
+                        @Html.HiddenFor(model => model.QuestionsForm.Q_ID, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    <div class="col-sm-8">
+
+                        @Html.DropDownListFor(model => model.QuestionsForm.Q_Type, Model.ddlQUserStatus, new { @class = "form-control ", id = "Qtype" })
+                        @Html.ValidationMessageFor(model => model.QuestionsForm.Q_Type, "", new { @class = "text-danger" })
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        @Html.LabelFor(model => model.QuestionsForm.Q_Question, htmlAttributes: new { @class = "control-label" })
+                    </div>
+                    <div class="col-sm-8">
+                        @Html.EditorFor(model => model.QuestionsForm.Q_Question, new { htmlAttributes = new { @class = "form-control", id = "Question", style = " height:80px;" } })
+                        @Html.ValidationMessageFor(model => model.QuestionsForm.Q_Question, "", new { @class = "text-danger" })
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        @Html.LabelFor(model => model.QuestionsForm.Q_Ans_Type, htmlAttributes: new { @class = "control-label" })
+                    </div>
+                    <div class="col-sm-8">
+
+                        @Html.DropDownListFor(model => model.QuestionsForm.Q_Ans_Type, Model.ddlAnsType, new { @class = "form-control ", id = "Anstype" })
+                        @Html.ValidationMessageFor(model => model.QuestionsForm.Q_Ans_Type, "", new { @class = "text-danger" })
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        @Html.LabelFor(model => model.QuestionsForm.Q_Status, htmlAttributes: new { @class = "control-label" })
+                    </div>
+                    <div class="col-sm-8">
+                        @*@Html.EditorFor(model => model.modelUser.U_DepotID, new { htmlAttributes = new { @class = "form-control" } })*@
+                        @Html.CheckBoxFor(model => model.QuestionsForm.Q_Status, htmlAttributes: new { @checked = true })
+                        @Html.ValidationMessageFor(model => model.QuestionsForm.Q_Status, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="optionsTextBoxes" style="display: none;">
+            <div class="col-sm-12">
+                <div id="container" class="col-sm-6">
+                    <div style="margin-left:5%;">
+                        <label style="margin-left:-4%;">Add Options</label>
+                    </div>
+                    <div class="row1 template" style="display: none;">
+                        <br />
+                        @*@Html.TextBox("Ans_Options", null, new { @class = "form-control", style = "border:solid grey;border-radius:5px;width:30%;" })*@
+                        @Html.EditorFor(model => model.QuestionsForm.Ans_Options1, new { htmlAttributes = new { @class = "form-control", id = "Ans_Options1", style = " border:solid grey;border-radius:5px;width:30%;" } })
+
+                        <button type="button" class="add-row" style="width: 25px; height: 25px; background-color: forestgreen; color: white;">+</button>
+                        <button type="button" class="remove-row" style="width: 25px; height: 25px; background-color: red; color: white; ">-</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--<div id="optionsTextBoxes" style="display: none;">
+        <div class="col-sm-12">
+            <div id="container" class="col-sm-6">
+                <div style="margin-left:5%;">
+                    <label style="margin-left:-4%;">Add Options</label>
+
+                </div>
+                <div class="row1">
+                    <br />-->
+        @*@Html.EditorFor(model => model.QuestionsForm.Ans_Options1, new { htmlAttributes = new { @class = "form-control", id = "Ans_Options1", style = " border:solid grey;border-radius:5px;width:30%;" } })*@
+
+        <!--<input type="text" name="textbox1" id="Ans_Options1" style="border:solid grey;border-radius:5px;width:30%;">
+                <button type="button" class="add-row" style="width: 25px; height: 25px; background-color: forestgreen; color: white;">+</button>
+                <button type="button" class="remove-row" style="width: 25px; height: 25px; background-color: red; color: white; ">-</button>
+            </div>
+
+
+        </div>
+        <!--<div id="container" class="col-sm-6">
+            <div style="margin-left:15%;">
+                <label style="margin-left:-4%;">Add Options</label>
+
+            </div>
+            <div class="row1">
+           !---->
+    
+        <!--@*<input type="text" name="textbox1" id="Ans_Options1" style="border:solid grey;border-radius:5px;width:30%;">*@-->
+        <!--<!--<button type="button" class="add-row" style="width: 25px; height: 25px; background-color: forestgreen; color: white;">+</button>
+                <button type="button" class="remove-row" style="width: 25px; height: 25px; background-color: red; color: white; ">-</button>
+            </div>
+        </div>-->
+       
+        <!--@*<div class="col-sm-6">
+                        <div class="form-group">
+                            @Html.EditorFor(model => model.QuestionsForm.Ans_Options1, new { htmlAttributes = new { @class = "form-control col-sm-2" } })
+                            @Html.EditorFor(model => model.QuestionsForm.Ans_Options2, new { htmlAttributes = new { @class = "form-control col-sm-2" } })
+                            @Html.EditorFor(model => model.QuestionsForm.Ans_Options3, new { htmlAttributes = new { @class = "form-control col-sm-2" } })
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            @Html.EditorFor(model => model.QuestionsForm.Ans_Options4, new { htmlAttributes = new { @class = "form-control col-sm-2" } })
+                            @Html.EditorFor(model => model.QuestionsForm.Ans_Options5, new { htmlAttributes = new { @class = "form-control col-sm-2" } })
+                        </div>
+                    </div>*@
+            </div>
+
+
+
+
+        </div>-->
+        <div class="col-sm-6">
+            <div class="form-group">
+                <div class="col-sm-4">
+
+                </div>
+                <div class="col-sm-8">
+
+                </div>
+            </div>
+        </div>
+    </div><div class="col-sm-12">
+        <div class="col-sm-6">
+
+        </div>
+        <div class="col-sm-6">
+            <div class="col-sm-3">
+
+            </div>
+            <div class="col-sm-12" style="padding:10px;">
+
+                <div class="col-sm-6">
+
+                </div>
+                <div class="col-sm-6">
+
+                    @if (@ViewData["Mode"] == null)
+                    {
+                        <div class="btns">
+                            <button class="btn-btnprimary" type="submit" id="save" name="Command" value="Add" style="background-color: forestgreen; color: white;padding: 8px; border: none; font-size: 14px; border-radius: 4px; " onclick="if (Savenewuser(Submit)) { return false; }">Save</button>
+
+                            <button class="btn-btnprimary" type="button" id="update" name="Command" value="Cancel" style="background-color: red; color: white; padding: 8px; border: none; font-size: 14px; border-radius: 4px;margin-left:30px; " onclick="location.href='QuestionDashboard';">Cancel</button>
+
+                            <button class="btn-btnprimary" type="button" id="clear" name="Command" value="Clear" style="background-color: darkorange; color: white; padding: 8px; border: none; font-size: 14px; border-radius: 4px;margin-left:30px; " onclick="clearscreen()">Clear</button>
+                        </div>
+
+                    }
+
+                    else if (@ViewData["Mode"].ToString() == "edit")
+                    {
+                        <div class="btns">
+                            <button class="btn-btnprimary" type="submit" id="save" name="Command" value="Add" style="background-color: forestgreen; color: white;padding: 8px; border: none; font-size: 14px; border-radius: 4px; " onclick="if (Savenewuser(Submit)) { return false; }">Update</button>
+
+                            <button class="btn-btnprimary" type="button" id="update" name="Command" value="Cancel" style="background-color: red; color: white; padding: 8px; border: none; font-size: 14px; border-radius: 4px;margin-left:30px; " onclick="location.href='QuestionDashboard';">Cancel</button>
+
+                            <button class="btn-btnprimary" type="button" id="clear" name="Command" value="Clear" style="background-color: darkorange; color: white; padding: 8px; border: none; font-size: 14px; border-radius: 4px;margin-left:30px; " onclick="clearscreen()">Clear</button>
+                        </div>
+                    }
+                </div>
+            </div>
+
+
+
+        </div>
+
+    </div>
+    @Html.Hidden("RowCount", 1)
+
+}
+
+
+
+<script>
+    $(document).ready(function () {
+        $("#Anstype").change(function () {
+            var selectedValue = $(this).val();
+            /*  alert(selectedValue);*/
+            if (selectedValue == "3") {
+                $("#optionsTextBoxes").show();
+            }
+            else {
+                $("#optionsTextBoxes").hide();
+            }
+        });
+    });
+
+</script>
+
+<script>
+    function clearscreen() {
+        /*   alert("hi");*/
+        $("#Qtype").val('');
+        $("#Question").val('');
+
+
+    }
+</script>
+
+
+<script>
+    $(document).ready(function () {
+        var maxRows = 5;
+
+        $('#container').on('click', '.add-row', function () {
+            if ($('#container .row1').length < maxRows) {
+                var newRow = $('.template').clone().removeClass('template').show();
+                var currentRows = $('#container .row1').length + 1;
+
+                // Update input attributes for the new row
+                newRow.find('input').val('');
+                newRow.find('input').attr({
+                    'id': 'Ans_Options' + currentRows,
+                    'name': 'Ans_Options[' + currentRows + ']'
+                });
+
+                // Increment the row count
+                var rowCount = parseInt($('#RowCount').val());
+                rowCount++;
+                $('#RowCount').val(rowCount);
+
+                // Append the new row
+                $('#container').append(newRow);
+            }
+        });
+
+        $('#container').on('click', '.remove-row', function () {
+            $(this).closest('.row1').remove();
+        });
+    });
+
+
+</script>
+
+
+@*<script type="text/javascript">
+
+        $(document).ready(function () {
+            var maxRows = 5;
+
+            $('#container').on('click', '.add-row', function () {
+                if ($('#container .row1').length < maxRows) {
+                    var newRow = $('.row1:last').clone();
+                    var currentRows = $('#container .row1').length + 1;
+
+                    newRow.find('input').val('');
+                    newRow.find('input').attr('id', 'Ans_Options' + currentRows);
+
+                    $('#container').append(newRow);
+                }
+            });
+
+            $('#container').on('click', '.remove-row', function () {
+                $(this).closest('.row1').remove();
+            });
+
+            // Assuming you want to update the corresponding editor field when a value is typed in the textbox
+            $('#container').on('input', 'input[type="text"]', function () {
+                var textboxId = $(this).attr('id');
+                var rowNumber = textboxId.replace('Ans_Options', '');
+
+                $('#Question' + rowNumber).val($(this).val());
+            });
+        });
+    </script>*@
+
+
+
+@*<script>
+        $(document).ready(function () {
+            var maxRows = 5;
+
+            $('#container').on('click', '.add-row', function () {
+                if ($('#container .row1').length < maxRows) {
+                    var newRow = $('.row1:last').clone();
+                    var currentRows = $('#container .row1').length + 1;
+
+                    newRow.find('input').val('');
+                    newRow.find('input').attr('id', 'Ans_Options' + currentRows);
+
+                    $('#container').append(newRow);
+                }
+            });
+
+            $('#container').on('click', '.remove-row', function () {
+                $(this).closest('.row1').remove();
+            });
+
+            // Assuming you want to update the corresponding editor field when a value is typed in the textbox
+            $('#container').on('input', 'input[type="text"]', function () {
+                var textboxId = $(this).attr('id');
+                var rowNumber = textboxId.replace('Ans_Options', '');
+
+                $('#Question' + rowNumber).val($(this).val());
+            });
+        });
+
+    </script>*@
+@*<script>
+        $(document).ready(function () {
+            var maxRows = 5;
+
+            $('#container').on('click', '.add-row', function () {
+                if ($('#container .row1').length < maxRows) {
+                    var newRow = $('.row1:last').clone();
+                    var currentRows = $('#container .row1').length + 1;
+
+                    newRow.find('input').val('');
+                    newRow.find('input').attr('id', 'Ans_Options' + currentRows);
+
+                    $('#container').append(newRow);
+                }
+            });
+
+            $('#container').on('click', '.remove-row', function () {
+                $(this).closest('.row1').remove();
+            });
+        });
+
+    </script>*@
+
+
+<script>
+    $(document).ready(function () {
+        $("#save").click(function () {
+            var Option1 = document.getElementById("Ans_Options1").value;
+            var Option2 = document.getElementById("Ans_Options2").value;
+            var Option3 = document.getElementById("Ans_Options3").value;
+            var Option4 = document.getElementById("Ans_Options4").value;
+            var Option5 = document.getElementById("Ans_Options5").value;
+            alert(Option1);
+            $.ajax({
+                type: "POST",
+                url: "/Questions/QuestionsForm",
+                data: {
+                    Option1: Option1,
+                    Option2: Option2,
+                    Option3: Option3,
+                    Option4: Option4,
+                    Option5: Option5
+                },
+                success: function (result) {
+                    window.location.href = "/Questions/QuestionDashboard";
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
+    });
+</script>
+
+@*<script>
+
+        $(document).ready(function () {
+
+            $('#container').on('click', '.add-row', function () {
+
+                var newRow = $('.row1:last').clone();
+
+                newRow.find('input').val('');
+
+                $('#container').append(newRow);
+            });
+
+            $('#container').on('click', '.remove-row', function () {
+
+                $(this).closest('.row1').remove();
+            });
+        });
+    </script>*@
+
+<style type="text/css">
+    @@media (max-width: 767px) {
+        #Question {
+            width: 350px;
+        }
+    }
+
+    @@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+        .btns {
+            white-space: nowrap;
+        }
+
+        #Question {
+            width: 500px;
+        }
+    }
+</style>

@@ -1,0 +1,406 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ProjectSurveyModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AS_AssignSurvey">
+          <Key>
+            <PropertyRef Name="AS_ID" />
+          </Key>
+          <Property Name="AS_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AS_ProjectID" Type="varchar" MaxLength="20" />
+          <Property Name="AS_ProjectName" Type="varchar" MaxLength="30" />
+          <Property Name="AS_Customer" Type="varchar" MaxLength="30" />
+          <Property Name="AS_ClientPM" Type="bit" />
+          <Property Name="AS_ClientPE" Type="bit" />
+          <Property Name="AS_HelpDeskPM" Type="bit" />
+          <Property Name="AS_HelpDeskPE" Type="bit" />
+          <Property Name="AS_PEPM" Type="bit" />
+          <Property Name="AS_PMPE" Type="bit" />
+          <Property Name="AS_SalePM" Type="bit" />
+          <Property Name="AS_AssignDate" Type="datetime" />
+          <Property Name="As_Status" Type="bit" />
+          <Property Name="AS_CreatedBY" Type="int" />
+          <Property Name="AS_CreatedDate" Type="datetime" />
+          <Property Name="AS_UpdatedBy" Type="int" />
+          <Property Name="AS_UpdatedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="L_Login">
+          <Key>
+            <PropertyRef Name="L_ID" />
+          </Key>
+          <Property Name="L_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="U_ID" Type="int" />
+          <Property Name="L_Name" Type="varchar" MaxLength="30" />
+          <Property Name="L_Password" Type="varchar" MaxLength="30" />
+          <Property Name="L_Active" Type="bit" />
+          <Property Name="L_CreatedBY" Type="int" />
+          <Property Name="L_CreatedDate" Type="datetime" />
+          <Property Name="L_UpdatedBy" Type="int" />
+          <Property Name="L_UpdatedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="P_Project">
+          <Key>
+            <PropertyRef Name="P_ID" />
+          </Key>
+          <Property Name="P_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="P_Name" Type="varchar" MaxLength="50" />
+          <Property Name="P_Discription" Type="varchar" MaxLength="200" />
+          <Property Name="P_PM" Type="int" />
+          <Property Name="P_PE" Type="int" />
+          <Property Name="P_SalesPM" Type="int" />
+          <Property Name="P_HPM" Type="int" />
+          <Property Name="P_HPE" Type="int" />
+          <Property Name="P_IsActive" Type="bit" />
+          <Property Name="P_CreatedBY" Type="int" />
+          <Property Name="P_CreatedDate" Type="datetime" />
+          <Property Name="P_UpdatedBy" Type="int" />
+          <Property Name="P_UpdatedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Q_Questionnaire">
+          <Key>
+            <PropertyRef Name="Q_ID" />
+          </Key>
+          <Property Name="Q_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Q_Type" Type="varchar" MaxLength="10" />
+          <Property Name="Q_QuestionSequence" Type="int" />
+          <Property Name="Q_Question" Type="varchar" MaxLength="300" />
+          <Property Name="Q_Status" Type="bit" />
+          <Property Name="Q_CreatedBY" Type="int" />
+          <Property Name="Q_CreatedDate" Type="datetime" />
+          <Property Name="Q_UpdatedBy" Type="int" />
+          <Property Name="Q_UpdatedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="RO_Role">
+          <Key>
+            <PropertyRef Name="RO_ID" />
+          </Key>
+          <Property Name="RO_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RO_Name" Type="varchar" MaxLength="30" />
+          <Property Name="RO_Description" Type="varchar" MaxLength="200" />
+          <Property Name="RO_IsActive" Type="bit" />
+          <Property Name="RO_CreatedBY" Type="int" />
+          <Property Name="RO_CreatedDate" Type="datetime" />
+          <Property Name="RO_UpdatedBy" Type="int" />
+          <Property Name="RO_UpdatedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SS_SubmitSurvey">
+          <Key>
+            <PropertyRef Name="SS_ID" />
+          </Key>
+          <Property Name="SS_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SS_AS_ID" Type="int" />
+          <Property Name="SS_P_ID" Type="int" />
+          <Property Name="SS_U_ID" Type="int" />
+          <Property Name="SS_U_Role" Type="varchar" MaxLength="30" />
+          <Property Name="SS_Status" Type="int" />
+          <Property Name="SS_IsActive" Type="bit" />
+          <Property Name="SS_CreatedBY" Type="int" />
+          <Property Name="SS_CreatedDate" Type="datetime" />
+          <Property Name="SS_UpdatedBy" Type="int" />
+          <Property Name="SS_UpdatedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="U_User">
+          <Key>
+            <PropertyRef Name="U_ID" />
+          </Key>
+          <Property Name="U_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="U_FirstName" Type="varchar" MaxLength="30" />
+          <Property Name="U_LastName" Type="varchar" MaxLength="30" />
+          <Property Name="U_Email" Type="varchar" MaxLength="30" />
+          <Property Name="U_Mobile" Type="varchar" MaxLength="30" />
+          <Property Name="U_Role" Type="varchar" MaxLength="30" />
+          <Property Name="U_Status" Type="bit" />
+          <Property Name="U_CreatedBY" Type="int" />
+          <Property Name="U_CreatedDate" Type="datetime" />
+          <Property Name="U_UpdatedBy" Type="int" />
+          <Property Name="U_UpdatedDate" Type="datetime" />
+        </EntityType>
+        <EntityContainer Name="ProjectSurveyModelStoreContainer">
+          <EntitySet Name="AS_AssignSurvey" EntityType="Self.AS_AssignSurvey" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="L_Login" EntityType="Self.L_Login" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="P_Project" EntityType="Self.P_Project" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Q_Questionnaire" EntityType="Self.Q_Questionnaire" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RO_Role" EntityType="Self.RO_Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SS_SubmitSurvey" EntityType="Self.SS_SubmitSurvey" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="U_User" EntityType="Self.U_User" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ProjectSurveyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AS_AssignSurvey">
+          <Key>
+            <PropertyRef Name="AS_ID" />
+          </Key>
+          <Property Name="AS_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AS_ProjectID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="AS_ProjectName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="AS_Customer" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="AS_ClientPM" Type="Boolean" />
+          <Property Name="AS_ClientPE" Type="Boolean" />
+          <Property Name="AS_HelpDeskPM" Type="Boolean" />
+          <Property Name="AS_HelpDeskPE" Type="Boolean" />
+          <Property Name="AS_PEPM" Type="Boolean" />
+          <Property Name="AS_PMPE" Type="Boolean" />
+          <Property Name="AS_SalePM" Type="Boolean" />
+          <Property Name="AS_AssignDate" Type="DateTime" Precision="3" />
+          <Property Name="As_Status" Type="Boolean" />
+          <Property Name="AS_CreatedBY" Type="Int32" />
+          <Property Name="AS_CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="AS_UpdatedBy" Type="Int32" />
+          <Property Name="AS_UpdatedDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="L_Login">
+          <Key>
+            <PropertyRef Name="L_ID" />
+          </Key>
+          <Property Name="L_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="U_ID" Type="Int32" />
+          <Property Name="L_Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="L_Password" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="L_Active" Type="Boolean" />
+          <Property Name="L_CreatedBY" Type="Int32" />
+          <Property Name="L_CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="L_UpdatedBy" Type="Int32" />
+          <Property Name="L_UpdatedDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="P_Project">
+          <Key>
+            <PropertyRef Name="P_ID" />
+          </Key>
+          <Property Name="P_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="P_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="P_Discription" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="P_PM" Type="Int32" />
+          <Property Name="P_PE" Type="Int32" />
+          <Property Name="P_SalesPM" Type="Int32" />
+          <Property Name="P_HPM" Type="Int32" />
+          <Property Name="P_HPE" Type="Int32" />
+          <Property Name="P_IsActive" Type="Boolean" />
+          <Property Name="P_CreatedBY" Type="Int32" />
+          <Property Name="P_CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="P_UpdatedBy" Type="Int32" />
+          <Property Name="P_UpdatedDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Q_Questionnaire">
+          <Key>
+            <PropertyRef Name="Q_ID" />
+          </Key>
+          <Property Name="Q_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Q_Type" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Q_QuestionSequence" Type="Int32" />
+          <Property Name="Q_Question" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Q_Status" Type="Boolean" />
+          <Property Name="Q_CreatedBY" Type="Int32" />
+          <Property Name="Q_CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="Q_UpdatedBy" Type="Int32" />
+          <Property Name="Q_UpdatedDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="RO_Role">
+          <Key>
+            <PropertyRef Name="RO_ID" />
+          </Key>
+          <Property Name="RO_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RO_Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="RO_Description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="RO_IsActive" Type="Boolean" />
+          <Property Name="RO_CreatedBY" Type="Int32" />
+          <Property Name="RO_CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="RO_UpdatedBy" Type="Int32" />
+          <Property Name="RO_UpdatedDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="SS_SubmitSurvey">
+          <Key>
+            <PropertyRef Name="SS_ID" />
+          </Key>
+          <Property Name="SS_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SS_AS_ID" Type="Int32" />
+          <Property Name="SS_P_ID" Type="Int32" />
+          <Property Name="SS_U_ID" Type="Int32" />
+          <Property Name="SS_U_Role" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="SS_Status" Type="Int32" />
+          <Property Name="SS_IsActive" Type="Boolean" />
+          <Property Name="SS_CreatedBY" Type="Int32" />
+          <Property Name="SS_CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="SS_UpdatedBy" Type="Int32" />
+          <Property Name="SS_UpdatedDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="U_User">
+          <Key>
+            <PropertyRef Name="U_ID" />
+          </Key>
+          <Property Name="U_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="U_FirstName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="U_LastName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="U_Email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="U_Mobile" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="U_Role" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="U_Status" Type="Boolean" />
+          <Property Name="U_CreatedBY" Type="Int32" />
+          <Property Name="U_CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="U_UpdatedBy" Type="Int32" />
+          <Property Name="U_UpdatedDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityContainer Name="ProjectSurveyEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AS_AssignSurvey" EntityType="Self.AS_AssignSurvey" />
+          <EntitySet Name="L_Login" EntityType="Self.L_Login" />
+          <EntitySet Name="P_Project" EntityType="Self.P_Project" />
+          <EntitySet Name="Q_Questionnaire" EntityType="Self.Q_Questionnaire" />
+          <EntitySet Name="RO_Role" EntityType="Self.RO_Role" />
+          <EntitySet Name="SS_SubmitSurvey" EntityType="Self.SS_SubmitSurvey" />
+          <EntitySet Name="U_User" EntityType="Self.U_User" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ProjectSurveyModelStoreContainer" CdmEntityContainer="ProjectSurveyEntities">
+          <EntitySetMapping Name="AS_AssignSurvey">
+            <EntityTypeMapping TypeName="ProjectSurveyModel.AS_AssignSurvey">
+              <MappingFragment StoreEntitySet="AS_AssignSurvey">
+                <ScalarProperty Name="AS_ID" ColumnName="AS_ID" />
+                <ScalarProperty Name="AS_ProjectID" ColumnName="AS_ProjectID" />
+                <ScalarProperty Name="AS_ProjectName" ColumnName="AS_ProjectName" />
+                <ScalarProperty Name="AS_Customer" ColumnName="AS_Customer" />
+                <ScalarProperty Name="AS_ClientPM" ColumnName="AS_ClientPM" />
+                <ScalarProperty Name="AS_ClientPE" ColumnName="AS_ClientPE" />
+                <ScalarProperty Name="AS_HelpDeskPM" ColumnName="AS_HelpDeskPM" />
+                <ScalarProperty Name="AS_HelpDeskPE" ColumnName="AS_HelpDeskPE" />
+                <ScalarProperty Name="AS_PEPM" ColumnName="AS_PEPM" />
+                <ScalarProperty Name="AS_PMPE" ColumnName="AS_PMPE" />
+                <ScalarProperty Name="AS_SalePM" ColumnName="AS_SalePM" />
+                <ScalarProperty Name="AS_AssignDate" ColumnName="AS_AssignDate" />
+                <ScalarProperty Name="As_Status" ColumnName="As_Status" />
+                <ScalarProperty Name="AS_CreatedBY" ColumnName="AS_CreatedBY" />
+                <ScalarProperty Name="AS_CreatedDate" ColumnName="AS_CreatedDate" />
+                <ScalarProperty Name="AS_UpdatedBy" ColumnName="AS_UpdatedBy" />
+                <ScalarProperty Name="AS_UpdatedDate" ColumnName="AS_UpdatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="L_Login">
+            <EntityTypeMapping TypeName="ProjectSurveyModel.L_Login">
+              <MappingFragment StoreEntitySet="L_Login">
+                <ScalarProperty Name="L_ID" ColumnName="L_ID" />
+                <ScalarProperty Name="U_ID" ColumnName="U_ID" />
+                <ScalarProperty Name="L_Name" ColumnName="L_Name" />
+                <ScalarProperty Name="L_Password" ColumnName="L_Password" />
+                <ScalarProperty Name="L_Active" ColumnName="L_Active" />
+                <ScalarProperty Name="L_CreatedBY" ColumnName="L_CreatedBY" />
+                <ScalarProperty Name="L_CreatedDate" ColumnName="L_CreatedDate" />
+                <ScalarProperty Name="L_UpdatedBy" ColumnName="L_UpdatedBy" />
+                <ScalarProperty Name="L_UpdatedDate" ColumnName="L_UpdatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="P_Project">
+            <EntityTypeMapping TypeName="ProjectSurveyModel.P_Project">
+              <MappingFragment StoreEntitySet="P_Project">
+                <ScalarProperty Name="P_ID" ColumnName="P_ID" />
+                <ScalarProperty Name="P_Name" ColumnName="P_Name" />
+                <ScalarProperty Name="P_Discription" ColumnName="P_Discription" />
+                <ScalarProperty Name="P_PM" ColumnName="P_PM" />
+                <ScalarProperty Name="P_PE" ColumnName="P_PE" />
+                <ScalarProperty Name="P_SalesPM" ColumnName="P_SalesPM" />
+                <ScalarProperty Name="P_HPM" ColumnName="P_HPM" />
+                <ScalarProperty Name="P_HPE" ColumnName="P_HPE" />
+                <ScalarProperty Name="P_IsActive" ColumnName="P_IsActive" />
+                <ScalarProperty Name="P_CreatedBY" ColumnName="P_CreatedBY" />
+                <ScalarProperty Name="P_CreatedDate" ColumnName="P_CreatedDate" />
+                <ScalarProperty Name="P_UpdatedBy" ColumnName="P_UpdatedBy" />
+                <ScalarProperty Name="P_UpdatedDate" ColumnName="P_UpdatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Q_Questionnaire">
+            <EntityTypeMapping TypeName="ProjectSurveyModel.Q_Questionnaire">
+              <MappingFragment StoreEntitySet="Q_Questionnaire">
+                <ScalarProperty Name="Q_ID" ColumnName="Q_ID" />
+                <ScalarProperty Name="Q_Type" ColumnName="Q_Type" />
+                <ScalarProperty Name="Q_QuestionSequence" ColumnName="Q_QuestionSequence" />
+                <ScalarProperty Name="Q_Question" ColumnName="Q_Question" />
+                <ScalarProperty Name="Q_Status" ColumnName="Q_Status" />
+                <ScalarProperty Name="Q_CreatedBY" ColumnName="Q_CreatedBY" />
+                <ScalarProperty Name="Q_CreatedDate" ColumnName="Q_CreatedDate" />
+                <ScalarProperty Name="Q_UpdatedBy" ColumnName="Q_UpdatedBy" />
+                <ScalarProperty Name="Q_UpdatedDate" ColumnName="Q_UpdatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RO_Role">
+            <EntityTypeMapping TypeName="ProjectSurveyModel.RO_Role">
+              <MappingFragment StoreEntitySet="RO_Role">
+                <ScalarProperty Name="RO_ID" ColumnName="RO_ID" />
+                <ScalarProperty Name="RO_Name" ColumnName="RO_Name" />
+                <ScalarProperty Name="RO_Description" ColumnName="RO_Description" />
+                <ScalarProperty Name="RO_IsActive" ColumnName="RO_IsActive" />
+                <ScalarProperty Name="RO_CreatedBY" ColumnName="RO_CreatedBY" />
+                <ScalarProperty Name="RO_CreatedDate" ColumnName="RO_CreatedDate" />
+                <ScalarProperty Name="RO_UpdatedBy" ColumnName="RO_UpdatedBy" />
+                <ScalarProperty Name="RO_UpdatedDate" ColumnName="RO_UpdatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SS_SubmitSurvey">
+            <EntityTypeMapping TypeName="ProjectSurveyModel.SS_SubmitSurvey">
+              <MappingFragment StoreEntitySet="SS_SubmitSurvey">
+                <ScalarProperty Name="SS_ID" ColumnName="SS_ID" />
+                <ScalarProperty Name="SS_AS_ID" ColumnName="SS_AS_ID" />
+                <ScalarProperty Name="SS_P_ID" ColumnName="SS_P_ID" />
+                <ScalarProperty Name="SS_U_ID" ColumnName="SS_U_ID" />
+                <ScalarProperty Name="SS_U_Role" ColumnName="SS_U_Role" />
+                <ScalarProperty Name="SS_Status" ColumnName="SS_Status" />
+                <ScalarProperty Name="SS_IsActive" ColumnName="SS_IsActive" />
+                <ScalarProperty Name="SS_CreatedBY" ColumnName="SS_CreatedBY" />
+                <ScalarProperty Name="SS_CreatedDate" ColumnName="SS_CreatedDate" />
+                <ScalarProperty Name="SS_UpdatedBy" ColumnName="SS_UpdatedBy" />
+                <ScalarProperty Name="SS_UpdatedDate" ColumnName="SS_UpdatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="U_User">
+            <EntityTypeMapping TypeName="ProjectSurveyModel.U_User">
+              <MappingFragment StoreEntitySet="U_User">
+                <ScalarProperty Name="U_ID" ColumnName="U_ID" />
+                <ScalarProperty Name="U_FirstName" ColumnName="U_FirstName" />
+                <ScalarProperty Name="U_LastName" ColumnName="U_LastName" />
+                <ScalarProperty Name="U_Email" ColumnName="U_Email" />
+                <ScalarProperty Name="U_Mobile" ColumnName="U_Mobile" />
+                <ScalarProperty Name="U_Role" ColumnName="U_Role" />
+                <ScalarProperty Name="U_Status" ColumnName="U_Status" />
+                <ScalarProperty Name="U_CreatedBY" ColumnName="U_CreatedBY" />
+                <ScalarProperty Name="U_CreatedDate" ColumnName="U_CreatedDate" />
+                <ScalarProperty Name="U_UpdatedBy" ColumnName="U_UpdatedBy" />
+                <ScalarProperty Name="U_UpdatedDate" ColumnName="U_UpdatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

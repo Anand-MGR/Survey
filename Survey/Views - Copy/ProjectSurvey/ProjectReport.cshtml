@@ -1,0 +1,150 @@
+﻿@model Survey.Models.AssignSurveyMasterModel
+
+@{
+    ViewBag.Title = "Project Report";
+    Layout = "~/Views/Shared/_LayoutSurvey.cshtml";
+}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css">
+<script data-require="jquery@3.1.1" data-semver="3.1.1" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+@*<link href="~/Css/Ratepagenew.css" rel="stylesheet" />*@
+
+<style type="text/css">
+    div.stars {
+        max-width: 270px;
+        display: inline-block;
+    }
+
+    input.star {
+        display: none;
+    }
+
+    label.star {
+        float: right;
+        padding: 5px;
+        font-size: 20px;
+        color: #444;
+        transition: all .2s;
+    }
+
+    input.star:checked ~ label.star:before {
+        content: '\f005';
+        color: #FD4;
+        transition: all .25s;
+    }
+
+    input.star5:checked ~ label.star:before {
+        color: forestgreen;
+        text-shadow: 0 0 20px #b6ff00;
+    }
+
+    input.star4half:checked ~ label.star:before {
+        color: orange;
+    }
+
+
+    input.star4:checked ~ label.star:before {
+        color: orange;
+    }
+
+    input.star3:checked ~ label.star:before {
+        color: #FE7;
+    }
+
+    input.star1:checked ~ label.star:before {
+        color: red;
+    }
+
+    label.star:hover {
+        /*       transform: rotate(-15deg) scale(1.3);*/
+    }
+
+    label.star:before {
+        content: '\f006';
+        font-family: FontAwesome;
+    }
+</style>
+
+<br />
+<div>
+    <label for="year" style="font-size:25px;">Select a year:</label>
+    <select name="year" id="year" style="padding:5px;font-size:20px;">
+        @for (int i = DateTime.Now.Year; i >= 2021; i--)
+        {
+            <option value="@i">@i</option>
+        }
+    </select>
+
+    <label for="months" style="font-size:25px;">Select a Quarter :</label>
+    <select name="Quadrant" id="months" style="padding:5px;font-size:20px;" onchange="Showmonths()">
+        <option value="1-12">Select All</option>
+        <option value="1-3">Quarter 1</option>
+        <option value="4-6">Quarter 2</option>
+        <option value="7-9">Quarter 3</option>
+        <option value="10-12">Quarter 4</option>
+    </select>
+    <button type="submit" class="btn btn-primary" style="margin:20px; font-size:18px;" onclick="Searchbtn()">Search</button>
+    <span id="quadrantmonths" style="visibility:hidden;"> </span>
+</div>
+<hr />
+<div id="searchdataload" style="display:none">
+    @Html.Partial("_ProjectReport", Model)
+</div>
+
+<script type="text/javascript">
+    function Showmonths() {
+        var selectedquadrant = document.getElementById("months").value;
+        if (selectedquadrant == "1-3") {
+
+            $('#quadrantmonths').text("January to March");
+        }
+
+        else if (selectedquadrant == "4-6") {
+
+            $('#quadrantmonths').text("April to June");
+        }
+
+        else if (selectedquadrant == "7-9") {
+
+            $('#quadrantmonths').text("July to September");
+        }
+
+        else if (selectedquadrant == "10-12") {
+
+            $('#quadrantmonths').text("October to December");
+        }
+    }
+
+</script>
+
+<script type="text/javascript">
+
+    function Searchbtn() {
+        var selectedyear = document.getElementById("year").value;
+        var selectedQuadrant = document.getElementById("months").value;
+        $.ajax({
+            type: "Post",
+            url: '@Url.Action("ProjectReport", "ProjectSurvey")',
+            data: '{selectedyear: "' + selectedyear + '",selectedQuadrant: "' + selectedQuadrant + '"}',
+            contentType: "application/json; charset=utf-8",
+            dataType: "html",
+            success: function (data) {
+                $('#searchdataload').html("");
+                $('#searchdataload').show();
+                $('#searchdataload').html(data);
+             }
+        });
+    }
+
+</script>
+
+
+
+<style type="text/css">
+    @@media (max-width: 767px) {
+        .quater {
+            margin-top: 4%;
+        }
+    }
+</style>

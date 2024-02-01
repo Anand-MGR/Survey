@@ -1,0 +1,157 @@
+﻿@model Survey.Models.ProjectMasterModel
+@{
+    ViewBag.Title = "QuestionsForm";
+    Layout = "~/Views/Shared/_LayoutSurvey.cshtml";
+}
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<style>
+    #Question {
+        width: 900px;
+    }
+</style>
+
+@using (Html.BeginForm("QuestionsForm", "Questions", FormMethod.Post, new { @id = "form2", @enctype = "multipart/form-data" }))
+{
+    //"UserManagementUpdate", "User", FormMethod.Post,
+
+
+    @Html.AntiForgeryToken()
+    //Html.ValidationSummary()
+    <h3 style="color: #3853a8;">Questionaire Form</h3>
+    <div id="form2" style="font-family:'Times New Roman', Times, serif; margin-top:4%;">
+
+        <div class="col-sm-12">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        @Html.LabelFor(model => model.QuestionsForm.Q_Type, htmlAttributes: new { @class = "control-label" })
+                        @Html.HiddenFor(model => model.QuestionsForm.Q_ID, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    <div class="col-sm-8">
+
+                        @Html.DropDownListFor(model => model.QuestionsForm.Q_Type, Model.ddlQUserStatus, new { @class = "form-control ", id = "Qtype" })
+                        @Html.ValidationMessageFor(model => model.QuestionsForm.Q_Type, "", new { @class = "text-danger" })
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        @Html.LabelFor(model => model.QuestionsForm.Q_Question, htmlAttributes: new { @class = "control-label" })
+                    </div>
+                    <div class="col-sm-8">
+                        @Html.EditorFor(model => model.QuestionsForm.Q_Question, new
+                        {
+                            htmlAttributes = new { @class = "form-control", id = "Question", style = " height:80px;" }
+})
+                        @Html.ValidationMessageFor(model => model.QuestionsForm.Q_Question, "", new { @class = "text-danger" })
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    @*<div class="col-sm-4">
+                            @Html.LabelFor(model => model.objUserModel.U_Role, htmlAttributes: new { @class = "control-label" })
+                        </div>
+                        <div class="col-sm-8">
+                            @Html.DropDownListFor(model => model.objUserModel.U_Role, Model.ddlUserStatus, new { @class = "form-control ", id = "Urole" })
+                            @Html.ValidationMessageFor(model => model.objUserModel.U_Role, "", new { @class = "text-danger" })
+                        </div>*@
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        @Html.LabelFor(model => model.QuestionsForm.Q_Status, htmlAttributes: new { @class = "control-label" })
+                    </div>
+                    <div class="col-sm-8">
+                        @*@Html.EditorFor(model => model.modelUser.U_DepotID, new { htmlAttributes = new { @class = "form-control" } })*@
+                        @Html.CheckBoxFor(model => model.QuestionsForm.Q_Status, htmlAttributes: new { @checked = true })
+                        @Html.ValidationMessageFor(model => model.QuestionsForm.Q_Status, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6">
+            <div class="form-group">
+                <div class="col-sm-4">
+
+                </div>
+                <div class="col-sm-8">
+
+                </div>
+            </div>
+        </div>
+    </div><div class="col-sm-12">
+        <div class="col-sm-6">
+
+        </div>
+        <div class="col-sm-6">
+            <div class="col-sm-3">
+
+            </div>
+            <div class="col-sm-12" style="padding:10px;">
+
+                <div class="col-sm-6">
+
+                </div>
+                <div class="col-sm-6">
+
+                    @if (@ViewData["Mode"] == null)
+                    {
+                        <button class="btn-btnprimary" type="submit" id="save" name="Command" value="Add" style="background-color: forestgreen; color: white;padding: 8px; border: none; font-size: 14px; border-radius: 4px; " onclick="if (Savenewuser(Submit)) { return false; }">Save</button>
+
+                        <button class="btn-btnprimary" type="button" id="update" name="Command" value="Cancel" style="background-color: red; color: white; padding: 8px; border: none; font-size: 14px; border-radius: 4px;margin-left:30px; " onclick="location.href='QuestionDashboard';">Cancel</button>
+
+                        <button class="btn-btnprimary" type="button" id="clear" name="Command" value="Clear" style="background-color: darkorange; color: white; padding: 8px; border: none; font-size: 14px; border-radius: 4px;margin-left:30px; " onclick="clearscreen()">Clear</button>
+
+
+                    }
+
+                    else if (@ViewData["Mode"].ToString() == "edit")
+                    {
+                        <button class="btn-btnprimary" type="submit" id="save" name="Command" value="Add" style="background-color: forestgreen; color: white;padding: 8px; border: none; font-size: 14px; border-radius: 4px; " onclick="if (Savenewuser(Submit)) { return false; }">Update</button>
+
+                        <button class="btn-btnprimary" type="button" id="update" name="Command" value="Cancel" style="background-color: red; color: white; padding: 8px; border: none; font-size: 14px; border-radius: 4px;margin-left:30px; " onclick="location.href='QuestionDashboard';">Cancel</button>
+
+                        <button class="btn-btnprimary" type="button" id="clear" name="Command" value="Clear" style="background-color: darkorange; color: white; padding: 8px; border: none; font-size: 14px; border-radius: 4px;margin-left:30px; " onclick="clearscreen()">Clear</button>
+
+                    }
+                </div>
+            </div>
+
+
+
+        </div>
+
+    </div>
+
+}
+
+<script>
+    function clearscreen() {
+        /*   alert("hi");*/
+        $("#Qtype").val('');
+        $("#Question").val('');
+
+
+    }
+</script>
+
+<style type="text/css">
+    @@media (max-width: 767px) {
+        #Question {
+            width: 350px;
+        }
+    }
+</style>

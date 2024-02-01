@@ -1,0 +1,191 @@
+﻿@model Survey.Models.AssignSurveyMasterModel
+@{
+    ViewBag.Title = "Feedbackform";
+    Layout = "~/Views/Shared/_LayoutSurvey.cshtml";
+}
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+
+
+<style>
+    #Fdsubject {
+        width: 700px
+    }
+
+    #Fddescription {
+        width: 700px;
+    }
+
+    #Name {
+        width: 360px;
+    }
+
+    #response {
+        width: 700px;
+    }
+</style>
+
+
+@using (Html.BeginForm("FeedBack", "FeedBack", FormMethod.Post, new { @id = "form2", @enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="container-fluid" style="margin-left:2%;margin-right:1%">
+
+            @if (@ViewData["Mode"] == null)
+            {
+                <div class="row">
+                    <div class="col-sm p-3">
+                        <label style="margin-top:2%; white-space: nowrap;">Name:</label>
+                        @*<h3>@Session["UserName"].ToString()</h3>*@
+                        @Html.EditorFor(model => model.objFBModel.FD_Name, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", id = "Name", style = " height: 35px; font-size: large;", @Value = Session["UserName"].ToString() } })
+
+                        <div id="data-container"></div>
+                    </div>
+                    <div class="col-sm p-3">
+                        <label style="margin-top:2%; white-space: nowrap;">Date:</label>
+                        @Html.EditorFor(model => model.objFBModel.FD_Date, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", style = "width: 160px; height: 35px; font-size: large;", @Value = DateTime.Now.ToString("yyyy-MM-dd") } })
+                        @Html.HiddenFor(model => model.objFBModel.FD_ID, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+            }
+            @if (@ViewData["Mode"] != null)
+            {
+
+                if (@ViewData["Mode"].ToString() == "edit")
+                {
+                    <div class="row">
+                        <div class="col-sm p-3">
+                            <label style="margin-top:2%; white-space: nowrap;">Name:</label>
+                            @*<h3>@Session["UserName"].ToString()</h3>*@
+                            @Html.EditorFor(model => model.objFBModel.FD_Name, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", style = "width: 360px; height: 35px; font-size: large;" } })
+
+                            <div id="data-container"></div>
+                        </div>
+                        <div class="col-sm p-3">
+                            <label style="margin-top:2%; white-space: nowrap;">Date:</label>
+                            @Html.EditorFor(model => model.objFBModel.FD_Date, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", style = "width: 160px; height: 35px; font-size: large;", @Value = DateTime.Now.ToString("yyyy-MM-dd") } })
+                            @Html.HiddenFor(model => model.objFBModel.FD_ID, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+                }
+            }
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label col-md-2" for="objFBModel_FD_Subject">Subject:</label>
+                        <div class="col-sm-8">
+                            @Html.EditorFor(model => model.objFBModel.FD_Subject, new { htmlAttributes = new { @class = "form-control", style = " height:55px;", id = "Fdsubject" } })
+                            @Html.ValidationMessageFor(model => model.objFBModel.FD_Subject, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label col-md-2" for="objFBModel_FD_Description">Description:</label>
+                        <div class="col-sm-8">
+                            @Html.TextAreaFor(model => model.objFBModel.FD_Description, new { @class = "form-control", style = " height:200px;", id = "Fddescription" })
+                            @Html.ValidationMessageFor(model => model.objFBModel.FD_Description, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                @if (@ViewData["Mode"] != null)
+                {
+                    if (@ViewData["Mode"].ToString() == "edit" && @Session["RoleName"].ToString() =="Admin")
+                    {
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-2" for="objFBModel_FD_Response">Response:</label>
+                                <div class="col-sm-8">
+                                    @Html.TextAreaFor(model => model.objFBModel.FD_Response, new { @class = "form-control", style = "height:200px;", id = "response" })
+                                    @Html.ValidationMessageFor(model => model.objFBModel.FD_Response, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                    }
+                }
+            </div>
+
+
+            <div class="row">
+                <div class="col-sm-12" style="float: right; margin-top: 20px;margin-right:25px;">
+
+
+                    <button class="btn-btnprimary" type="submit" id="save" name="Command" value="Add" style="background-color: forestgreen; color: white;padding: 8px; border: none; font-size: 14px; border-radius: 4px; " onclick="if (Savenewuser(Submit)) { return false; }">Save</button>
+
+                    <button class="btn-btnprimary" type="button" id="update" name="Command" value="Cancel" style="background-color: red; color: white; padding: 8px; border: none; font-size: 14px; border-radius: 4px;margin-left:30px; " onclick="location.href='FeedBackDashboard';">Cancel</button>
+
+                    <button class="btn-btnprimary" type="button" id="clear" name="Command" value="Clear" style="background-color: darkorange; color: white; padding: 8px; border: none; font-size: 14px; border-radius: 4px;margin-left:30px; " onclick="clearscreen()">Clear</button>
+                    `
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        @*Default Today date scripts*@
+        var now = new Date();
+        var day = ("0" + now.getDate()).slice(-2);
+        var month = ("0" + (now.getMonth() + 1)).slice(-2);
+        var today = (month) + "-" + (day) + "-" + now.getFullYear() ;
+        var currenttime = now.getHours() + ":" + now.getMinutes();
+        $('#orderdate').val(today);
+        $('#todate').val(today);
+        $("#getitemid").show();
+
+
+
+    });
+</script>
+
+<script>
+
+
+
+    function clearscreen() {
+
+        $("#Fddescription").val('');
+        $("#Fdsubject").val('');
+    }
+
+
+</script>
+
+
+<style type="text/css">
+    @@media (max-width: 767px) {
+        #Fdsubject {
+            width: 320px;
+        }
+
+        #Fddescription {
+            width: 320px;
+        }
+
+        #Name {
+            width: 300px;
+        }
+
+        #response {
+            width: 320px;
+        }
+    }
+</style>
+

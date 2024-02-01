@@ -1,0 +1,69 @@
+﻿@model Survey.Models.AssignSurveyMasterModel
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+<table id="tbldocuments" class="display">
+    <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>User Role</th>
+        <th>EmailId</th>
+        <th>Mobile no</th>
+        <th>Status</th>
+        <th>Edit</th>
+        @*<th>User Role</th>
+        <th>Depot</th>
+        <th>Reset Password</th>
+        <th>Status</th>
+        <th>Edit</th>*@
+    </tr>
+    <tbody>
+        @foreach (var x in Model.LstUserModel)
+        {
+            <tr>
+                <td>@x.U_FirstName</td>
+                <td>@x.U_LastName</td>
+                <td>@x.U_Role</td>
+                <td>@x.U_Email</td>
+                <td>@x.U_Mobile</td>
+                <td>@x.U_Status</td>
+                <!--<td>
+        <i style='font-size:24px' class='far' onclick="EditUserDashboard(@x.U_ID)">&#xf044;</i>-->
+                @*<img src='~/Images/editu.png' onclick="EditUserDashboard(@x.U_ID)" width="20" style="cursor:pointer;" title="Edit" />*@
+                <!--</td>-->
+
+                <td><i style='font-size:24px' class='far' onclick="EditUserDashboard(@x.U_ID)">&#xf044;</i></td>
+            </tr>
+
+        }
+
+    </tbody>
+</table>
+
+<script type="text/javascript">
+
+    function resetdata(x) {
+
+        //alert(x);
+        var result = confirm("Are you sure you want to Reset the Password");
+        if (result) {
+            $.ajax({
+                type: "Post",
+                url: '@Url.Action("Resertpassword", "User")',
+                data: '{ID: "' + x + '"}',
+                contentType: "application/json; charset=utf-8",
+                dataType: "html",
+                success: function (data) {
+
+                }
+            });
+          }
+    }
+
+    function EditUserDashboard(U_ID) {
+           var link = '@Url.Action("EditUser", "User", new { U_ID = "replace", Mode = "Modes" })';
+         link = link.replace("replace", U_ID);
+        link = link.replace("Modes", "Edit");
+         window.location.href = link.replace(/&amp;/g, '&');
+
+    }
+
+</script>
