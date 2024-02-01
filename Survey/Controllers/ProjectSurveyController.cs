@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-//using System.Web;
 using System.Web.Mvc;
 using Survey.Models;
 using Survey.SurveyEntity;
@@ -9,13 +8,6 @@ using System.Data;
 using System.Configuration;
 using System.Net;
 using System.Net.Mail;
-
-//using System.IO;
-//using Newtonsoft.Json;
-//using System.Data.SqlClient;
-
-//using System.Net.NetworkInformation;
-
 
 namespace Survey.Controllers
 {
@@ -263,7 +255,6 @@ namespace Survey.Controllers
             ObjSurveyMaster.LsttotalPEReport = SuvEnt.Database.SqlQuery<TotalPEReportModel>("usp_GetProjectEngineerReport").ToList();
             ObjSurveyMaster.LsttotalSAReport = SuvEnt.Database.SqlQuery<TotalSAReportModel>("usp_GetSAReport").ToList();
             return View(ObjSurveyMaster);
-            //return View(ObjSurveyMaster);
         }
 
         [HttpPost]
@@ -276,8 +267,7 @@ namespace Survey.Controllers
 
             string[] months = selectedQuadrant.Split('-');
             string startMonth = months[0];
-            string endMonth = months[1];
-            //var obj = new AssignSurveyMasterModel();
+            string endMonth = months[1];            
             LstSurveyMaster.Clear();
             ObjSurveyMaster.LsttotalReport = SuvEnt.Database.SqlQuery<TotalReportModel>("usp_GetTotalReportForProject @p0,@p1,@p2", selectedyear, startMonth, endMonth).ToList();
             ObjSurveyMaster.LsttotalPMReport = SuvEnt.Database.SqlQuery<TotalPMReportModel>("usp_GetProjectManagerReport @p0,@p1,@p2", selectedyear, startMonth, endMonth).ToList();
@@ -362,8 +352,7 @@ namespace Survey.Controllers
                 }
             }
 
-            var Name = (from N in ObjList
-                            // where N.A_AssetNo.StartsWith(AssetNo)
+            var Name = (from N in ObjList                            
                         select new { N.U_FirstName });
             return Json(Name, JsonRequestBehavior.AllowGet);
         }
@@ -375,23 +364,7 @@ namespace Survey.Controllers
         }
 
 
-        //[HttpPost]
-        //public JsonResult Index(string Name2, string URid)
-        //{
-
-        //    List<UserModel> LstUserModel = new List<UserModel>();
-        //    List<ProjectSurveyModel> objPSM = new List<ProjectSurveyModel>();
-        //    ProjectSurveyModel testPSM = new ProjectSurveyModel();
-
-        //    LstUserModel = SuvEnt.Database.SqlQuery<UserModel>("usp_GetUserBasedOnUserrole @p0, @p1", URid, Name2).ToList();
-
-        //    var names = (from N in LstUserModel
-        //                 where N.U_FirstName.IndexOf(Name2, StringComparison.OrdinalIgnoreCase) >= 0
-        //                 select new { PS_ClientName = N.U_FirstName }).ToList();
-
-
-        //    return Json(names, JsonRequestBehavior.AllowGet);
-        //}
+       
 
     }
 
