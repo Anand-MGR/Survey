@@ -24,7 +24,7 @@ namespace Survey.Controllers
         ChangePassword ObjChangePassword = new ChangePassword();
         string UserName;
         #endregion
-        // GET: Login
+        
 
         [HttpGet]
         public ActionResult LoginPage()
