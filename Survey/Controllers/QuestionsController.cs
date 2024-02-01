@@ -21,299 +21,27 @@ namespace Survey.Controllers
 
         ProjectSurveyEntities SuvEnt = new ProjectSurveyEntities();
 
-        CLPMModel objCLPM = new CLPMModel();
-        CLPEModel objCLPE = new CLPEModel();
-        HDPMModel objHDPM = new HDPMModel(); 
-        HDPEModel objHDPE = new HDPEModel();
-        PEPMModel objPEPM = new PEPMModel();
-        PMPEModel objPMPE = new PMPEModel();
-        SAPMModel objSAPM = new SAPMModel();
+        RatingPageModel objRatingPageModel = new RatingPageModel();
+
         List<ReviewModel> objRwviewlstmodel = new List<ReviewModel>();
         ProjectSurveyModel objProjectsurveymodel = new ProjectSurveyModel();
         QuestionsForm ObjquestionsForm = new QuestionsForm();
         ProjectMasterModel ObjProjectSurveyMaster = new ProjectMasterModel();
         #endregion
 
-        public ActionResult CLPM(string Id) 
-        {          
-            objCLPM = GEtDataCLPM(Id);
 
-            var QType = "CLPM";
-            objCLPM.QuestionnaireLst = SuvEnt.Database.SqlQuery<QuestionnaireObjectModel>("usp_getquestionsfromdb @p0", QType).ToList();
-            return View(objCLPM);
+        public ActionResult RatingPage(string QType, string Id)
+        {
+            objRatingPageModel = GEtDataRatingPage(Id, QType);
+            //var QType = "RatingPage";
+            objRatingPageModel.QuestionnaireLst = SuvEnt.Database.SqlQuery<QuestionnaireObjectModel>("usp_getquestionsfromdb @p0", QType).ToList();
+            objRatingPageModel.objTotalQtype = SuvEnt.Database.SqlQuery<TotalQtype>("Usp_GetQTypes @p0", QType).First();
+            return View(objRatingPageModel);
         }
 
         [HttpPost]
-        public ActionResult CLPM(List<CLPMModel> ratings,string psId,string prId,string ratingFrom)
+        public ActionResult RatingPage(List<RatingPageModel> ratings, string psId, string prId, string QType, string ratingFrom)
         {
-           
-            DataTable dt = new DataTable();
-            dt.Columns.Add("Q_Id", typeof(int));
-            dt.Columns.Add("PSD_Rating", typeof(int));
-            dt.Columns.Add("PSD_Yesorno", typeof(string));
-            dt.Columns.Add("PSD_Mcq", typeof(string));
-
-            for (int i =0; i<ratings.Count;i++)
-            {
-                DataRow dr = dt.NewRow();
-                dr["Q_Id"] = ratings[i].Question;
-                dr["PSD_Rating"] = ratings[i].Answer;
-                dt.Rows.Add(dr);
-            }
-
-         
-            SqlCommand cmd = new SqlCommand("usp_ProjectSurveyDetails", con);
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@PS_ID", psId);
-            cmd.Parameters.AddWithValue("@PR_ID", prId);
-            cmd.Parameters.AddWithValue("@PSD_Type", "CLPM");
-            cmd.Parameters.AddWithValue("@PSD_CreatedBY", ratingFrom);
-            cmd.Parameters.AddWithValue("@TypeTable", dt);
-
-            con.Open();
-            cmd.ExecuteNonQuery();
-            con.Close();
-
-            return RedirectToAction("ThankYou","ProjectSurvey");
-        
-        }
-
-        public ActionResult CLPE(string Id)
-        {
-           
-            objCLPE = GEtDataCLPE(Id);
-
-            var QType = "CLPE";
-            objCLPE.QuestionnaireLst = SuvEnt.Database.SqlQuery<QuestionnaireObjectModel>("usp_getquestionsfromdb @p0", QType).ToList();
-            return View(objCLPE);
-            
-        }
-
-        [HttpPost]
-        public ActionResult CLPE(List<CLPEModel> ratings, string psId, string prId, string ratingFrom)
-        {
-            
-            DataTable dt = new DataTable();
-            dt.Columns.Add("Q_Id", typeof(int));
-            dt.Columns.Add("PSD_Rating", typeof(int));
-            dt.Columns.Add("PSD_Yesorno", typeof(string));
-            dt.Columns.Add("PSD_Mcq", typeof(string));
-
-            for (int i = 0; i < ratings.Count; i++)
-            {
-                DataRow dr = dt.NewRow();
-                dr["Q_Id"] = ratings[i].Question;
-                dr["PSD_Rating"] = ratings[i].Answer;
-                dt.Rows.Add(dr);
-            }
-
-
-            SqlCommand cmd = new SqlCommand("usp_ProjectSurveyDetails", con);
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@PS_ID", psId);
-            cmd.Parameters.AddWithValue("@PR_ID", prId);
-            cmd.Parameters.AddWithValue("@PSD_Type", "CLPE");
-            cmd.Parameters.AddWithValue("@PSD_CreatedBY", ratingFrom);
-            cmd.Parameters.AddWithValue("@TypeTable", dt);
-            con.Open();
-            cmd.ExecuteNonQuery();
-            con.Close();
-            return RedirectToAction("ThankYou", "ProjectSurvey");
-
-        }
-
-        public ActionResult HDPM(string Id)
-        {
-            objHDPM = GEtDataHDPM(Id);
-
-            var QType = "HDPM";
-            objHDPM.QuestionnaireLst = SuvEnt.Database.SqlQuery<QuestionnaireObjectModel>("usp_getquestionsfromdb @p0", QType).ToList();
-            return View(objHDPM);
-        }
-
-        [HttpPost]
-        public ActionResult HDPM(List<HDPMModel> ratings, string psId, string prId, string ratingFrom)
-        {
-          
-                
-                DataTable dt = new DataTable();
-                dt.Columns.Add("Q_Id", typeof(int));
-                dt.Columns.Add("PSD_Rating", typeof(int));
-            dt.Columns.Add("PSD_Yesorno", typeof(string));
-            dt.Columns.Add("PSD_Mcq", typeof(string));
-
-            for (int i = 0; i < ratings.Count; i++)
-                    {
-                        DataRow dr = dt.NewRow();
-                        dr["Q_Id"] = ratings[i].Question;
-                        dr["PSD_Rating"] = ratings[i].Answer;
-                        dt.Rows.Add(dr);
-                    }
-
-
-
-            SqlCommand cmd = new SqlCommand("usp_ProjectSurveyDetails", con);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@PS_ID",psId);
-                cmd.Parameters.AddWithValue("@PR_ID", prId);
-                cmd.Parameters.AddWithValue("@PSD_Type", "HDPM");
-                cmd.Parameters.AddWithValue("@PSD_CreatedBY", ratingFrom);
-                cmd.Parameters.AddWithValue("@TypeTable", dt);
-                con.Open();
-                cmd.ExecuteNonQuery();
-                con.Close();
-            return RedirectToAction("ThankYou", "ProjectSurvey");
-            //return Redirect("/ProjectSurvey/ThankYou");
-
-        }
-
-        public ActionResult HDPE(string Id)
-        {
-            objHDPE = GEtDataHDPE(Id);
-
-            var QType = "HDPE";
-            objHDPE.QuestionnaireLst = SuvEnt.Database.SqlQuery<QuestionnaireObjectModel>("usp_getquestionsfromdb @p0", QType).ToList();
-            return View(objHDPE);
-        }
-
-        [HttpPost]
-        public ActionResult HDPE(List<HDPEModel> ratings, string psId, string prId, string ratingFrom)
-        {
-           
-                DataTable dt = new DataTable();
-                dt.Columns.Add("Q_Id", typeof(int));
-                dt.Columns.Add("PSD_Rating", typeof(int));
-            dt.Columns.Add("PSD_Yesorno", typeof(string));
-            dt.Columns.Add("PSD_Mcq", typeof(string));
-
-            for (int i = 0; i < ratings.Count; i++)
-                    {
-                        DataRow dr = dt.NewRow();
-                        dr["Q_Id"] = ratings[i].Question;
-                        dr["PSD_Rating"] = ratings[i].Answer;
-                        dt.Rows.Add(dr);
-                    }
-
-
-
-            SqlCommand cmd = new SqlCommand("usp_ProjectSurveyDetails", con);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@PS_ID", psId);
-                cmd.Parameters.AddWithValue("@PR_ID", prId);
-                cmd.Parameters.AddWithValue("@PSD_Type", "HDPE");
-                cmd.Parameters.AddWithValue("@PSD_CreatedBY", ratingFrom);
-                cmd.Parameters.AddWithValue("@TypeTable", dt);
-                con.Open();
-                cmd.ExecuteNonQuery();
-                con.Close();
-
-            return RedirectToAction("ThankYou", "ProjectSurvey");
-
-        }
-
-        public ActionResult PEPM(string Id)
-        {
-            objPEPM = GEtDataPEPM(Id);
-
-
-            var QType = "PEPM";
-            objPEPM.QuestionnaireLst = SuvEnt.Database.SqlQuery<QuestionnaireObjectModel>("usp_getquestionsfromdb @p0", QType).ToList();
-            return View(objPEPM);
-        }
-
-        [HttpPost]
-        public ActionResult PEPM(List<PEPMModel> ratings, string psId, string prId, string ratingFrom)
-        {
-            
-             
-                DataTable dt = new DataTable();
-                dt.Columns.Add("Q_Id", typeof(int));
-                dt.Columns.Add("PSD_Rating", typeof(int));
-            dt.Columns.Add("PSD_Yesorno", typeof(string));
-            dt.Columns.Add("PSD_Mcq", typeof(string));
-
-            for (int i = 0; i < ratings.Count; i++)
-                    {
-                        DataRow dr = dt.NewRow();
-                        dr["Q_Id"] = ratings[i].Question;
-                        dr["PSD_Rating"] = ratings[i].Answer;
-                        dt.Rows.Add(dr);
-                    }
-
-
-            SqlCommand cmd = new SqlCommand("usp_ProjectSurveyDetails", con);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@PS_ID", psId);
-                cmd.Parameters.AddWithValue("@PR_ID", prId);
-                cmd.Parameters.AddWithValue("@PSD_Type", "PEPM");
-                cmd.Parameters.AddWithValue("@PSD_CreatedBY", ratingFrom);
-                cmd.Parameters.AddWithValue("@TypeTable", dt);
-                con.Open();
-                cmd.ExecuteNonQuery();
-                con.Close();
-                return RedirectToAction("ThankYou", "ProjectSurvey");
-           
-
-        }
-
-        public ActionResult PMPE(string Id)
-        {
-            objPMPE = GEtDataPMPE(Id);
-
-            var QType = "PMPE";
-            objPMPE.QuestionnaireLst = SuvEnt.Database.SqlQuery<QuestionnaireObjectModel>("usp_getquestionsfromdb @p0", QType).ToList();
-
-            return View(objPMPE);
-        }
-
-        [HttpPost]
-        public ActionResult PMPE(List<PMPEModel> ratings, string psId, string prId, string ratingFrom)
-        {
-         
-               
-                DataTable dt = new DataTable();
-                dt.Columns.Add("Q_Id", typeof(int));
-                dt.Columns.Add("PSD_Rating", typeof(int));
-            dt.Columns.Add("PSD_Yesorno", typeof(string));
-            dt.Columns.Add("PSD_Mcq", typeof(string));
-
-            for (int i = 0; i < ratings.Count; i++)
-                    {
-                        DataRow dr = dt.NewRow();
-                        dr["Q_Id"] = ratings[i].Question;
-                        dr["PSD_Rating"] = ratings[i].Answer;
-                        dt.Rows.Add(dr);
-                    }
-
-
-            SqlCommand cmd = new SqlCommand("usp_ProjectSurveyDetails", con);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@PS_ID", psId);
-                cmd.Parameters.AddWithValue("@PR_ID", prId);
-                cmd.Parameters.AddWithValue("@PSD_Type", "PMPE");
-                cmd.Parameters.AddWithValue("@PSD_CreatedBY", ratingFrom);
-                cmd.Parameters.AddWithValue("@TypeTable", dt);
-                con.Open();
-                cmd.ExecuteNonQuery();
-                con.Close();
-            return RedirectToAction("ThankYou", "ProjectSurvey");
-
-        }
-
-        public ActionResult SAPE(string Id)
-        {
-            objPMPE = GEtDataSAPE(Id);
-
-            var QType = "SAPE";
-            objPMPE.QuestionnaireLst = SuvEnt.Database.SqlQuery<QuestionnaireObjectModel>("usp_getquestionsfromdb @p0", QType).ToList();
-
-            return View(objPMPE);
-        }
-
-        [HttpPost]
-        public ActionResult SAPE(List<PMPEModel> ratings, string psId, string prId, string ratingFrom)
-        {
-
 
             DataTable dt = new DataTable();
             dt.Columns.Add("Q_Id", typeof(int));
@@ -334,174 +62,17 @@ namespace Survey.Controllers
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@PS_ID", psId);
             cmd.Parameters.AddWithValue("@PR_ID", prId);
-            cmd.Parameters.AddWithValue("@PSD_Type", "SAPE");
+            cmd.Parameters.AddWithValue("@PSD_Type", QType);
             cmd.Parameters.AddWithValue("@PSD_CreatedBY", ratingFrom);
             cmd.Parameters.AddWithValue("@TypeTable", dt);
+
             con.Open();
             cmd.ExecuteNonQuery();
             con.Close();
+
             return RedirectToAction("ThankYou", "ProjectSurvey");
 
         }
-
-        public ActionResult PMSA(string Id)
-        {
-            objPMPE = GEtDataPMSA(Id);
-
-            var QType = "PMSA";
-            objPMPE.QuestionnaireLst = SuvEnt.Database.SqlQuery<QuestionnaireObjectModel>("usp_getquestionsfromdb @p0", QType).ToList();
-
-            return View(objPMPE);
-        }
-
-        [HttpPost]
-        public ActionResult PMSA(List<PMPEModel> ratings, string psId, string prId, string ratingFrom)
-        {
-
-
-            DataTable dt = new DataTable();
-            dt.Columns.Add("Q_Id", typeof(int));
-            dt.Columns.Add("PSD_Rating", typeof(int));
-            dt.Columns.Add("PSD_Yesorno", typeof(string));
-            dt.Columns.Add("PSD_Mcq", typeof(string));
-
-            for (int i = 0; i < ratings.Count; i++)
-            {
-                DataRow dr = dt.NewRow();
-                dr["Q_Id"] = ratings[i].Question;
-                dr["PSD_Rating"] = ratings[i].Answer;
-                dt.Rows.Add(dr);
-            }
-
-
-            SqlCommand cmd = new SqlCommand("usp_ProjectSurveyDetails", con);
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@PS_ID", psId);
-            cmd.Parameters.AddWithValue("@PR_ID", prId);
-            cmd.Parameters.AddWithValue("@PSD_Type", "PMSA");
-            cmd.Parameters.AddWithValue("@PSD_CreatedBY", ratingFrom);
-            cmd.Parameters.AddWithValue("@TypeTable", dt);
-            con.Open();
-            cmd.ExecuteNonQuery();
-            con.Close();
-            return RedirectToAction("ThankYou", "ProjectSurvey");
-
-        }
-
-
-
-        public ActionResult PESA(string Id)
-        {
-            objPMPE = GEtDataPESA(Id);
-
-            var QType = "PESA";
-            objPMPE.QuestionnaireLst = SuvEnt.Database.SqlQuery<QuestionnaireObjectModel>("usp_getquestionsfromdb @p0", QType).ToList();
-
-            return View(objPMPE);
-        }
-
-        [HttpPost]
-        public ActionResult PESA(List<PMPEModel> ratings, string psId, string prId, string ratingFrom)
-        {
-
-
-            DataTable dt = new DataTable();
-            dt.Columns.Add("Q_Id", typeof(int));
-            dt.Columns.Add("PSD_Rating", typeof(int));
-            dt.Columns.Add("PSD_Yesorno", typeof(string));
-            dt.Columns.Add("PSD_Mcq", typeof(string));
-
-            for (int i = 0; i < ratings.Count; i++)
-            {
-                DataRow dr = dt.NewRow();
-                dr["Q_Id"] = ratings[i].Question;
-                dr["PSD_Rating"] = ratings[i].Answer;
-                dt.Rows.Add(dr);
-            }
-
-
-            SqlCommand cmd = new SqlCommand("usp_ProjectSurveyDetails", con);
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@PS_ID", psId);
-            cmd.Parameters.AddWithValue("@PR_ID", prId);
-            cmd.Parameters.AddWithValue("@PSD_Type", "PESA");
-            cmd.Parameters.AddWithValue("@PSD_CreatedBY", ratingFrom);
-            cmd.Parameters.AddWithValue("@TypeTable", dt);
-            con.Open();
-            cmd.ExecuteNonQuery();
-            con.Close();
-            return RedirectToAction("ThankYou", "ProjectSurvey");
-
-        }
-
-
-
-        public ActionResult SAPM(string Id)
-        {
-            objSAPM = GEtDataSAPM(Id);
-
-            var QType = "SAPM";
-            objSAPM.QuestionnaireLst = SuvEnt.Database.SqlQuery<QuestionnaireObjectModel>("usp_getquestionsfromdb @p0", QType).ToList();
-
-            return View(objSAPM);
-        }
-
-        [HttpPost]
-        public ActionResult SAPM(List<SAPMModel> ratings, List<SAPMModel> Yesorno, List<SAPMModel> Mcq, string psId, string prId, string ratingFrom, List<SAPMModel> Choosenvalue)
-        {
-
-
-            DataTable dt = new DataTable();
-            dt.Columns.Add("Q_Id", typeof(int));
-            dt.Columns.Add("PSD_Rating", typeof(int));
-            dt.Columns.Add("PSD_Yesorno",typeof(string));
-            dt.Columns.Add("PSD_Mcq", typeof(string));
-            if(ratings!=null)
-            {
-                for (int i = 0; i < ratings.Count; i++)
-                {
-                    DataRow dr = dt.NewRow();
-                    dr["Q_Id"] = ratings[i].Question;
-                    dr["PSD_Rating"] = ratings[i].Answer;
-                    dt.Rows.Add(dr);
-                }
-            }
-            if(Yesorno != null)
-            {
-                for (int i = 0; i < Yesorno.Count; i++)
-                {
-                    DataRow dr = dt.NewRow();
-                    dr["Q_Id"] = Yesorno[i].Question;
-                    dr["PSD_Yesorno"] = Yesorno[i].Answer;
-                    dt.Rows.Add(dr);
-                }
-            }
-              if(Mcq != null)
-            {
-                for (int i = 0; i < Mcq.Count; i++)
-                {
-                    DataRow dr = dt.NewRow();
-                    dr["Q_Id"] = Mcq[i].Question;
-                    dr["PSD_Mcq"] = Mcq[i].Answer;
-                    dt.Rows.Add(dr);
-                }
-            }
-
-
-            SqlCommand cmd = new SqlCommand("usp_ProjectSurveyDetails", con);
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@PS_ID", psId);
-            cmd.Parameters.AddWithValue("@PR_ID", prId);
-            cmd.Parameters.AddWithValue("@PSD_Type", "SAPM");
-            cmd.Parameters.AddWithValue("@PSD_CreatedBY", ratingFrom);
-            cmd.Parameters.AddWithValue("@TypeTable", dt);
-            con.Open();
-            cmd.ExecuteNonQuery();
-            con.Close();
-            return RedirectToAction("ThankYou", "ProjectSurvey");
-
-        }
-
 
 
         public ActionResult ReviewRating(int id)
@@ -509,12 +80,12 @@ namespace Survey.Controllers
             ReviewSummaryModel objSummary = new ReviewSummaryModel();
             objSummary.LstReview = new List<ReviewModel>();
             objSummary.LstReview = GetReviewDatas(id);
-            objSummary.Final = new List<string>();            
+            objSummary.Final = new List<string>();
             objSummary.ProjectName = objSummary.LstReview.Select(o => o.PS_ProjectName).FirstOrDefault();
             objSummary.PS_Date = objSummary.LstReview.Select(o => o.PS_Date).FirstOrDefault();
             objSummary.PS_Status = objSummary.LstReview.Select(o => o.PS_Status).FirstOrDefault();
             string Id = "";
-            
+
             if (objSummary.LstReview.Count > 0)
             {
                 foreach (var i in objSummary.LstReview)
@@ -523,11 +94,11 @@ namespace Survey.Controllers
                     objSummary.Final.Add(Id);
 
                 }
-                
-            }          
+
+            }
 
             return View(objSummary);
-          
+
         }
 
         public ActionResult GetCLData()
@@ -538,8 +109,8 @@ namespace Survey.Controllers
             }
             GetClDataListModel ObjCLModel = new GetClDataListModel();
             var UserId = Session["UserID"].ToString();
-           var Role = Session["Role"].ToString();
-            ObjCLModel.ClList = SuvEnt.Database.SqlQuery<GetClDataModel>("spGetClData @p0,@p1" ,Role, UserId).ToList();
+            var Role = Session["Role"].ToString();
+            ObjCLModel.ClList = SuvEnt.Database.SqlQuery<GetClDataModel>("spGetClData @p0,@p1", Role, UserId).ToList();
 
             return View(ObjCLModel);
         }
@@ -551,88 +122,54 @@ namespace Survey.Controllers
             return objRwviewlstmodel;
         }
 
+
+        public ActionResult ReviewRatingpage(string Value)
+        {
+            string[] Details = Value.Split(',');
+            var PS_Id = Details[0];
+            var Qtype = Details[1];
+
+            ReviewSummaryModel objSummary = new ReviewSummaryModel();
+            objSummary.LstReview = new List<ReviewModel>();
+            objSummary.LstReview = GetReviewDatas(Convert.ToInt16(PS_Id));
+            objSummary.LstReview = objSummary.LstReview.Where(x => x.PRType == Qtype).ToList();
+            objSummary.Final = new List<string>();
+            objSummary.ProjectName = objSummary.LstReview.Select(o => o.PS_ProjectName).FirstOrDefault();
+            objSummary.PS_Date = objSummary.LstReview.Select(o => o.PS_Date).FirstOrDefault();
+            objSummary.PS_Status = objSummary.LstReview.Select(o => o.PS_Status).FirstOrDefault();
+            string Id = "";
+
+            if (objSummary.LstReview.Count > 0)
+            {
+                foreach (var i in objSummary.LstReview)
+                {
+                    Id = "star" + i.PSD_Rating + "-" + i.Q_Id;
+                    objSummary.Final.Add(Id);
+
+                }
+
+            }
+
+            return View(objSummary);
+
+
+
+            //var Role = Session["Role"].ToString();
+            //objRwviewlstmodel = SuvEnt.Database.SqlQuery<ReviewModel>("usp_GetReviewRating @p0,@p1", PS_Id, Role).ToList();
+            //return View ("ReviewRating",objRwviewlstmodel);
+            //return View();
+
+        }
         #region Getting Datas From DB
 
-        public CLPMModel GEtDataCLPM(string Id)
+
+        public RatingPageModel GEtDataRatingPage(string Id, string Type)
         {
-            string Type = "CLPM";
-            objCLPM.RatingHeader = SuvEnt.Database.SqlQuery<RatingCommonmodel>("usp_GetDatas @p0,@p1", Type, Id).First();   
-            return objCLPM;
+
+            objRatingPageModel.RatingHeader = SuvEnt.Database.SqlQuery<RatingCommonmodel>("usp_GetDatas @p0,@p1", Type, Id).First();
+            return objRatingPageModel;
 
         }
-
-        public CLPEModel GEtDataCLPE(string Id)
-        {
-            var Type = "CLPE";
-            objCLPE.RatingHeader = SuvEnt.Database.SqlQuery<RatingCommonmodel>("usp_GetDatas @p0,@p1", Type,Id).First();
-            return objCLPE;
-
-        }
-
-        public HDPMModel GEtDataHDPM(string Id)
-        {
-            var Type = "HDPM";
-            objHDPM.RatingHeader = SuvEnt.Database.SqlQuery<RatingCommonmodel>("usp_GetDatas @p0,@p1", Type,Id).First();
-            return objHDPM;
-
-        }
-
-        public HDPEModel GEtDataHDPE(string Id)
-        {
-            var Type = "HDPE";
-            objHDPE.RatingHeader = SuvEnt.Database.SqlQuery<RatingCommonmodel>("usp_GetDatas @p0,@p1", Type, Id).First();
-            return objHDPE;
-
-        }
-
-        public PEPMModel GEtDataPEPM(string Id)
-        {
-            var Type = "PEPM";
-            objPEPM.RatingHeader = SuvEnt.Database.SqlQuery<RatingCommonmodel>("usp_GetDatas @p0,@p1", Type,Id).First();
-            return objPEPM;
-
-        }
-
-        public PMPEModel GEtDataPMPE(string Id)
-        {
-            var Type = "PMPE";
-            objPMPE.RatingHeader = SuvEnt.Database.SqlQuery<RatingCommonmodel>("usp_GetDatas @p0,@p1", Type,Id).First();
-            return objPMPE;
-
-        }
-
-        public PMPEModel GEtDataSAPE(string Id)
-        {
-            var Type = "SAPE";
-            objPMPE.RatingHeader = SuvEnt.Database.SqlQuery<RatingCommonmodel>("usp_GetDatas @p0,@p1", Type, Id).First();
-            return objPMPE;
-
-        }
-        public PMPEModel GEtDataPMSA(string Id)
-        {
-            var Type = "PMSA";
-            objPMPE.RatingHeader = SuvEnt.Database.SqlQuery<RatingCommonmodel>("usp_GetDatas @p0,@p1", Type, Id).First();
-            return objPMPE;
-
-        }
-
-        public PMPEModel GEtDataPESA(string Id)
-        {
-            var Type = "PESA";
-            objPMPE.RatingHeader = SuvEnt.Database.SqlQuery<RatingCommonmodel>("usp_GetDatas @p0,@p1", Type, Id).First();
-            return objPMPE;
-
-        }
-
-        public SAPMModel GEtDataSAPM(string Id)
-        {
-            var Type = "SAPM";
-            objSAPM.RatingHeader = SuvEnt.Database.SqlQuery<RatingCommonmodel>("usp_GetDatas @p0,@p1", Type, Id).First();
-            return objSAPM;
-
-        }
- 
-
 
         #endregion
 
@@ -662,11 +199,11 @@ namespace Survey.Controllers
             var Role = Session["Role"].ToString();
             ObjProjectSurveyMaster.objProjectsurveymodel = SuvEnt.Database.SqlQuery<ProjectSurveyModel>("Usp_DeleteGetCLData @p0", PS_ID).FirstOrDefault();
 
-            GetClDataListModel ObjCLModel = new GetClDataListModel(); 
+            GetClDataListModel ObjCLModel = new GetClDataListModel();
             ObjCLModel.ClList = SuvEnt.Database.SqlQuery<GetClDataModel>("spGetClData @p0,@p1", Role, UserId).ToList();
 
 
-            return View("GetCLData",ObjCLModel);
+            return View("GetCLData", ObjCLModel);
 
         }
 
@@ -674,7 +211,7 @@ namespace Survey.Controllers
 
         public ActionResult SearchBasedOnProject(string Value, string Filterby)
         {
-            if (Session["UserName"] == null)  
+            if (Session["UserName"] == null)
             {
                 return RedirectToAction("Loginpage", "Login");
             }
@@ -695,14 +232,14 @@ namespace Survey.Controllers
             ObjProjectSurveyMaster.ddlAnsType = SuvEnt.Database.SqlQuery<AnsType>("usp_GetAnstype").Select(x => new SelectListItem { Value = x.value.ToString(), Text = x.Name }).ToList();
 
 
-            return View (ObjProjectSurveyMaster);
+            return View(ObjProjectSurveyMaster);
 
         }
-         
+
         [HttpPost]
 
         public ActionResult QuestionsForm(QuestionsForm QuestionsForm)
-          {
+        {
             if (Session["UserName"] == null)
             {
                 return RedirectToAction("Loginpage", "Login");
@@ -752,10 +289,10 @@ namespace Survey.Controllers
             if (Session["UserName"] == null)
             {
                 return RedirectToAction("Loginpage", "Login");
-            }         
+            }
             SuvEnt.Database.ExecuteSqlCommand("usp_AddQuestionType @p0,@p1,@p2"
-                
-          , QuestionsTypeForm.Q_QuestionType,QuestionsTypeForm.QuestionTypeStatus,QuestionsTypeForm.QT_ID);
+
+          , QuestionsTypeForm.Q_QuestionType, QuestionsTypeForm.QuestionTypeStatus, QuestionsTypeForm.QT_ID);
 
             return RedirectToAction("QuestionsTypeDashboard", "Questions");
         }
@@ -789,7 +326,7 @@ namespace Survey.Controllers
             ObjProjectSurveyMaster.ddlQUserStatus = SuvEnt.Database.SqlQuery<QUserStatus>("usp_GetQtype").Select(x => new SelectListItem { Value = x.value, Text = x.Name }).ToList();
             ObjProjectSurveyMaster.ddlAnsType = SuvEnt.Database.SqlQuery<AnsType>("usp_GetAnstype").Select(x => new SelectListItem { Value = x.value.ToString(), Text = x.Name }).ToList();
 
-            return View("QuestionsForm",ObjProjectSurveyMaster);
+            return View("QuestionsForm", ObjProjectSurveyMaster);
         }
 
 

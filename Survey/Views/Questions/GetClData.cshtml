@@ -23,51 +23,14 @@
         display: none;
     }
 
-    /*#tbldocuments {
-        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-        border-collapse: collapse;
-        width: 100%;
+    #tbldocuments tr:nth-child(even) {
+        background-color: #f2f2f2;
     }
 
-        #tbldocuments td, #tbldocuments th {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: center;
-        }*/
+    #tbldocuments tr:hover {
+        background-color: #ddd;
+    }
 
-        #tbldocuments tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        #tbldocuments tr:hover {
-            background-color: #ddd;
-        }
-
-        /*#tbldocuments th {
-            padding-top: 12px;
-            padding-bottom: 12px;
-            text-align: left;
-            background-color: #3853a8;
-            color: white;
-        }
-
-    .danger {
-        background-color: #f44336;
-    }*/
-        /* Red */
-        /*.danger:hover {
-            background: #da190b;
-        }
-
-    .info {
-        background-color: #3853a8;
-        color: white;
-    }*/
-        /* Blue */
-        /*.info:hover {
-            background-color: #3853a8;
-            color: white;
-        }*/
 
     .Delete {
         background-color: brown;
@@ -94,51 +57,13 @@
         width: 30px;
         height: 30px;
         color: navy;
-        /*text-indent: -9999px;*/ /* hides the link text */
+       
     }
 
     .EditTd1 {
         background-image: url(/Images/editu.png);
     }
 
-  /*  .AddTraining {
-        background-color: #3853a8;
-        color: white;
-        display: inline-block;
-        padding: 6px 12px;
-        margin-bottom: 0;
-        font-size: 14px;
-        font-weight: 400;
-        line-height: 1.42857143;
-        text-align: center;
-        white-space: nowrap;
-        vertical-align: middle;
-        touch-action: manipulation;
-        user-select: none;
-        background-image: none;
-        border: 1px solid transparent;
-        border-radius: 4px;
-        float: right;
-    }
-
-    .AddTrainingSearch {
-        background-color: cornflowerblue;
-        color: white;
-        display: inline-block;
-        padding: 6px 12px;
-        margin-bottom: 0;
-        font-size: 14px;
-        font-weight: 400;
-        line-height: 1.42857143;
-        text-align: center;
-        white-space: nowrap;
-        vertical-align: middle;
-        touch-action: manipulation;
-        user-select: none;
-        background-image: none;
-        border: 1px solid transparent;
-        border-radius: 4px;
-    }*/
 
     .AddTraining {
         background-color: #0296e0;
@@ -238,15 +163,7 @@
             @{
                 var Role = Session["Role"].ToString();
             }
-            @*<div class="col-lg-4" style="float:left;display:inline-flex;">
-            @Html.TextBoxFor(model => model.SearchBy, new { @class = "form-control", @maxlength = "80", @id = "txtserach", @placeholder = "Search by Project", onkeypress = "return NuberandChracter(event)", @style = "width:40%;" })
-            <span id="error" style="color: Red; display: none">* Special Characters not allowed.</span>
-        </div>
-        <div class="col-lg-1">
-            <a href="#" class="AddTrainingSearch " onclick="SearchRecords()" style="color: white; text-decoration: none;">
-                <i class="fa fa-search" style="margin-top:4px;"></i>
-            </a>
-        </div>*@
+   
 
             <div class="col-lg-5" style="float:left; display:flex; align-items: center;">
                 @Html.TextBoxFor(model => model.SearchBy, new { @class = "form-control", @maxlength = "80", @id = "txtserach", @placeholder = "Search by Project", onkeypress = "return NuberandChracter(event)", @style = "width:70%;" })
@@ -258,21 +175,7 @@
             </div>
             <span id="error" style="color: Red; display: none; float: left; width: 100%;">* Special Characters not allowed.</span>
 
-            @*<div class="col-lg-6" style="float:left;">
-            @Html.TextBoxFor(model => model.SearchBy, new { @class = "form-control", @maxlength = "80", @id = "txtserach", @placeholder = "Search by Project", onkeypress = "return NuberandChracter(event)", @style = "width:40%;" })
-            <span id="error" style="color: Red; display: none">* Special Characters not allowed.</span>
 
-            <div class="col-lg-1" style="float:left;">
-                <a href="#" class="AddTrainingSearch" id="searchbtn" onclick="SearchRecords()" style="color: white; text-decoration: none;">
-                    <i class="fa fa-search" style="margin-top:4px;"></i>
-                </a>
-            </div>
-        </div>*@
-            @*<div class="col-lg-1" style="float:left;">
-            <a href="#" class="AddTrainingSearch" id="searchbtn" onclick="SearchRecords()" style="color: white; text-decoration: none;">
-              <i class="fa fa-search" style="margin-top:4px;"></i>
-            </a>
-        </div>*@
             <div style="float: right; margin-right: 10%;">
                 @if (Role == "1")
                 {
@@ -281,12 +184,7 @@
                     </a>
                 }
             </div>
-
-            @*<div class="col-lg-2" style="float:left;">
-            <span>
-                <a href="@Url.Action("WareHouse","WareHouse")" class="AddTraining" style="color: white; text-decoration: none;">Add Warehouse Details</a>
-            </span>
-        </div>*@
+    
             <br />
 
         </div>
@@ -324,7 +222,7 @@
                     "oLanguage": {
                         "sLengthMenu": "Page Size: _MENU_"
                     },
-                    columnDefs: [{ orderable: false, targets: [7,8,9,10,11,12,13,14,15,16] }],
+                    columnDefs: [{ orderable: false, targets: [8,9,10,11,12,13,14,15,16,17,18,19,20] }],
                     "searching": false
                 });
 
@@ -352,7 +250,7 @@
                             "oLanguage": {
                                 "sLengthMenu": "Page Size: _MENU_"
                             },
-                            columnDefs: [{ orderable: false, targets: [7, 8, 9, 10, 11, 12, 13, 14, 15, 16]  }],
+                            columnDefs: [{ orderable: false, targets: [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20] }],
                             "searching": false
                         });
 
@@ -413,7 +311,6 @@
         .searchbtn {
             margin-left: 20%;
         }
-
     }
 </style>
 

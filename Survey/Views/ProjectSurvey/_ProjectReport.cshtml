@@ -1,8 +1,15 @@
 ﻿<div>
+    <label class="collapsible theme-button" style="font-size: 27px; font-weight: bold; background-color: #f0f0f0; padding: 10px; display: block; border: 1px solid #ccc; border-radius: 5px; position: relative;" onclick="toggleArrow(this)">
+        Project Name 
+        <span class="arrow" style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); font-size: 20px;">&#x25BC;</span>
+    </label>
+
+
+
 
 
     @*<label class="expand-collapse" onclick="toggleStars('.stars-form1')" " style="font-size:27px;font-weight:bold"> Project Name :</label>*@
-    <label class="collapsible" style="font-size:27px;font-weight:bold"> Project Name :</label>
+    @*<label class="collapsible" style="font-size:27px;font-weight:bold"> Project Name :</label>*@
     @*<a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Project Name :</a>*@
     <div class="content">
         <br />
@@ -53,7 +60,13 @@
 
 
     <hr />
-    <label class="collapsible" style="font-size:27px;font-weight:bold">Project Manager: </label>
+
+    <label class="collapsible" style="font-size: 27px; font-weight: bold; background-color: #f0f0f0; padding: 10px; display: block; border: 1px solid #ccc; border-radius: 5px; position: relative;" onclick="toggleArrow(this)">
+        Project Manager 
+        <span class="arrow" style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); font-size: 20px;">&#x25BC;</span>
+    </label>
+
+    @*<label class="collapsible" style="font-size:27px;font-weight:bold">Project Manager: </label>*@
     <div class="content">
         <br />
         @foreach (var Obj in Model.LsttotalPMReport)
@@ -99,7 +112,12 @@
 
 
     <hr />
-    <label class="collapsible" style="font-size:27px;font-weight:bold">Project Engineer : </label>
+
+    <label class="collapsible theme-button" style="font-size: 27px; font-weight: bold; background-color: #f0f0f0; padding: 10px; display: block; border: 1px solid #ccc; border-radius: 5px; position: relative;">
+        Project Engineer
+        <span style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); font-size: 20px;">&#x25BC;</span>
+    </label>
+    @*<label class="collapsible" style="font-size:27px;font-weight:bold">Project Engineer : </label>*@
 
     <div class="content">
         <br />
@@ -149,7 +167,12 @@
     </div>
 
     <hr />
-    <label class="collapsible" style="font-size:27px;font-weight:bold">Solution Archetect : </label>
+
+    <label class="collapsible theme-button" style="font-size: 27px; font-weight: bold; background-color: #f0f0f0; padding: 10px; display: block; border: 1px solid #ccc; border-radius: 5px; position: relative;">
+        Solution Archetect
+        <span style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); font-size: 20px;">&#x25BC;</span>
+    </label>
+    @*<label class="collapsible" style="font-size:27px;font-weight:bold">Solution Archetect : </label>*@
 
     <div class="content">
         <br />
@@ -198,6 +221,9 @@
 
     </div>
 </div>
+
+
+
 
 <style>
     .active{

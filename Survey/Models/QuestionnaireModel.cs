@@ -10,8 +10,6 @@ namespace Survey.Models
         public List<AssignProjectSurveyModel> objassignprojectsurveymodel { get; set; }
         public List<LoginModel> objloginmodel { get; set; }
         public List<QuestionnaireModel> objquestionnaireModels { get; set; }
-        public List<CLPMModel> objlistCLPM { get; set; }
-        public List<CLPEModel> objlistCLPE { get; set; }
 
         public List<ReviewModel> objlistreviewmodel { get; set; }
         public ReviewModel objReviewmodel { get; set; }
@@ -101,161 +99,31 @@ namespace Survey.Models
 
 
     #endregion
-    public class CLPMModel
+
+    public class RatingPageModel
     {
         public string Question { get; set; }
         public string Answer { get; set; }
-        //public string Question1 { get; set; }
-        //public string Answer1 { get; set; }
-        //public string Question2 { get; set; }
-        //public string Answer2 { get; set; }
-        //public string Question3 { get; set; }
-        //public string Answer3 { get; set; }
-        //public string Question4 { get; set; }
-        //public string Answer4 { get; set; }
-        //public string Question5 { get; set; }
-        //public string Answer5 { get; set; }
 
         public string PS_ID { get; set; }
         public string PR_ID { get; set; }
         public string RatingFrom { get; set; }
-
-        //created on 08-02-2023 for getting values of CLPM Created by Janagan
         public RatingCommonmodel RatingHeader { get; set; }
         public QuestionnaireModel QuestionModel { get; set; }
+        public TotalQtype objTotalQtype { get; set; }
         public List<QuestionnaireObjectModel> QuestionnaireLst { get; set; }
-
-
+        public List<TotalQtype> LstQtype { get; set; }
 
     }
 
-    public class CLPEModel
+    public class TotalQtype
     {
-        public string Question { get; set; }
-        public string Answer { get; set; }
-        //public string Question7 { get; set; }
-        //public string Answer7 { get; set; }
-        //public string Question8 { get; set; }
-        //public string Answer8 { get; set; }
-        //public string Question9 { get; set; }
-        //public string Answer9 { get; set; }
-        //public string Question10 { get; set; }
-        //public string Answer10 { get; set; }
-        //public string Question11 { get; set; }
-        //public string Answer11 { get; set; }
-        public string PS_ID { get; set; }
-        public string PR_ID { get; set; }
-        public string RatingFrom { get; set; }
+        public int QT_ID { get; set; }
+        public string Q_Qus { get; set; }
+        public string Q_Qustionvalue { get; set; }
 
-
-        public RatingCommonmodel RatingHeader { get; set; }
-        public QuestionnaireModel QuestionModel { get; set; }
-        public List<QuestionnaireObjectModel> QuestionnaireLst { get; set; }
     }
 
-    public class HDPMModel
-    {
-        public string Question { get; set; }
-        public string Answer { get; set; }
-        //public string Question13 { get; set; }
-        //public string Answer13 { get; set; }
-        //public string Question14 { get; set; }
-        //public string Answer14 { get; set; }
-        //public string Question15 { get; set; }
-        //public string Answer15 { get; set; }
-        //public string Question16 { get; set; }
-        //public string Answer16 { get; set; }
-        public string PS_ID { get; set; }
-        public string PR_ID { get; set; }
-        public string RatingFrom { get; set; }
-
-        public RatingCommonmodel RatingHeader { get; set; }
-        public QuestionnaireModel QuestionModel { get; set; }
-        public List<QuestionnaireObjectModel> QuestionnaireLst { get; set; }
-    }
-
-    public class HDPEModel
-    {
-        public string Question { get; set; }
-        public string Answer { get; set; }
-        //public string Question18 { get; set; }
-        //public string Answer18 { get; set; }
-        //public string Question19 { get; set; }
-        //public string Answer19 { get; set; }
-        //public string Question20 { get; set; }
-        //public string Answer20 { get; set; }
-        //public string Question21 { get; set; }
-        //public string Answer21 { get; set; }
-        public string PS_ID { get; set; }
-        public string PR_ID { get; set; }
-        public string RatingFrom { get; set; }
-
-
-        public RatingCommonmodel RatingHeader { get; set; }
-
-        public QuestionnaireModel QuestionModel { get; set; }
-        public List<QuestionnaireObjectModel> QuestionnaireLst { get; set; }
-    }
-
-    public class PEPMModel
-    {
-
-        public string Question { get; set; }
-        public string Answer { get; set; }
-        //public string Question23 { get; set; }
-        //public string Answer23 { get; set; }
-        //public string Question24 { get; set; }
-        //public string Answer24 { get; set; }
-        //public string Question25 { get; set; }
-        //public string Answer25 { get; set; }
-        //public string Question26 { get; set; }
-        //public string Answer26 { get; set; }
-        public string RatingFrom { get; set; }
-
-        public string PS_ID { get; set; }
-        public string PR_ID { get; set; }
-        public RatingCommonmodel RatingHeader { get; set; }
-        public QuestionnaireModel QuestionModel { get; set; }
-        public List<QuestionnaireObjectModel> QuestionnaireLst { get; set; }
-    }
-
-    public class PMPEModel
-    {
-
-        public string Question { get; set; }
-        public string Answer { get; set; }
-        //public string Question28 { get; set; }
-        //public string Answer28 { get; set; }
-        //public string Question29 { get; set; }
-        //public string Answer29 { get; set; }
-        //public string Question30 { get; set; }
-        //public string Answer30 { get; set; }
-        //public string Question31 { get; set; }
-        //public string Answer31 { get; set; }
-        public string RatingFrom { get; set; }
-
-
-        public string PS_ID { get; set; }
-        public string PR_ID { get; set; }
-        public RatingCommonmodel RatingHeader { get; set; }
-        public QuestionnaireModel QuestionModel { get; set; }
-        public List<QuestionnaireObjectModel> QuestionnaireLst { get; set; }
-    }
-    public class SAPMModel
-    {
-
-        public string Question { get; set; }
-        public string Answer { get; set; }
-
-        public string RatingFrom { get; set; }
-
-
-        public string PS_ID { get; set; }
-        public string PR_ID { get; set; }
-        public RatingCommonmodel RatingHeader { get; set; }
-        public QuestionnaireModel QuestionModel { get; set; }
-        public List<QuestionnaireObjectModel> QuestionnaireLst { get; set; }
-    }
 
     public class ReviewSummaryModel
     {

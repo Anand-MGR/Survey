@@ -88,7 +88,7 @@ namespace Survey.Models
         public string ProfileImage { get; set; }
     }
 
-    
+
 
     public class UserName
     {
@@ -165,12 +165,11 @@ namespace Survey.Models
         public FeedbackViewModel objFBModel { get; set; }
         public List<UserModel> LstUserModel { get; set; }
         public List<UserRole> LstUserRole { get; set; }
+        //public List<TotalQtype> LstQtype { get; set; }
+        public List<SurveyLinks> LstSurveyLinks { get; set; }
         public List<FeedbackViewModel> LstFbModel { get; set; }
         public List<SelectListItem> userRole { get; set; }
         public List<SelectListItem> ddlUserStatus { get; set; }
-
-
-
 
     }
 
@@ -179,6 +178,21 @@ namespace Survey.Models
         public int Total { get; set; }
         public string ProjectName { get; set; }
         public int PS_Id { get; set; }
+
+    }
+
+    //public class TotalQtype
+    //{
+    //    public int QT_ID { get; set; }
+    //    public string Q_Qus { get; set; }
+    //    public string Q_Qustionvalue { get; set; }
+
+    //}
+    public class SurveyLinks
+    {
+        public int PS_ID { get; set; }
+        public string PS_QType { get; set; }
+        public string PS_link { get; set; }
 
     }
 

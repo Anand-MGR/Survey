@@ -1,0 +1,277 @@
+﻿@model Survey.Models.EmailTemplateModel
+
+@{
+    ViewBag.Title = "EmailTemplate";
+    Layout = "~/Views/Shared/_LayoutSurvey.cshtml";
+}
+
+<h2>Email Template </h2>
+
+<form method="post" action="@Url.Action("EmailTemplate", "ProjectSurvey")">
+    <label for="TemplateName">TemplateName:</label><br />
+    <textarea id="TemplateName" name="TemplateName" rows="1" cols="80">@Model.TemplateName</textarea>
+    <br />
+    <label for="editor">Body Content:</label><br />
+    <textarea id="editor" name="Body_Content" rows="10" cols="80">@Model.Body_Content</textarea>
+    <br />
+    <input id="TemplateId" type="hidden" name="TemplateId" value="@Model.TemplateId">
+    @*<label for="templateActiveStatus">Template Active Status</label>&nbsp;
+        <input type="checkbox" id="templateActiveStatus" name="TemplateActiveStatus" checked="@Model.TemplateActiveStatus" />*@
+
+    <br />
+    <button type="button" onclick="toggleFormat('bold')">Bold</button>
+    <button type="button" onclick="toggleFormat('italic')">Italic</button>
+    <button type="button" onclick="toggleFormat('underline')">Underline</button>
+    <label>Font Family: </label>
+    <select onchange="applyFontFamily(this.value)">
+        <option value="Arial">Arial</option>
+        <option value="Arial Black">Arial Black</option>
+        <option value="Arial Narrow">Arial Narrow</option>
+        <option value="Arial Rounded MT Bold">Arial Rounded MT Bold</option>
+        <option value="Book Antiqua">Book Antiqua</option>
+        <option value="Bookman Old Style">Bookman Old Style</option>
+        <option value="Calibri">Calibri</option>
+        <option value="Cambria">Cambria</option>
+        <option value="Candara">Candara</option>
+        <option value="Century Gothic">Century Gothic</option>
+        <option value="Comic Sans MS">Comic Sans MS</option>
+        <option value="Consolas">Consolas</option>
+        <option value="Courier New">Courier New</option>
+        <option value="Georgia">Georgia</option>
+        <option value="Gill Sans">Gill Sans</option>
+        <option value="Helvetica">Helvetica</option>
+        <option value="Impact">Impact</option>
+        <option value="Lucida Console">Lucida Console</option>
+        <option value="Lucida Sans Unicode">Lucida Sans Unicode</option>
+        <option value="Microsoft Sans Serif">Microsoft Sans Serif</option>
+        <option value="Monaco">Monaco</option>
+        <option value="Palatino Linotype">Palatino Linotype</option>
+        <option value="Segoe UI">Segoe UI</option>
+        <option value="Tahoma">Tahoma</option>
+        <option value="Times New Roman">Times New Roman</option>
+        <option value="Trebuchet MS">Trebuchet MS</option>
+        <option value="Verdana">Verdana</option>
+        <option value="Webdings">Webdings</option>
+        <option value="Wingdings">Wingdings</option>
+        <option value="Zapf Dingbats">Zapf Dingbats</option>
+        <option value="Courier, monospace">Courier (Monospace)</option>
+        <option value="Georgia, serif">Georgia (Serif)</option>
+        <option value="Monaco, monospace">Monaco (Monospace)</option>
+        <option value="Times, serif">Times (Serif)</option>
+        <option value="Consolas, 'Courier New', monospace">Consolas (Monospace)</option>
+        <!-- Add more font options as needed -->
+    </select>
+
+    <select onchange="applyFontSize(this.value)">
+        <option value="8px">8px</option>
+        <option value="10px">10px</option>
+        <option value="12px">12px</option>
+        <option value="14px">14px</option>
+        <option value="16px">16px</option>
+        <option value="18px">18px</option>
+        <option value="20px">20px</option>
+        <option value="24px">24px</option>
+        <option value="28px">28px</option>
+        <option value="32px">32px</option>
+        <option value="36px">36px</option>
+        <option value="40px">40px</option>
+        <option value="48px">48px</option>
+        <option value="56px">56px</option>
+        <option value="64px">64px</option>
+        <!-- Add more font size options as needed -->
+    </select>
+
+    <label>Font Color: </label>
+    <input type="color" onchange="applyFontColor(this.value)" />
+
+
+    <br />
+
+    @if (@ViewData["Mode"] == null)
+    {
+        <div class="btns">
+            <button class="btn-btnprimary" type="submit" id="save" name="Command" value="Add" style="background-color: forestgreen; color: white;padding: 8px; border: none; font-size: 14px; border-radius: 4px; " onclick="if (Savenewuser(Submit)) { return false; }">Save</button>
+
+            <button class="btn-btnprimary" type="button" id="update" name="Command" value="Cancel" style="background-color: red; color: white; padding: 8px; border: none; font-size: 14px; border-radius: 4px;margin-left:30px; " onclick="location.href='EmailTemplateDashboard';">Cancel</button>
+
+        </div>
+        @*<input type="submit" value="Save" />*@
+
+    }
+    else if (@ViewData["Mode"].ToString() == "edit")
+    {
+        <div class="btns">
+            <button class="btn-btnprimary" type="submit" id="save" name="Command" value="Add" style="background-color: forestgreen; color: white;padding: 8px; border: none; font-size: 14px; border-radius: 4px; " onclick="if (Savenewuser(Submit)) { return false; }">Update</button>
+
+            <button class="btn-btnprimary" type="button" id="update" name="Command" value="Cancel" style="background-color: red; color: white; padding: 8px; border: none; font-size: 14px; border-radius: 4px;margin-left:30px; " onclick="location.href='EmailTemplateDashboard';">Cancel</button>
+
+        </div>
+    }
+
+    </form>
+
+<div>
+    <h3>Preview:</h3>
+    <div id="preview"></div>
+</div>
+
+@*<script>
+        function toggleFormat(format) {
+            var textarea = document.getElementById("editor");
+            var start = textarea.selectionStart;
+            var end = textarea.selectionEnd;
+            var selectedText = textarea.value.substring(start, end);
+
+            if (selectedText.length > 0) {
+                var formattedText = '';
+
+                switch (format) {
+                    case 'bold':
+                        formattedText = selectedText.includes('<b>') ? selectedText.replace(/<\/?b>/g, '') : '<b>' + selectedText + '</b>';
+                        break;
+                    case 'italic':
+                        formattedText = selectedText.includes('<i>') ? selectedText.replace(/<\/?i>/g, '') : '<i>' + selectedText + '</i>';
+                        break;
+                    case 'underline':
+                        formattedText = selectedText.includes('<u>') ? selectedText.replace(/<\/?u>/g, '') : '<u>' + selectedText + '</u>';
+                        break;
+                }
+                textarea.value = textarea.value.substring(0, start) + formattedText + textarea.value.substring(end);
+                document.getElementById("preview").innerHTML = textarea.value;
+            }
+        }
+    </script>*@
+<script>
+    function toggleFormat(format) {
+        var textarea = document.getElementById("editor");
+        var start = textarea.selectionStart;
+        var end = textarea.selectionEnd;
+        var selectedText = textarea.value.substring(start, end);
+
+        if (selectedText.length > 0) {
+            var formattedText = '';
+
+            switch (format) {
+                case 'bold':
+                    formattedText = toggleOutermostTag(selectedText, 'b');
+                    break;
+                case 'italic':
+                    formattedText = toggleOutermostTag(selectedText, 'i');
+                    break;
+                case 'underline':
+                    formattedText = toggleOutermostTag(selectedText, 'u');
+                    break;
+            }
+
+            // Replace the selected text with the formatted text
+            textarea.value = textarea.value.substring(0, start) + formattedText + textarea.value.substring(end);
+
+            // Update the preview div with the entire HTML content
+            document.getElementById("preview").innerHTML = textarea.value;
+        }
+    }
+
+    function toggleOutermostTag(text, tag) {
+        var regex = new RegExp('<' + tag + '>(.*?)<\/' + tag + '>');
+
+        if (text.match(regex)) {
+            // Remove the outermost tag
+            return text.replace(regex, '$1');
+        } else {
+            // Add the tag
+            return '<' + tag + '>' + text + '</' + tag + '>';
+        }
+    }
+</script>
+@*<script>
+        function applyFontFamily(fontFamily) {
+            var textarea = document.getElementById("editor");
+            var start = textarea.selectionStart;
+            var end = textarea.selectionEnd;
+            var selectedText = textarea.value.substring(start, end);
+
+            if (selectedText.length > 0) {
+                var formattedText = `<span style="font-family: ${fontFamily};">${selectedText}</span>`;
+                textarea.value = textarea.value.substring(0, start) + formattedText + textarea.value.substring(end);
+                document.getElementById("preview").innerHTML = textarea.value;
+            }
+        }
+    </script>*@
+
+<script>
+    function applyFontFamily(fontFamily) {
+        var textarea = document.getElementById("editor");
+        var start = textarea.selectionStart;
+        var end = textarea.selectionEnd;
+
+        if (start !== end) {
+            // If text is selected
+            var selectedText = textarea.value.substring(start, end);
+
+            // Remove any existing formatting
+            var formattedText = selectedText.replace(/<span[^>]*style="[^"]*font-family:[^"]*"[^>]*>/g, '');
+            formattedText = formattedText.replace(/<\/span>/g, '');
+
+            // Apply the new font family
+            formattedText = `<span style="font-family: ${fontFamily};">${formattedText}</span>`;
+
+            // Replace the selected text with the formatted text
+            textarea.setRangeText(formattedText);
+
+            // Update the preview div with the entire HTML content
+            document.getElementById("preview").innerHTML = textarea.value;
+        }
+    }
+</script>
+
+<script>
+    function applyFontSize(fontSize) {
+        var textarea = document.getElementById("editor");
+        var start = textarea.selectionStart;
+        var end = textarea.selectionEnd;
+
+        if (start !== end) {
+            // If text is selected
+            var selectedText = textarea.value.substring(start, end);
+
+            // Remove any existing formatting
+            var formattedText = selectedText.replace(/<span[^>]*style="[^"]*font-size:[^"]*"[^>]*>/g, '');
+            formattedText = formattedText.replace(/<\/span>/g, '');
+
+            // Apply the new font size
+            formattedText = `<span style="font-size: ${fontSize};">${formattedText}</span>`;
+
+            // Replace the selected text with the formatted text
+            textarea.setRangeText(formattedText);
+
+            // Update the preview div with the entire HTML content
+            document.getElementById("preview").innerHTML = textarea.value;
+        }
+    }
+</script>
+
+<script>
+    function applyFontColor(fontColor) {
+        var textarea = document.getElementById("editor");
+        var start = textarea.selectionStart;
+        var end = textarea.selectionEnd;
+
+        if (start !== end) {
+            // If text is selected
+            var selectedText = textarea.value.substring(start, end);
+
+            // Remove any existing formatting
+            var formattedText = selectedText.replace(/<span[^>]*style="[^"]*color:[^"]*"[^>]*>/g, '');
+            formattedText = formattedText.replace(/<\/span>/g, '');
+
+            // Apply the new font color
+            formattedText = `<span style="color: ${fontColor};">${formattedText}</span>`;
+
+            // Replace the selected text with the formatted text
+            textarea.setRangeText(formattedText);
+
+            // Update the preview div with the entire HTML content
+            document.getElementById("preview").innerHTML = textarea.value;
+        }
+    }
+</script>

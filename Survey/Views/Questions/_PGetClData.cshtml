@@ -25,7 +25,7 @@
             <th>PM-PE</th>
 
             <th>HD-PM</th>
-            <th>HD-PE</th>           
+            <th>HD-PE</th>
             <th>SA-PE</th>
             <th>PM-SA</th>
             <th>PE-SA</th>
@@ -33,146 +33,166 @@
             <th>Details</th>
             @if (Role == "1")
             {
-            <th>Edit Survey</th>
-            <th>Delete Survey</th>
+                <th>Edit Survey</th>
+                <th>Delete Survey</th>
             }
         </tr>
     </thead>
     <tbody>
         @foreach (var obj in Model.ClList)
         {
-        <tr>
-            <td style="width:30px;">@obj.PS_Date.ToString("MM/dd/yyyy")</td>
-            <td>@obj.PS_ProjectName</td>
-            <td>@obj.PS_ProjectCode</td>
-            <td>@obj.PS_ClientName</td>
-            <td>@obj.PS_PM_Name</td>
-            <td>@obj.PS_PE_Name</td>
-            <td>@obj.PS_HD_Name</td>
-            <td>@obj.PS_SA_Name</td>
-            <td>
-                @if (@obj.PS_Client_PM_Status == true)
-                {
-                    <img src="~/images/icons/Compeleted.png" style="width: 25px;" />
-                }
-                else
-                {
-                    <img src="~/images/icons/incompleted.png" style="width: 25px;" />
-                }
-            </td>
-            <td>
-                @if (obj.PS_Client_PE_Status == true)
-                {
-                    <img src="~/images/icons/Compeleted.png" style="width: 25px;" />
-                }
-                else
-                {
-                    <img src="~/images/icons/incompleted.png" style="width: 25px;" />
-                }
-            </td>
-            <td>
-                @if (obj.PS_PM_Status == true)
-                {
-                    <img src="~/images/icons/Compeleted.png" style="width: 25px;" />
-                }
-                else
-                {
-                    <img src="~/images/icons/incompleted.png" style="width: 25px;" />
-                }
-            </td>
+            <tr>
+                <td style="width:30px;">@obj.PS_Date.ToString("MM/dd/yyyy")</td>
+                <td>@obj.PS_ProjectName</td>
+                <td>@obj.PS_ProjectCode</td>
+                <td>@obj.PS_ClientName</td>
+                <td>@obj.PS_PM_Name</td>
+                <td>@obj.PS_PE_Name</td>
+                <td>@obj.PS_HD_Name</td>
+                <td>@obj.PS_SA_Name</td>
+                <td>
+                    @if (@obj.PS_Client_PM_Status == true)
+                    {
+                        <a href="@Url.Action("ReviewRatingpage", "Questions", new { value = obj.PS_ID + "," + "CLPM" })" title="Widget View" class="links">
+                            <img alt="Details" src="~/images/icons/Compeleted.png" style="width: 25px;">
+                        </a>
+                    }
+                    else
+                    {
+                        <img src="~/images/icons/incompleted.png" style="width: 25px;" />
+                    }
+                </td>
+                <td>
+                    @if (obj.PS_Client_PE_Status == true)
+                    {
+                        <a href="@Url.Action("ReviewRatingpage", "Questions", new { value = obj.PS_ID + "," + "CLPE" })" title="Widget View" class="links">
+                            <img alt="Details" src="~/images/icons/Compeleted.png" style="width: 25px;">
+                        </a>
+                    }
+                    else
+                    {
+                        <img src="~/images/icons/incompleted.png" style="width: 25px;" />
+                    }
+                </td>
+                <td>
+                    @if (obj.PS_PM_Status == true)
+                    {
+                        <a href="@Url.Action("ReviewRatingpage", "Questions", new { value = obj.PS_ID + "," + "PEPM" })" title="Widget View" class="links">
+                            <img alt="Details" src="~/images/icons/Compeleted.png" style="width: 25px;">
+                        </a>
+                    }
+                    else
+                    {
+                        <img src="~/images/icons/incompleted.png" style="width: 25px;" />
+                    }
+                </td>
 
-            <td>
-                @if (obj.PS_PE_Status == true)
-                {
-                    <img src="~/images/icons/Compeleted.png" style="width: 25px;" />
-                }
-                else
-                {
-                    <img src="~/images/icons/incompleted.png" style="width: 25px;" />
-                }
-            </td>
+                <td>
+                    @if (obj.PS_PE_Status == true)
+                    {
+                        <a href="@Url.Action("ReviewRatingpage", "Questions", new { value = obj.PS_ID + "," + "PMPE" })" title="Widget View" class="links">
+                            <img alt="Details" src="~/images/icons/Compeleted.png" style="width: 25px;">
+                        </a>
+                    }
+                    else
+                    {
+                        <img src="~/images/icons/incompleted.png" style="width: 25px;" />
+                    }
+                </td>
 
-            <td>
-                @if (obj.PS_HD_PM_Status == true)
-                {
-                    <img src="~/images/icons/Compeleted.png" style="width: 25px;" />
-                }
-                else
-                {
-                    <img src="~/images/icons/incompleted.png" style="width: 25px;" />
-                }
-            </td>
-            <td>
-                @if (obj.PS_HD_PE_Status == true)
-                {
-                    <img src="~/images/icons/Compeleted.png" style="width: 25px;" />
-                }
-                else
-                {
-                    <img src="~/images/icons/incompleted.png" style="width: 25px;" />
-                }
-            </td>
-     
-            <td>
-                @if (obj.PS_SA_PE_Status == true)
-                {
-                    <img src="~/images/icons/Compeleted.png" style="width: 25px;" />
-                }
-                else
-                {
-                    <img src="~/images/icons/incompleted.png" style="width: 25px;" />
-                }
-            </td>
-            <td>
-                @if (obj.PS_PM_SA_Status == true)
-                {
-                    <img src="~/images/icons/Compeleted.png" style="width: 25px;" />
-                }
-                else
-                {
-                    <img src="~/images/icons/incompleted.png" style="width: 25px;" />
-                }
-            </td>
-            <td>
-                @if (obj.PS_PE_SA_Status == true)
-                {
-                    <img src="~/images/icons/Compeleted.png" style="width: 25px;" />
-                }
-                else
-                {
-                    <img src="~/images/icons/incompleted.png" style="width: 25px;" />
-                }
-            </td>
-            <td>
-                @if (obj.PS_Status == true)
-                {
-                    <img src="~/images/icons/Compeleted.png" style="width: 25px;" />
-                }
-                else
-                {
-                    <img src="~/images/icons/incompleted.png" style="width: 25px;" />
-                }
-            </td>
+                <td>
+                    @if (obj.PS_HD_PM_Status == true)
+                    {
+                        <a href="@Url.Action("ReviewRatingpage", "Questions", new { value = obj.PS_ID + "," + "HDPM" })" title="Widget View" class="links">
+                            <img alt="Details" src="~/images/icons/Compeleted.png" style="width: 25px;">
+                        </a>
+                    }
+                    else
+                    {
+                        <img src="~/images/icons/incompleted.png" style="width: 25px;" />
+                    }
+                </td>
+                <td>
+                    @if (obj.PS_HD_PE_Status == true)
+                    {
+                        <a href="@Url.Action("ReviewRatingpage", "Questions", new { value = obj.PS_ID + "," + "HDPE" })" title="Widget View" class="links">
+                            <img alt="Details" src="~/images/icons/Compeleted.png" style="width: 25px;">
+                        </a>
+                    }
+                    else
+                    {
+                        <img src="~/images/icons/incompleted.png" style="width: 25px;" />
+                    }
+                </td>
+
+                <td>
+                    @if (obj.PS_SA_PE_Status == true)
+                    {
+                        <a href="@Url.Action("ReviewRatingpage", "Questions", new { value = obj.PS_ID + "," + "SAPE" })" title="Widget View" class="links">
+                            <img alt="Details" src="~/images/icons/Compeleted.png" style="width: 25px;">
+                        </a>
+                    }
+                    else
+                    {
+                        <img src="~/images/icons/incompleted.png" style="width: 25px;" />
+                    }
+                </td>
+                <td>
+                    @if (obj.PS_PM_SA_Status == true)
+                    {
+                        <a href="@Url.Action("ReviewRatingpage", "Questions", new { value = obj.PS_ID + "," + "PMSA" })" title="Widget View" class="links">
+                            <img alt="Details" src="~/images/icons/Compeleted.png" style="width: 25px;">
+                        </a>
+                    }
+                    else
+                    {
+                        <img src="~/images/icons/incompleted.png" style="width: 25px;" />
+                    }
+                </td>
+                <td>
+                    @if (obj.PS_PE_SA_Status == true)
+                    {
+                        <a href="@Url.Action("ReviewRatingpage", "Questions", new { value = obj.PS_ID + "," + "PESA" })" title="Widget View" class="links">
+                            <img alt="Details" src="~/images/icons/Compeleted.png" style="width: 25px;">
+                        </a>
+                    }
+                    else
+                    {
+                        <img src="~/images/icons/incompleted.png" style="width: 25px;" />
+                    }
+                </td>
+                <td>
+                    @if (obj.PS_Status == true)
+                    {
+                        <a href="@Url.Action("ReviewRating", "Questions", new { id = obj.PS_ID})" title="Widget View" class="links">
+                            <img alt="Details" src="~/images/icons/Compeleted.png" style="width: 25px;">
+                        </a>
+                    }
+                    else
+                    {
+                        <img src="~/images/icons/incompleted.png" style="width: 25px;" />
+                    }
+                </td>
 
 
 
-            <td>
-                <a href="#" style="color: Red; text-decoration: none;float:left;">
-                    @*<span class="glyphicon glyphicon-search"></span>Details*@
-                    @Html.ActionLink("Details", "ReviewRating", "Questions", new { id = obj.PS_ID, style = "color: red;" }, new { @class = "EditTd" })
-                </a>
-            </td>
+                <td>
+                    <a href="#" style="color: Red; text-decoration: none;float:left;">
+                        @*<span class="glyphicon glyphicon-search"></span>Details*@
+                        @Html.ActionLink("Details", "ReviewRating", "Questions", new { id = obj.PS_ID, style = "color: red;" }, new { @class = "EditTd" })
+                    </a>
+                </td>
 
-            @if (Role == "1")
-            {
-                <td><i style='font-size:24px' class='far' onclick="EditGetCLData(@obj.PS_ID)">&#xf044;</i></td>
-                <td><i style='font-size:24px' class='fas' onclick="DeleteGetCLData(@obj.PS_ID)">&#xf2ed;</i></td>
-            }
+                @if (Role == "1")
+                {
+                    <td><i style='font-size:24px' class='far' onclick="EditGetCLData(@obj.PS_ID)">&#xf044;</i></td>
+                    <td><i style='font-size:24px' class='fas' onclick="DeleteGetCLData(@obj.PS_ID)">&#xf2ed;</i></td>
+                }
 
-            @*<td>
-            @Html.ActionLink("Edit", "Questionnaire", "Questionnaire", new { id = obj.PS_ID }, new { @class = "EditTd" })
-        </td>*@
-        </tr>
+                @*<td>
+                        @Html.ActionLink("Edit", "Questionnaire", "Questionnaire", new { id = obj.PS_ID }, new { @class = "EditTd" })
+                    </td>*@
+            </tr>
 
         }
     </tbody>
@@ -361,6 +381,37 @@
 </script>
 
 
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+<script src="~/Content/assets/js/main.js"></script>
+<script src="~/Content/src/jquery.flashy.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+<script type="text/javascript">
+
+    function funcreviewrateings(PS_ID) {
+
+        $.ajax({
+            type: "Post",
+            url: '@Url.Action("ReviewRatingpage", "Questions")',
+            data: JSON.stringify({ Value: PS_ID }),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function(response) {
+                // Redirect to the desired page
+                window.location.href = response.Questions/ReviewRatingpage; // Change "redirectUrl" to the property name in your response object
+            },
+            error: function(xhr, status, error) {
+                // Handle errors if needed
+                console.error(xhr.responseText);
+            }
+        });
+    }
+</script>
+
+
+
 <style>
     table {
         border-collapse: collapse;
@@ -375,7 +426,7 @@
     }
 
     th {
-        background-color: darkgray;
+        background-color: #D6DBDF;
         color: black;
     }
 

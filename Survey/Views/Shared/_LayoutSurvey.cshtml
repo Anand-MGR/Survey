@@ -4,35 +4,30 @@
         <div class="header_toggle">
             <i class='bx bx-menu' id="header-toggle"></i>
             @if (Session["RoleName"] != null)
-            {@Session["RoleName"].ToString()}
+            {
+                @Session["RoleName"].ToString()
 
-            <label for="colorPicker"></label>
-            <input type="color" id="colorPicker">
-            <div id="colorDisplayBox"></div>
+                if (Session["RoleName"].ToString() != "Admin")
+                {
+                    <div style="display:none">
+                        <label for="colorPicker"></label>
+                        <input type="color" id="colorPicker">
+                        <div id="colorDisplayBox"></div>
+                    </div>
 
-
+                }
+                else
+                {
+                    <label for="colorPicker"></label>
+                    <input type="color" id="colorPicker">
+                    <div id="colorDisplayBox"></div>
+                }
+            }
         </div>
 
 
-       
-        <div class="feed" style="float:left; margin-left: 5%; margin-top: 1%;">
-            @*<header2>
-            <div id="user-profile" onclick="toggleOptions()">
-                @if (Session["FirstName"] != null)
-                {
-                    @Session["FirstName"].ToString()
 
-                }
-                <img src='@Session["Image"]' style="width: 35px; height: 35px;">
-
-                <div id="user-options" class="shadow">
-                    <a class="dropdown-item" href='@Url.Action("ChangePassword", "Login")'>Change Password</a>
-                    <a class="dropdown-item" href="@Url.Action("FeedBackdashboard", "FeedBack")">Feedback</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href='@Url.Action("Logout", "Login")'>Logout</a>
-                </div>
-            </div>
-        </header2>*@
+        <div class="feed" style="float:left; margin-left: 5%; margin-top: 1%;">          
             <div style=" float:left;margin-top:5%;">
                 @if (Session["FirstName"] != null)
                 {
@@ -352,7 +347,23 @@
                             <i class='bx bx-layer nav_logo-icon'></i> <span class="nav_name">Get Survey</span>
                         </a>
                         <a href="@Url.Action("ProjectReport", "ProjectSurvey")" class="nav_link">
-                            <i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Project Report</span>
+                            <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">Project Report</span>
+                        </a>
+                        <a href="@Url.Action("QuestionDashboard", "Questions")" class="nav_link">
+                            <i class='bx bx-folder nav_icon'></i> <span class="nav_name">Questionnaire</span>
+                        </a>
+                        <a href="@Url.Action("QuestionsTypeDashboard", "Questions")" class="nav_link">
+                            <i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Questionnaire Type</span>
+                        </a>
+                        <a href="@Url.Action("EmailTemplateDashboard", "ProjectSurvey")" class="nav_link">
+                            <i class='bx bx-envelope nav_icon'></i> <span class="nav_name">Mail Dashboard</span>
+                        </a>
+                        <a href="@Url.Action("EmailTemplateMappingDashboard", "ProjectSurvey")" class="nav_link">
+                            <i class='bx bx-mail-send nav_icon'></i> <span class="nav_name">Mail Mapping</span>
+                        </a>
+
+                        <a href="@Url.Action("UserRoleDashboard", "User")" class="nav_link">
+                            <i class='bx bx-shield nav_icon'></i> <span class="nav_name">Roles</span>
                         </a>
                         <a href="@Url.Action("UserDashboard", "User")" class="nav_link">
                             <i class='bx bx-user nav_icon'></i> <span class="nav_name">Users</span>
@@ -360,17 +371,7 @@
                         <a href="@Url.Action("FeedBackdashboard", "FeedBack")" class="nav_link">
                             <i class='bx bx-bookmark nav_icon'></i> <span class="nav_name">Feedback</span>
                         </a>
-                        <a href="@Url.Action("QuestionDashboard", "Questions")" class="nav_link">
-                            <i class='bx bx-folder nav_icon'></i> <span class="nav_name">Questionnaire</span>
-                        </a>
-                        <a href="@Url.Action("QuestionsTypeDashboard", "Questions")" class="nav_link">
-                            <i class='fas fa-edit'></i> <span class="nav_name">Questionnaire Type</span>
-                        </a>
-                        <a href="@Url.Action("UserRoleDashboard", "User")" class="nav_link">
-                            <i class='fas fa-cog mx-1'></i> <span class="nav_name">Roles</span>
-                        </a>
-
-
+                        <a href='@Url.Action("Logout", "Login")' class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">Log Out</span> </a>
                     </div>
                 }
                 else
@@ -384,9 +385,10 @@
                     <a href="@Url.Action("FeedBackdashboard", "FeedBack")" class="nav_link">
                         <i class='bx bx-bookmark nav_icon'></i> <span class="nav_name">Feedback</span>
                     </a>
+                    <a href='@Url.Action("Logout", "Login")' class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">Log Out</span> </a>
                 }
             </div>
-            <a href='@Url.Action("Logout", "Login")' class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">Log Out</span> </a>
+            @*<a href='@Url.Action("Logout", "Login")' class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">Log Out</span> </a>*@
         </nav>
     </div>
     <!--Container Main start-->
@@ -402,79 +404,11 @@
 </body>
 
 
-
-@*<style type="text/css">
-        @@media(max-width: 575.98px) {
-            .header {
-                padding: 0 1rem;
-            }
-
-            .header_toggle {
-                margin-left: 0;
-            }
-
-            .nav_logo {
-                padding-left: 1rem;
-            }
-
-            .nav_link {
-                padding: .5rem 1rem;
-            }
-
-            .l-navbar {
-                width: 100%;
-                left: -100%;
-                padding: .5rem 1rem 0 0;
-            }
-
-            .body-pd {
-                padding-left: 1rem;
-            }
-
-            .nav_link::before {
-                display: none;
-            }
-        }
-    </style>*@
 <style>
-
-    /* @@media screen and (max-width:575.78 px) {
-        body {
-            margin: var(--header-height) 0 0 0;
-            padding: 0 1rem;
-        }
-
-        .header {
-            height: var(--header-height);
-            padding: 0 1rem;
-        }
-
-        .header_img {
-            width: 35px;
-            height: 35px;
-        }
-
-            .header_img img {
-                width: 40px;
-            }
-
-        .l-navbar {
-            left: -100%;
-            padding: .5rem 1rem 0 0;
-        }
-
-        .body-pd {
-            padding-left: 1rem;
-        }
-
-        .feed {
-            font-size: 2px !important;
-        }
-    }*/
 
     @@media (max-width: 767px) {
         .feed {
-            display: none; /* Hide the div in mobile view */
+            display: none; 
         }
 
         .header_toggle {
@@ -493,12 +427,7 @@
         margin-right: 10px;
         width: 25px;
         height: 25px;
-    }
-    /*   #colorPicker.hover:text-gray-800
-    {
-
-    }*/
-
+    }  
     #colorDisplay {
         width: 50px;
         height: 50px;

@@ -13,13 +13,16 @@ namespace Survey.Models
         public List<SelectListItem> ddlQUserStatus { get; set; }
         public List<SelectListItem> ddlAnsType { get; set; }
         public QuestionsForm QuestionsForm { get; set; }
+        public EmailTemplateModel ObjEmailTemplateModel { get; set; }
         public QuestionsTypeForm QuestionsTypeForm { get; set; }
         public List<QuestionsTypeForm> LstQuestiontypeFrom { get; set; }
         public List<QuestionsForm> objQuestionsForm { get; set; }
-      
+
+        public List<EmailTemplateModel> lstEmailTemplate { get; set; }
+
     }
 
-        public class ProjectModel
+    public class ProjectModel
     {
         public int ProjectID { get; set; }
         public string ProjectName { get; set; }
@@ -44,7 +47,7 @@ namespace Survey.Models
         public string PS_ClientName { get; set; }
         [Display(Name = "Client Email")]
         [RegularExpression("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$", ErrorMessage = "Please enter valid E-Mail Id")]
-         public string PS_Client_Email { get; set; }
+        public string PS_Client_Email { get; set; }
         public string PS_Client_PM_link { get; set; }
         public bool PS_Client_PM_Status { get; set; }
         public string PS_Client_PE_link { get; set; }
@@ -55,7 +58,7 @@ namespace Survey.Models
         public string PS_PM_Name { get; set; }
         [Display(Name = "Project Manager Email")]
         [RegularExpression("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$", ErrorMessage = "Please enter valid E-Mail Id")]
-         public string PS_PM_Email { get; set; }
+        public string PS_PM_Email { get; set; }
         public string PS_PM_link { get; set; }
         public bool PS_PM_Status { get; set; }
         [Display(Name = "Project Engineer Name")]
@@ -71,7 +74,7 @@ namespace Survey.Models
         public string PS_HD_Name { get; set; }
         [Display(Name = "Help Desk Person Email")]
         [RegularExpression("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$", ErrorMessage = "Please enter valid E-Mail Id")]
-      public string PS_HD_Email { get; set; }
+        public string PS_HD_Email { get; set; }
         public string PS_HD_PM_link { get; set; }
         public bool PS_HD_PM_Status { get; set; }
         public string PS_HD_PE_link { get; set; }
@@ -113,7 +116,7 @@ namespace Survey.Models
         [Required(ErrorMessage = "Question is required")]
         public string Q_Question { get; set; }
 
-       
+
 
         [Display(Name = "Status")]
         [Required(ErrorMessage = "Status is required")]
@@ -149,20 +152,39 @@ namespace Survey.Models
 
         public int QT_ID { get; set; }
     }
-        public class QUserStatus
+    public class QUserStatus
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public string value { get; set; }
-    
+
 
     }
+
+
     public class AnsType
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public int value { get; set; }
-       
 
+
+    }
+
+
+    public class EmailTemplateModel
+    {
+
+        public int TemplateId { get; set; }
+        public int TemplateMapId { get; set; }
+        public string TemplateName { get; set; }
+        public string Q_type { get; set; }
+
+        public string Body_Content { get; set; }
+
+        public bool TemplateActiveStatus { get; set; }
+        public bool TemplateMapActiveStatus { get; set; }
+        public List<SelectListItem> ddlQUserStatus { get; set; }
+        public List<SelectListItem> ddlTemplateName { get; set; }
     }
 }

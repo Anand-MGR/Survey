@@ -798,6 +798,13 @@
     <Content Include="Views\Questions\SAPE.cshtml" />
     <Content Include="Views\Questions\QuestionsTypeDashboard.cshtml" />
     <Content Include="Views\Questions\QuestionsTypeForm.cshtml" />
+    <Content Include="Views\ProjectSurvey\EmailTemplate.cshtml" />
+    <Content Include="Views\ProjectSurvey\EmailTemplateDashboard.cshtml" />
+    <Content Include="Views\ProjectSurvey\EmailTemplateMapping.cshtml" />
+    <Content Include="Views\ProjectSurvey\EmailTemplateMappingDashboard.cshtml" />
+    <Content Include="Views\ProjectSurvey\_EmailDashboard.cshtml" />
+    <Content Include="Views\ProjectSurvey\_EmailMapDashboard.cshtml" />
+    <Content Include="Views\Questions\ReviewRatingpage.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
