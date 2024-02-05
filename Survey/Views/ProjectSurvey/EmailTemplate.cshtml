@@ -8,9 +8,18 @@
 
 <style>
     #templatename, #editor {
-        width: 41%;
         margin-left: 10%;
-        border: 1px solid grey;
+        display: block;
+        width: 41%;
+        padding: 0.375rem 0.75rem;
+        font-size: 1rem;
+        line-height: 1.5;
+        color: #495057;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        border-radius: 0.25rem;
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     }
 
     .ck.ck-editor {
@@ -37,6 +46,13 @@
         border-radius: 6px;
         /* margin-top:4% !important;*/
     }
+    #btnCanceltemplate {
+        background-color: red;
+        color: white;
+        border-radius: 6px;
+        padding: 7px;
+        /* margin-top:4% !important;*/
+    }
 
     .ck.ck-content.ck-editor__editable.ck-rounded-corners.ck-editor__editable_inline.ck-blurred {
         height: 600px !important;
@@ -53,16 +69,23 @@
     <script src="~/scripts/texteditor.js"></script>
 </head>
 <body>
+    <h2 style="float: left; color: #3853a8 ;margin-top:1%;">Email Template</h2>
+    <button type="button" class="btn btn-primary" style="float: right; margin-top: 1%;" id="backtodashboard" onclick="location.href = '@Url.Action("EmailTemplateDashboard", "ProjectSurvey")';">Back To Dashboard</button>
     <br />
-    <h3>Template Name</h3>
+    <br />
+    <hr />
+    <div class="control-label">Template Name</div>
     <input type="text" id="templatename" value="@Model.TemplateName" />
 
-    <h3>Body Content</h3>
+    <div class="control-label">Body Content</div>
     <div id="editor">
         <p></p>
     </div>
 
-    <button class="btn-outline-primary" id="btnCreateTemplate" onclick="updateOutput()">Create Template</button>
+    <div id="Emailtemplatebuttons" style="margin-top:32%;">
+        <button id="btnCreateTemplate" onclick="updateOutput()">Create Template</button>
+        <button id="btnCanceltemplate" onclick="location.href = '@Url.Action("EmailTemplateDashboard", "ProjectSurvey")';">Cancel</button>
+    </div>
 
     <div id="output"><p>@Model.Body_Content</p></div>
     <script>
