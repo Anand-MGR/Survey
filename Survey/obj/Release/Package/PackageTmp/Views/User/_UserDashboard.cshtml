@@ -1,0 +1,158 @@
+﻿@model Survey.Models.AssignSurveyMasterModel
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+<table id="tbldocuments" class="DeskUser">
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>User Role</th>
+            <th>EmailId</th>
+            <th>Mobile no</th>
+            <th>Status</th>
+            <th>Edit</th>
+            @*<th>User Role</th>
+                <th>Depot</th>
+                <th>Reset Password</th>
+                <th>Status</th>
+                <th>Edit</th>*@
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var x in Model.LstUserModel)
+        {
+            <tr>
+                <td>@x.U_FirstName</td>
+                <td>@x.U_LastName</td>
+                <td>@x.U_Role</td>
+                <td>@x.U_Email</td>
+                <td>@x.U_Mobile</td>
+                <td>
+                    @if (@x.U_Status == true)
+                    {
+                        <img src="~/images/icons/Compeleted.png" style="width: 25px;" />
+                    }
+                    else
+                    {
+                        <img src="~/images/icons/incompleted.png" style="width: 25px;" />
+                    }
+                </td>
+                <!--<td>
+                <i style='font-size:24px' class='far' onclick="EditUserDashboard(@x.U_ID)">&#xf044;</i>-->
+                @*<img src='~/Images/editu.png' onclick="EditUserDashboard(@x.U_ID)" width="20" style="cursor:pointer;" title="Edit" />*@
+                <!--</td>-->
+
+                <td><i style='font-size:24px' class='far' onclick="EditUserDashboard(@x.U_ID)">&#xf044;</i></td>
+            </tr>
+
+        }
+
+    </tbody>
+</table>
+
+<table id="tbldocuments" class="MobUser" style="width:100%">
+    @foreach (var x in Model.LstUserModel)
+    {
+        <tr>
+            <th>First Name</th>
+            <td>@x.U_FirstName</td>
+        </tr>
+        <tr>
+            <th>Last Name</th>
+            <td>@x.U_LastName</td>
+        </tr>
+        <tr>
+            <th>User Role</th>
+            <td>@x.U_Role</td>
+        </tr>
+        <tr>
+            <th>Email Id</th>
+            <td>@x.U_Email</td>
+        </tr>
+        <tr>
+            <th>Mobile no</th>
+            <td>@x.U_Mobile</td>
+        </tr>
+        <tr>
+            <th>Status</th>
+            <td>
+                @if (@x.U_Status == true)
+                {
+                    <img src="~/images/icons/Compeleted.png" style="width: 25px;" />
+                }
+                else
+                {
+                    <img src="~/images/icons/incompleted.png" style="width: 25px;" />
+                }
+            </td>
+        </tr>
+        <tr>
+            <th>Edit</th>
+            <td><i style='font-size:24px' class='far' onclick="EditUserDashboard(@x.U_ID)">&#xf044;</i></td>
+        </tr>
+        <tr>
+            <th> </th>
+            <td>
+                &nbsp;
+            </td>
+        </tr>
+    }
+</table>
+
+
+<script type="text/javascript">
+
+    function resetdata(x) {
+
+        //alert(x);
+        var result = confirm("Are you sure you want to Reset the Password");
+        if (result) {
+            $.ajax({
+                type: "Post",
+                url: '@Url.Action("Resertpassword", "User")',
+                data: '{ID: "' + x + '"}',
+                contentType: "application/json; charset=utf-8",
+                dataType: "html",
+                success: function (data) {
+
+                }
+            });
+          }
+    }
+
+    function EditUserDashboard(U_ID) {
+           var link = '@Url.Action("EditUser", "User", new { U_ID = "replace", Mode = "Modes" })';
+         link = link.replace("replace", U_ID);
+        link = link.replace("Modes", "Edit");
+         window.location.href = link.replace(/&amp;/g, '&');
+
+    }
+
+</script>
+
+
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        font-family: "Gill Sans", sans-serif;
+        font-size: 12px;
+    }
+
+    th, td {
+        text-align: left;
+        padding: 8px;
+    }
+
+    th {
+        background-color: darkgray;
+        color: black;
+    }
+
+    td {
+        font-weight: 400;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+</style>

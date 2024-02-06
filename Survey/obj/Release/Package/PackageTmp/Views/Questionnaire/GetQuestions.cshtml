@@ -1,0 +1,37 @@
+﻿@model Survey.Models.QuestionnaireModel
+
+@{
+    ViewBag.Title = "GetQuestions";
+    Layout = "~/Views/Shared/_LayoutSurvey.cshtml";
+}
+<script src="~/scripts/bootstrap.min.js"></script>
+<script src="~/scripts/jquery-1.10.2.min.js"></script>
+<script src="~/scripts/jquery-1.10.2.intellisense.js"></script>
+<link href="~/Css/Ratingstylepage.css" rel="stylesheet" />
+<body>
+
+
+
+    <div style="display:none;">
+        @foreach (var x in Model.QuestionnaireLst)
+        {
+            <div>
+                <b>@x.Q_Questions</b><br />
+                <div class="stars">
+                    <input class="star star-5" id="star-5q2" type="radio" name="star" />
+                    <label class="star star-5" for="star-5q2"></label>
+                    <input class="star star-4" id="star-4q2" type="radio" name="star" />
+                    <label class="star star-4" for="star-4q2"></label>
+                    <input class="star star-3" id="star-3q2" type="radio" name="star" />
+                    <label class="star star-3" for="star-3q2"></label>
+                    <input class="star star-2" id="star-2q2" type="radio" name="star" />
+                    <label class="star star-2" for="star-2q2"></label>
+                    <input class="star star-1" id="star-1q2" type="radio" name="star" />
+                    <label class="star star-1" for="star-1q2"></label>
+                    @*</form>*@
+                </div>
+            </div>
+        }
+            <br /><button>submit</button>
+        </div>
+</body>

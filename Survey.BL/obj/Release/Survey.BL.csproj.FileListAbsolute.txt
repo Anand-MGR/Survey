@@ -1,0 +1,11 @@
+D:\Projects\SurveyRating\Survey Completed Source 13-02-2023 Night\Survey feb\Survey\Survey.BL\bin\Release\Survey.BL.dll
+D:\Projects\SurveyRating\Survey Completed Source 13-02-2023 Night\Survey feb\Survey\Survey.BL\bin\Release\Survey.BL.pdb
+D:\Projects\SurveyRating\Survey Completed Source 13-02-2023 Night\Survey feb\Survey\Survey.BL\obj\Release\Survey.BL.dll
+D:\Projects\SurveyRating\Survey Completed Source 13-02-2023 Night\Survey feb\Survey\Survey.BL\obj\Release\Survey.BL.pdb
+D:\Projects\SurveyRating\Survey Completed Source 13-02-2023 Night\Survey feb\Survey\Survey.BL\obj\Release\Survey.BL.csprojResolveAssemblyReference.cache
+D:\Survey 09 jan 24_final\Survey 03 jan 24 (2)\Survey 03 jan 24\V7_Survey_11282023\Survey\Survey.BL\bin\Release\Survey.BL.dll
+D:\Survey 09 jan 24_final\Survey 03 jan 24 (2)\Survey 03 jan 24\V7_Survey_11282023\Survey\Survey.BL\bin\Release\Survey.BL.pdb
+D:\Survey 09 jan 24_final\Survey 03 jan 24 (2)\Survey 03 jan 24\V7_Survey_11282023\Survey\Survey.BL\obj\Release\Survey.BL.csproj.AssemblyReference.cache
+D:\Survey 09 jan 24_final\Survey 03 jan 24 (2)\Survey 03 jan 24\V7_Survey_11282023\Survey\Survey.BL\obj\Release\Survey.BL.csproj.CoreCompileInputs.cache
+D:\Survey 09 jan 24_final\Survey 03 jan 24 (2)\Survey 03 jan 24\V7_Survey_11282023\Survey\Survey.BL\obj\Release\Survey.BL.dll
+D:\Survey 09 jan 24_final\Survey 03 jan 24 (2)\Survey 03 jan 24\V7_Survey_11282023\Survey\Survey.BL\obj\Release\Survey.BL.pdb

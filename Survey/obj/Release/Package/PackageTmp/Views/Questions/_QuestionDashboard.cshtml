@@ -1,0 +1,133 @@
+﻿<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+
+
+
+<table id="tbldocuments1" class="DeskQues">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Type</th>
+            <th>Questions</th>
+            <th>Answer Type</th>
+            <th>Status </th>
+            <th>Edit</th>
+
+        </tr>
+
+    </thead>
+
+    <tbody>
+        @foreach (var x in Model.objQuestionsForm)
+        {
+            <tr>
+                <td>@x.Q_ID</td>
+                <td>@x.Q_Type</td>
+                <td>@x.Q_Question</td>
+                <td>@x.Q_Ans_Type</td>
+                <td>
+                    @if (@x.Q_Status == true)
+                    {
+                        <img src="~/images/icons/Compeleted.png" style="width: 25px;" />
+                    }
+                    else
+                    {
+                        <img src="~/images/icons/incompleted.png" style="width: 25px;" />
+                    }
+                </td>
+                <td><i style='font-size:24px' class='far' onclick="EditQustionDashboard(@x.Q_ID)">&#xf044;</i></td>
+            </tr>
+
+        }
+
+    </tbody>
+</table>
+
+
+<table id="tbldocuments1" class="MobQues">
+    @foreach (var x in Model.objQuestionsForm)
+    {
+        <tr>
+            <th>ID</th>
+            <td>@x.Q_ID</td>
+        </tr>
+        <tr>
+            <th>Type</th>
+            <td>@x.Q_Type</td>
+        </tr>
+        <tr>
+            <th>Questions</th>
+            <td>@x.Q_Question</td>
+        </tr>
+        <tr>
+            <th>Answer Type</th>
+            <td>@x.Q_Ans_Type</td>
+        </tr>
+        <tr>
+            <th>Status </th>
+            <td>
+                @if (@x.Q_Status == true)
+                {
+                    <img src="~/images/icons/Compeleted.png" style="width: 25px;" />
+                }
+                else
+                {
+                    <img src="~/images/icons/incompleted.png" style="width: 25px;" />
+                }
+            </td>
+        </tr>
+        <tr>
+            <th>Edit</th>
+            <td><i style='font-size:24px' class='far' onclick="EditQustionDashboard(@x.Q_ID)">&#xf044;</i></td>
+        </tr>
+        <tr>
+            <th> </th>
+            <td>
+                &nbsp;
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+<script type="text/javascript">
+
+
+
+    function EditQustionDashboard(Q_ID) {
+           var link = '@Url.Action("EditQuestion", "Questions", new { Q_ID = "replace", Mode = "Modes" })';
+         link = link.replace("replace", Q_ID);
+        link = link.replace("Modes", "Edit");
+         window.location.href = link.replace(/&amp;/g, '&');
+
+    }
+
+</script>
+
+
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        font-family: "Gill Sans", sans-serif;
+        font-size: 12px;
+    }
+
+    th, td {
+        text-align: left;
+        padding: 8px;
+    }
+
+    th {
+        background-color: darkgray;
+        color: black;
+    }
+
+    td {
+        font-weight: 400;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+</style>

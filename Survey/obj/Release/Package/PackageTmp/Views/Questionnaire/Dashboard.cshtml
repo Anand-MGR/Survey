@@ -1,0 +1,79 @@
+﻿@*@model Survey.Models.wholemodelvalues*@
+@model Survey.Models.QuestionnaireModel
+
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_LayoutSurvey.cshtml";
+}
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css">
+<link href="~/Css/Ratingstylepage .css" rel="stylesheet" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<body>
+
+    <h2 id="dashboardhead">Dashboard</h2>
+
+    <button id="rateusbtn" onclick="AssignQus()">Rate US</button>
+
+    <div id="questionsshow">
+        @Html.Partial("_GetQuestionspartial", Model)
+    </div>
+</body>
+
+<script type="text/javascript">
+    function ratingclick() {
+        //alert("I am onclick star");
+        var ratingValue = '';
+        var final = '';
+
+        var ratingElements = document.getElementsByClassName("star");
+
+        for (var i = 0; i < ratingElements.length; i++) {
+            for (j = i; j = ratingElements[i].checked; j++) {
+                ratingValue = ratingElements[i].value;
+                final = final + ratingValue + '/';//output 3-1 /
+                break;
+            }
+
+        }
+        $('#selectedratings').text(final)
+    }
+
+</script>
+
+@*<script type="text/javascript">
+    function submitbtnclick() {
+
+        var finalselectedratings = document.getElementById("selectedratings").innerHTML;
+        //alert(finalselectedratings);
+        $.ajax({
+            type: "POST",
+            //url: '@Url.Action("SubmitRating", "Questionnaire")',
+            url: "/Questionnaire/SubmitRating",
+            //data: '{alldata:' + JSON.stringify(values) + '}',
+            data: '{Ratingandid: "' + finalselectedratings + '"}',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json"
+
+        });
+
+
+    }
+
+</script>*@
+
+
+
+<script type="text/javascript">
+
+    function AssignQus() {
+        //alert("I am Hittedd");
+        $("#partialpageid").show();
+        $("#dashboardhead").hide();
+        $("#rateusbtn").hide();
+
+    }
+
+</script>
+

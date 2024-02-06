@@ -1,0 +1,250 @@
+﻿<div>
+
+
+    @*<label class="expand-collapse" onclick="toggleStars('.stars-form1')" " style="font-size:27px;font-weight:bold"> Project Name :</label>*@
+    <label class="collapsible" style="font-size:27px;font-weight:bold"> Project Name :</label>
+    @*<a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Project Name :</a>*@
+    <div class="content">
+        <br />
+        @foreach (var Obj in Model.LsttotalReport)
+        {
+            int rated = Obj.Total;
+            decimal totalstars = 155;
+            var finalval = (rated / totalstars) * 100;
+            var rating = finalval / 20;
+            var finalrate = @Math.Round(rating, 2);
+
+            <div class="stars">
+
+                <label style="font-size:20px;">&nbsp; @Obj.ProjectName</label>
+
+                <form>
+
+
+                    <input class="star star5" id="star5-@Obj.PS_Id" type="radio" name="star" value="5" @(finalrate >= 4.5M ? "checked" : "") disabled />
+                    <label class="star star5" for="star5-@Obj.PS_Id">&nbsp;&nbsp;(@finalrate) </label>
+                    <input class="star star4" id="star4-@Obj.PS_Id" type="radio" name="star" value="4" @(finalrate >= 3.5M && finalrate < 4.5M ? "checked" : "") disabled />
+                    <label class="star star4" for="star4-@Obj.PS_Id"></label>
+                    <input class="star star3" id="star3-@Obj.PS_Id" type="radio" name="star" value="3" @(finalrate >= 2.5M && finalrate < 3.5M ? "checked" : "") disabled />
+                    <label class="star star3" for="star3-@Obj.PS_Id"></label>
+                    <input class="star star2" id="star2-@Obj.PS_Id" type="radio" name="star" value="2" @(finalrate >= 1.5M && finalrate < 2.5M ? "checked" : "") disabled />
+                    <label class="star star2" for="star2-@Obj.PS_Id"></label>
+                    <input class="star star1" id="star1-@Obj.PS_Id" type="radio" name="star" value="1" @(finalrate >= 0.5M && finalrate < 1.5M ? "checked" : "") disabled />
+                    <label class="star star1" for="star1-@Obj.PS_Id"> </label>
+
+
+
+
+                </form>
+
+            </div>
+            <br />
+            <br />
+
+
+
+        }
+        @if (Model.LsttotalReport.Count == 0)
+        {
+            <b style="color: red; font-size: 25px; font-family: Alergian; margin: 20px;">No Data available </b>
+            <br />
+        }
+    </div>
+
+
+    <hr />
+    <label class="collapsible" style="font-size:27px;font-weight:bold">Project Manager: </label>
+    <div class="content">
+        <br />
+        @foreach (var Obj in Model.LsttotalPMReport)
+        {
+            int PmTotal = Obj.TotalRating;
+            decimal PmTotalStars = Obj.IDCOUNT * 5;
+            var FinalPMval = (PmTotal / PmTotalStars) * 100;
+            var FinalPMrate = FinalPMval / 20;
+            var FinalPMResult = @Math.Round(FinalPMrate, 2);
+
+
+            <div class="stars">
+
+
+                <label style="font-size:20px;"> &nbsp; @Obj.ProjectManagerName</label>
+                <form>
+                    <input class="star star5" id="star5-@Obj.PS_Id" type="radio" name="star" value="5" @(FinalPMResult >= 4.5M ? "checked" : "") disabled />
+                    <label class="star star5" for="star5-@Obj.PS_Id">&nbsp;&nbsp; (@FinalPMResult)</label>
+                    <input class="star star4" id="star4-@Obj.PS_Id" type="radio" name="star" value="4" @(FinalPMResult >= 3.5M && FinalPMResult < 4.5M ? "checked" : "") disabled />
+                    <label class="star star4" for="star4-@Obj.PS_Id"></label>
+                    <input class="star star3" id="star3-@Obj.PS_Id" type="radio" name="star" value="3" @(FinalPMResult >= 2.5M && FinalPMResult < 3.5M ? "checked" : "") disabled />
+                    <label class="star star3" for="star3-@Obj.PS_Id"></label>
+                    <input class="star star2" id="star2-@Obj.PS_Id" type="radio" name="star" value="2" @(FinalPMResult >= 1.5M && FinalPMResult < 2.5M ? "checked" : "") disabled />
+                    <label class="star star2" for="star2-@Obj.PS_Id"></label>
+                    <input class="star star1" id="star1-@Obj.PS_Id" type="radio" name="star" value="1" @(FinalPMResult >= 0.5M && FinalPMResult < 1.5M ? "checked" : "") disabled />
+                    <label class="star star1" for="star1-@Obj.PS_Id"></label>
+
+
+
+                </form>
+            </div>
+            <br />
+            <br />
+
+        }
+        @if (Model.LsttotalPMReport.Count == 0)
+        {
+            <b style="color: red; font-size: 25px; font-family: Alergian; margin: 20px;">No Data available </b>
+            <br />
+        }
+    </div>
+
+
+
+    <hr />
+    <label class="collapsible" style="font-size:27px;font-weight:bold">Project Engineer : </label>
+
+    <div class="content">
+        <br />
+        @foreach (var Obj in Model.LsttotalPEReport)
+        {
+
+
+            int PETotal = Obj.TotalPERating;
+            decimal PETotalStars = Obj.PE_IDCOUNT * 5;
+            var FinalPEval = (PETotal / PETotalStars) * 100;
+            var FinalPErate = FinalPEval / 20;
+            var FinalPEResult = @Math.Round(FinalPErate, 2);
+
+
+            <div class="stars">
+
+                <label style="font-size:20px;">&nbsp; @Obj.ProjectEngineerName</label>
+
+                <form>
+                    <input class="star star5" id="star5-@Obj.PS_Id" type="radio" name="star" value="5" @(FinalPEResult >= 4.5M ? "checked" : "") disabled />
+                    <label class="star star5" for="star5-@Obj.PS_Id">&nbsp;&nbsp; (@FinalPEResult)</label>
+                    <input class="star star4" id="star4-@Obj.PS_Id" type="radio" name="star" value="4" @(FinalPEResult >= 3.5M && FinalPEResult < 4.5M ? "checked" : "") disabled />
+                    <label class="star star4" for="star4-@Obj.PS_Id"></label>
+                    <input class="star star3" id="star3-@Obj.PS_Id" type="radio" name="star" value="3" @(FinalPEResult >= 2.5M && FinalPEResult < 3.5M ? "checked" : "") disabled />
+                    <label class="star star3" for="star3-@Obj.PS_Id"></label>
+                    <input class="star star2" id="star2-@Obj.PS_Id" type="radio" name="star" value="2" @(FinalPEResult >= 1.5M && FinalPEResult < 2.5M ? "checked" : "") disabled />
+                    <label class="star star2" for="star2-@Obj.PS_Id"></label>
+                    <input class="star star1" id="star1-@Obj.PS_Id" type="radio" name="star" value="1" @(FinalPEResult >= 0.5M && FinalPEResult < 1.5M ? "checked" : "") disabled />
+                    <label class="star star1" for="star1-@Obj.PS_Id"></label>
+
+
+                </form>
+
+            </div>
+
+            <br />
+
+
+
+        }
+        @if (Model.LsttotalPEReport.Count == 0)
+        {
+            <b style="color:red;font-size:25px;font-family:Alergian;margin:20px;">No Data available </b>
+            <br />
+        }
+
+    </div>
+
+    <hr />
+    <label class="collapsible" style="font-size:27px;font-weight:bold">Solution Archetect : </label>
+
+    <div class="content">
+        <br />
+        @foreach (var Obj in Model.LsttotalSAReport)
+        {
+
+
+            int SATotal = Obj.TotalSARating;
+            decimal SATotalStars = Obj.SA_IDCOUNT * 5;
+            var FinalSAval = (SATotal / SATotalStars) * 100;
+            var FinalSArate = FinalSAval / 20;
+            var FinalSAResult = @Math.Round(FinalSArate, 2);
+
+
+            <div class="stars">
+
+                <label style="font-size:20px;">&nbsp; @Obj.SolutionArchetectName</label>
+
+                <form>
+                    <input class="star star5" id="star5-@Obj.PS_Id" type="radio" name="star" value="5" @(FinalSAResult >= 4.5M ? "checked" : "") disabled />
+                    <label class="star star5" for="star5-@Obj.PS_Id">&nbsp;&nbsp; (@FinalSAResult)</label>
+                    <input class="star star4" id="star4-@Obj.PS_Id" type="radio" name="star" value="4" @(FinalSAResult >= 3.5M && FinalSAResult < 4.5M ? "checked" : "") disabled />
+                    <label class="star star4" for="star4-@Obj.PS_Id"></label>
+                    <input class="star star3" id="star3-@Obj.PS_Id" type="radio" name="star" value="3" @(FinalSAResult >= 2.5M && FinalSAResult < 3.5M ? "checked" : "") disabled />
+                    <label class="star star3" for="star3-@Obj.PS_Id"></label>
+                    <input class="star star2" id="star2-@Obj.PS_Id" type="radio" name="star" value="2" @(FinalSAResult >= 1.5M && FinalSAResult < 2.5M ? "checked" : "") disabled />
+                    <label class="star star2" for="star2-@Obj.PS_Id"></label>
+                    <input class="star star1" id="star1-@Obj.PS_Id" type="radio" name="star" value="1" @(FinalSAResult >= 0.5M && FinalSAResult < 1.5M ? "checked" : "") disabled />
+                    <label class="star star1" for="star1-@Obj.PS_Id"></label>
+
+
+                </form>
+
+            </div>
+
+            <br />
+
+
+
+        }
+        @if (Model.LsttotalSAReport.Count == 0)
+        {
+            <b style="color:red;font-size:25px;font-family:Alergian;margin:20px;">No Data available </b>
+            <br />
+        }
+
+    </div>
+</div>
+
+<style>
+    .active{
+        color:black
+    }
+</style>
+
+<script>
+
+    var coll = document.getElementsByClassName("collapsible");
+        var i;
+
+        for (i = 0; i < coll.length; i++) {
+            coll[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var content = this.nextElementSibling;
+                if (content.style.display === "block") {
+                    content.style.display = "none";
+                } else {
+                    content.style.display = "block";
+                }
+            });
+        }
+    
+
+</script>
+
+@*<style>
+    .stars-form {
+        visibility: hidden;
+        height: 0;
+        overflow: hidden;
+        transition: height 0.3s ease-in-out;
+    }
+
+        .stars-form.show {
+            visibility: visible;
+            height: auto;
+        }
+</style>
+
+<script>
+    function toggleStars(className) {
+        var starsForm = document.querySelectorAll(className);
+        starsForm.forEach(function (form) {
+            form.classList.toggle('show');
+        });
+    }
+</script>*@
+

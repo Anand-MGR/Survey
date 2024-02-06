@@ -1,0 +1,166 @@
+﻿@model Survey.Models.AssignSurveyMasterModel
+@{
+    ViewBag.Title = "UserRole";
+    Layout = "~/Views/Shared/_LayoutSurvey.cshtml";
+}
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<style>
+    #Qtype {
+        width: 600px;
+    }
+</style>
+
+@using (Html.BeginForm("UserRole", "User", FormMethod.Post, new { @id = "form2", @enctype = "multipart/form-data" }))
+{
+    //"UserManagementUpdate", "User", FormMethod.Post,
+
+
+    @Html.AntiForgeryToken()
+    //Html.ValidationSummary()
+<h3 style="color: #3853a8;">Add UserRole</h3>
+    <div id="form2" style="font-family:'Times New Roman', Times, serif; margin-top:4%;">
+
+        <div class="col-sm-12">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        @Html.LabelFor(model => model.objUserRole.Role, htmlAttributes: new { @class = "control-label" })
+                        @Html.HiddenFor(model => model.objUserRole.UR_ID, new { htmlAttributes = new { @class = "form-control" } })
+
+                    </div>
+                    <div class="col-sm-8">
+
+                        @*@Html.EditorFor(model => model.QuestionsTypeForm.Q_QuestionType, new { @class = "form-control ", id = "Qtype", style = "height:80px" })*@
+                        @Html.EditorFor(model => model.objUserRole.Role, new { htmlAttributes = new { @class = "form-control", id = "Qtype", style = " height:60px;" } })
+
+                        @Html.ValidationMessageFor(model => model.objUserRole.Role, "", new { @class = "text-danger" })
+
+                    </div>
+                </div>
+            </div>
+            <br />
+
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        @Html.LabelFor(model => model.objUserRole.RoleStatus, htmlAttributes: new { @class = "control-label" })
+                    </div>
+                    <div class="col-sm-8">
+                        @*@Html.EditorFor(model => model.modelUser.U_DepotID, new { htmlAttributes = new { @class = "form-control" } })*@
+                        @Html.CheckBoxFor(model => model.objUserRole.RoleStatus, htmlAttributes: new { @checked = true })
+                        @Html.ValidationMessageFor(model => model.objUserRole.RoleStatus, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br />
+
+        <div class="col-sm-6">
+            <div class="form-group">
+                <div class="col-sm-4">
+
+                </div>
+                <div class="col-sm-8">
+
+                </div>
+            </div>
+        </div>
+    </div><div class="col-sm-12">
+        <div class="col-sm-6">
+
+        </div>
+        <div class="col-sm-6">
+            <div class="col-sm-3">
+
+            </div>
+            <div class="col-sm-12" style="padding:10px;">
+
+                <div class="col-sm-6">
+
+                </div>
+                <div class="col-sm-6">
+
+                    @if (@ViewData["Mode"] == null)
+                    {
+                        <div class="btns">
+                            <button class="btn-btnprimary" type="submit" id="save" name="Command" value="Add" style="background-color: forestgreen; color: white;padding: 8px; border: none; font-size: 14px; border-radius: 4px; " onclick="if (Savenewuser(Submit)) { return false; }">Save</button>
+
+                            <button class="btn-btnprimary" type="button" id="update" name="Command" value="Cancel" style="background-color: red; color: white; padding: 8px; border: none; font-size: 14px; border-radius: 4px;margin-left:30px; " onclick="location.href='UserRoleDashboard';">Cancel</button>
+
+                            <button class="btn-btnprimary" type="button" id="clear" name="Command" value="Clear" style="background-color: darkorange; color: white; padding: 8px; border: none; font-size: 14px; border-radius: 4px;margin-left:30px; " onclick="clearscreen()">Clear</button>
+                        </div>
+
+                    }
+
+                    else if (@ViewData["Mode"].ToString() == "edit")
+                    {
+                        <div class="btns">
+                            <button class="btn-btnprimary" type="submit" id="save" name="Command" value="Add" style="background-color: forestgreen; color: white;padding: 8px; border: none; font-size: 14px; border-radius: 4px; " onclick="if (Savenewuser(Submit)) { return false; }">Update</button>
+
+                            <button class="btn-btnprimary" type="button" id="update" name="Command" value="Cancel" style="background-color: red; color: white; padding: 8px; border: none; font-size: 14px; border-radius: 4px;margin-left:30px; " onclick="location.href='UserRoleDashboard';">Cancel</button>
+
+                            <button class="btn-btnprimary" type="button" id="clear" name="Command" value="Clear" style="background-color: darkorange; color: white; padding: 8px; border: none; font-size: 14px; border-radius: 4px;margin-left:30px; " onclick="clearscreen()">Clear</button>
+                        </div>
+                    }
+                </div>
+            </div>
+
+
+
+        </div>
+
+    </div>
+
+
+}
+
+
+
+
+
+<script>
+    function clearscreen() {
+        /*   alert("hi");*/
+        $("#Qtype").val('');
+        $("#Question").val('');
+
+
+    }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+    @@media (max-width: 767px) {
+        #Question {
+            width: 350px;
+        }
+    }
+
+    @@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+        .btns {
+            white-space: nowrap;
+        }
+
+        #Question {
+            width: 500px;
+        }
+    }
+</style>

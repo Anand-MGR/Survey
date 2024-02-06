@@ -1,0 +1,99 @@
+﻿@model Survey.Models.AssignSurveyMasterModel
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+<table id="tbldocuments" class="DeskUser">
+    <thead>
+        <tr>
+             <th style="width:70%">User Role</th>
+             <th>User Status</th>
+             <th>Edit User Status</th>
+             @*<th>Delete User Status</th>*@
+         
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var x in Model.LstUserRole)
+        {
+        <tr>
+            <td>@x.Role</td>
+
+            <td>
+                @if (@x.RoleStatus == true)
+                {
+                    <img src="~/images/icons/Compeleted.png" style="width: 25px;" />
+                }
+                else
+                {
+                    <img src="~/images/icons/incompleted.png" style="width: 25px;" />
+                }
+            </td>
+
+
+            <td><i style='font-size:24px' class='far' onclick="EditUserDashboard(@x.UR_ID)">&#xf044;</i></td>           
+            @*<td><i style='font-size:24px' class='fas' onclick="DeleteUserDashboard(@x.UR_ID)">&#xf2ed;</i></td>*@
+        </tr>
+
+        }
+
+    </tbody>
+</table>
+
+<table id="tbldocuments" class="MobUser" style="width:100%">
+    @foreach (var x in Model.LstUserRole)
+    {
+        <tr>
+            <th>User Role</th>
+            <td>@x.Role</td>
+        </tr>
+
+        <tr>
+            <th>User Status</th>
+            <td>
+                @if (@x.RoleStatus == true)
+                {
+                    <img src="~/images/icons/Compeleted.png" style="width: 25px;" />
+                }
+                else
+                {
+                    <img src="~/images/icons/incompleted.png" style="width: 25px;" />
+                }
+            </td>
+        </tr>
+        <tr>
+            <th>Edit</th>
+            <td><i style='font-size:24px' class='far' onclick="EditUserDashboard(@x.UR_ID)">&#xf044;</i></td>
+        </tr>
+        <tr>
+            <th>Delete</th>
+            <td><i style='font-size:24px' class='far' onclick="DeleteUserDashboard(@x.UR_ID)">&#xf044;</i></td>
+        </tr>
+        <tr>
+            <th> </th>
+            <td>
+                &nbsp;
+            </td>
+        </tr>
+    }
+</table>
+
+
+<script type="text/javascript">
+
+    function EditUserDashboard(UR_ID) {
+           var link = '@Url.Action("EditUserRole", "User", new { UR_ID = "replace", Mode = "Modes" })';
+         link = link.replace("replace", UR_ID);
+        link = link.replace("Modes", "Edit");
+         window.location.href = link.replace(/&amp;/g, '&');
+
+    }
+    </script>
+<script>
+    function DeleteUserDashboard(UR_ID) {
+        var isConfirmed = confirm("Are you sure you want to delete this data?");
+        if (isConfirmed) {
+            var link = '@Url.Action("DeleteUserRoleDashboard", "User", new { UR_ID = "replace", Mode = "Modes" })';
+            link = link.replace("replace", UR_ID);
+            link = link.replace("Modes", "Edit");
+            window.location.href = link.replace(/&amp;/g, '&');
+        }
+    }
+</script>

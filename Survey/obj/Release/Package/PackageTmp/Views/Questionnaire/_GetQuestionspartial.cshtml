@@ -1,0 +1,83 @@
+﻿@model Survey.Models.QuestionnaireModel
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<body>
+    <div id="partialpageid" style="display:none;" class="stars">
+
+        @foreach (var x in Model.QuestionnaireLst)
+        {
+            <b>@x.Q_Questions</b><br />
+            <div class="rating">
+                <input class="star star-5" id="star5.@x.QuestionID" type="radio" name="rating.@x.QuestionID" value="5 - @x.QuestionID" onclick="ratingclick()" />
+                <label class="star star-5" for="star5.@x.QuestionID"></label>
+
+                <input class="star star-4" id="star4.@x.QuestionID" type="radio" name="rating.@x.QuestionID" value="4 - @x.QuestionID" onclick="ratingclick()" />
+                <label class="star star-4" for="star4.@x.QuestionID"></label>
+
+                <input class="star star-3" id="star3.@x.QuestionID" type="radio" name="rating.@x.QuestionID" value="3 - @x.QuestionID" onclick="ratingclick()" />
+                <label class="star star-3" for="star3.@x.QuestionID"></label>
+
+                <input class="star star-2" id="star2.@x.QuestionID" type="radio" name="rating.@x.QuestionID" value="2 - @x.QuestionID" onclick="ratingclick()" />
+                <label class="star star-2" for="star2.@x.QuestionID"></label>
+
+                <input class="star star-1" id="star1.@x.QuestionID" type="radio" name="rating.@x.QuestionID" value="1 - @x.QuestionID" onclick="ratingclick()" />
+                <label class="star star-1" for="star1.@x.QuestionID"></label>
+            </div>
+
+
+            @*<div class="rating">
+                <input class="star star-5" id="star5.@x.QuestionID" type="radio" name="rating" value="5 @x.QuestionID" />
+                <label class="star star-5" for="star5.@x.QuestionID"></label>
+
+                <input class="star star-4" id="star4.@x.QuestionID" type="radio" name="rating" value="4 @x.QuestionID" />
+                <label class="star star-4" for="star4.@x.QuestionID"></label>
+
+                <input class="star star-3" id="star3.@x.QuestionID" type="radio" name="rating" value="3 @x.QuestionID" />
+                <label class="star star-3" for="star3.@x.QuestionID"></label>
+
+                <input class="star star-2" id="star2.@x.QuestionID" type="radio" name="rating" value="2 @x.QuestionID" />
+                <label class="star star-2" for="star2.@x.QuestionID"></label>
+
+                <input class="star star-1" id="star1.@x.QuestionID" type="radio" name="rating" value="1 @x.QuestionID" />
+                <label class="star star-1" for="star1.@x.QuestionID"></label>
+            </div>*@
+
+
+        }
+        <br />
+        <div id="selectedratings" style="display:none;"></div>
+        <button type="submit" id="submitbtnrate" class="btn btn-primary" onclick="submitbtnclick()">Submit</button>
+
+        @*<button type="submit" id="submitbtnrate" onclick="selected()">submit</button>*@
+    </div>
+</body>
+
+<script type="text/javascript">
+    function submitbtnclick() {
+
+        var finalselectedratings = document.getElementById("selectedratings").innerHTML;
+        //alert(finalselectedratings);
+        $.ajax({
+            type: "POST",
+            //url: 'Url.Action("SubmitRating", "Questionnaire")',
+            url: "/Questionnaire/SumbitRating",
+            //data: '{alldata:' + JSON.stringify(values) + '}',
+            data: '{Ratingandid: "' + finalselectedratings + '"}',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json"
+            //success: function (data) {
+            //    alert(data);
+            //}
+
+        });
+
+
+    }
+
+</script>
+
+

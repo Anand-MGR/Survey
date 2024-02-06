@@ -1,0 +1,507 @@
+﻿@model Survey.Models.ProjectMasterModel
+
+@{
+    ViewBag.Title = "ProjectSurveyAssign";
+    Layout = "~/Views/Shared/_LayoutSurvey.cshtml";
+}
+
+<style>
+    /* Add your custom styles here */
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .footer {
+        padding-top: 33% !important;
+    }
+
+    .col-md-6 {
+        width: 38%;
+        margin-left: 3%;
+        margin-top: 1%;
+        margin-right: 3%;
+        float: left;
+    }
+
+    /* Optional: Adjust styles for smaller screens */
+    @@media (max-width: 768px) {
+        .col-md-6 {
+            width: 100%;
+            float: none;
+        }
+    }
+</style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+
+
+@using (Html.BeginForm("ProjectSurveyAssign", "ProjectSurvey", FormMethod.Post, new { onsubmit = "showLoadingIcon()" }))
+{
+    @Html.AntiForgeryToken()
+    <h2 style="float: left; color: #3853a8 ;margin-top:1%;">Project Survey </h2>
+    <button type="button" class="btn btn-primary" style="float: right; margin-top: 1%;" id="backtodashboard">Back To Dashboard</button>
+    <br />
+    <br />
+    <hr />
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div>
+            <form control="" class="form-group">
+
+                <div class="form-group">
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.objProjectsurveymodel.PS_ProjectName, htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.objProjectsurveymodel.PS_ProjectName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.objProjectsurveymodel.PS_ProjectName, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.objProjectsurveymodel.PS_ID, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.objProjectsurveymodel.PS_ProjectCode, htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.objProjectsurveymodel.PS_ProjectCode, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.objProjectsurveymodel.PS_ProjectCode, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.objProjectsurveymodel.PS_ClientName, htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.objProjectsurveymodel.PS_ClientName, new { htmlAttributes = new { @class = "form-control", id = "PS_ClientName" } })
+                        @Html.ValidationMessageFor(model => model.objProjectsurveymodel.PS_ClientName, "", new { @class = "text-danger" })
+                        <p id="suggestion-container" class="form-control" style="display:none; width:30%;"></p>
+                    </div>
+
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.objProjectsurveymodel.PS_Client_Email, htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.objProjectsurveymodel.PS_Client_Email, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.objProjectsurveymodel.PS_Client_Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.objProjectsurveymodel.PS_PM_Name, htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.objProjectsurveymodel.PS_PM_Name, new { htmlAttributes = new { @class = "form-control", id = "PS_PM_Name" } })
+                        @Html.ValidationMessageFor(model => model.objProjectsurveymodel.PS_PM_Name, "", new { @class = "text-danger" })
+                        <p id="suggestion-containerpm" class="form-control" style="display:none; width:30%;"></p>
+                    </div>
+
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.objProjectsurveymodel.PS_PM_Email, htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.objProjectsurveymodel.PS_PM_Email, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.objProjectsurveymodel.PS_PM_Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.objProjectsurveymodel.PS_PE_Name, htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.objProjectsurveymodel.PS_PE_Name, new { htmlAttributes = new { @class = "form-control", id = "PS_PE_Name" } })
+                        @Html.ValidationMessageFor(model => model.objProjectsurveymodel.PS_PE_Name, "", new { @class = "text-danger" })
+                        <p id="suggestion-containerpe" class="form-control" style="display: none; width: 30%;"></p>
+                    </div>
+
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.objProjectsurveymodel.PS_PE_Email, htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.objProjectsurveymodel.PS_PE_Email, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.objProjectsurveymodel.PS_PE_Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.objProjectsurveymodel.PS_HD_Name, htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.objProjectsurveymodel.PS_HD_Name, new { htmlAttributes = new { @class = "form-control", id = "PS_HD_Name" } })
+                        @Html.ValidationMessageFor(model => model.objProjectsurveymodel.PS_HD_Name, "", new { @class = "text-danger" })
+                        <p id="suggestion-containerhd" class="form-control" style="display: none; width: 30%;"></p>
+                    </div>
+
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.objProjectsurveymodel.PS_HD_Email, htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.objProjectsurveymodel.PS_HD_Email, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.objProjectsurveymodel.PS_HD_Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.objProjectsurveymodel.PS_SA_Name, htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.objProjectsurveymodel.PS_SA_Name, new { htmlAttributes = new { @class = "form-control", id = "PS_HD_Name" } })
+                        @Html.ValidationMessageFor(model => model.objProjectsurveymodel.PS_SA_Name, "", new { @class = "text-danger" })
+                        <p id="suggestion-containerhd" class="form-control" style="display: none; width: 30%;"></p>
+                    </div>
+
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.objProjectsurveymodel.PS_SA_Email, htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.objProjectsurveymodel.PS_SA_Email, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.objProjectsurveymodel.PS_SA_Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+
+
+                <div class="loading-overlay" style="display:none;">
+                    <div class="loading-icon"></div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="col-md-6">
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-6">
+
+                    </div>
+                    <div class="col-md-6">
+
+
+                        @if (@ViewData["Mode"] == null)
+                        {
+
+                            <button class="btn btn-primary" type="submit" name="Command" value="Add" style="background-color: forestgreen; color: white;" onclick="if (Savenewuser(Submit)) { return false; }">Create</button>
+                            <button class="btn btn-primary" type="button" name="Command" value="Cancel" style="background-color: red; color: white; " onclick="location.href = '@Url.Action("GetCLData", "Questions")';">Cancel</button>
+                        }
+                        else
+                        {
+
+                            <button class="btn btn-primary" type="submit" name="Command" value="Add" style="background-color: forestgreen; color: white;" onclick="if (Savenewuser(Submit)) { return false; }">Update</button>
+                            <button class="btn btn-primary" type="button" name="Command" value="Cancel" style="background-color: red; color: white; " onclick="location.href = '@Url.Action("GetCLData", "Questions")';">Cancel</button>
+                        }
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+}
+
+<script>
+    document.getElementById("backtodashboard").onclick = function () {
+        location.href = '@Url.Action("GetCLData","Questions")';
+    };
+</script>
+<style>
+    .loading-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 9999;
+        display: none;
+        justify-content: center;
+        align-items: center;
+    }
+
+        .loading-overlay.active {
+            display: flex;
+        }
+
+    .loading-icon {
+        position: fixed;
+        top: 30%;
+        left: 45%;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border: 5px solid #fff;
+        border-top-color: #555;
+        animation: spin 1s infinite linear;
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#PS_ClientName').keyup(function () {
+
+            var inputVal = $(this).val();
+            var URid = "6";
+            var arraylist = "";
+            if (inputVal.length == "0") {
+                $('#objProjectsurveymodel_PS_Client_Email').val('');
+                $('#suggestion-container').html('');
+                $('#suggestion-container').hide();
+            }
+
+            if (inputVal.length) {
+                $.get('@Url.Action("GetSuggestions", "ProjectSurvey")', { input: inputVal, URid: URid }, function (data) {
+                    if (data.length === 0) {
+                        $('#suggestion-container').html('');
+                        $('#suggestion-container').hide();
+                    } else {
+                        var suggestionOptions = '';
+                        $.each(data, function (index, value) {
+                            suggestionOptions += '<span class="suggestion-item" style="cursor: pointer">' + value + '</span><br>';
+                        });
+
+                        $('#suggestion-container').html(suggestionOptions);
+                        $('#suggestion-container').show();
+
+                        $('.suggestion-item').on('click', function () {
+                            var selectedValue = $(this).text();
+                            $('#PS_ClientName').val(selectedValue);
+                            $.get('@Url.Action("GetClientEmail", "ProjectSurvey")', { clientName: selectedValue, URid: URid},
+                                function (data) {
+                                    $('#objProjectsurveymodel_PS_Client_Email').val(data);
+                                });
+                            $('#suggestion-container').hide();
+                        });
+                    }
+                });
+            }
+        });
+
+        $('#PS_ClientName').keyup(function () {
+            if ($(this).val() === '') {
+                $('#suggestion-container').html('');
+                $('#suggestion-container').hide();
+            }
+        });
+    });
+</script>
+
+
+<script>
+    $(document).ready(function () {
+        $('#PS_PM_Name').keyup(function () {
+            var inputVal = $(this).val();
+            var URid = "2";
+            var arraylist = "";
+            if (inputVal.length == "0") {
+                $('#objProjectsurveymodel_PS_PM_Email').val('');
+                $('#suggestion-containerpm').html('');
+                $('#suggestion-containerpm').hide();
+            }
+
+            if (inputVal.length) {
+                $.get('@Url.Action("GetSuggestions", "ProjectSurvey")', { input: inputVal, URid: URid }, function (data) {
+                    if (data.length === 0) {
+                        $('#suggestion-containerpm').html('');
+                        $('#suggestion-containerpm').hide();
+                    } else {
+                        var suggestionOptions = '';
+                        $.each(data, function (index, value) {
+                            suggestionOptions += '<span class="suggestion-item" style="cursor: pointer">' + value + '</span><br>';
+                        });
+
+                        $('#suggestion-containerpm').html(suggestionOptions);
+                        $('#suggestion-containerpm').show();
+
+                        $('.suggestion-item').on('click', function () {
+                            var selectedValue = $(this).text();
+                            $('#PS_PM_Name').val(selectedValue);
+                            $.get('@Url.Action("GetClientEmail", "ProjectSurvey")', { clientName: selectedValue },
+                                function (data) {
+                                  //  alert(data);
+                                    $('#objProjectsurveymodel_PS_PM_Email').val(data);
+                                });
+                            $('#suggestion-containerpm').hide();
+                        });
+                    }
+                });
+            }
+        });
+
+        $('#PS_PM_Name').keyup(function () {
+            if ($(this).val() === '') {
+                $('#suggestion-containerpm').html('');
+                $('#suggestion-containerpm').hide();
+            }
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        $('#PS_PE_Name').keyup(function () {
+            var inputVal = $(this).val();
+            var URid = "3";
+            var arraylist = "";
+            if (inputVal.length == "0") {
+                $('#objProjectsurveymodel_PS_PE_Email').val('');
+                $('#suggestion-containerpe').html('');
+                $('#suggestion-containerpe').hide();
+            }
+
+            if (inputVal.length) {
+                $.get('@Url.Action("GetSuggestions", "ProjectSurvey")', { input: inputVal, URid: URid }, function (data) {
+                    if (data.length === 0) {
+                        $('#suggestion-containerpe').html('');
+                        $('#suggestion-containerpe').hide();
+                    } else {
+                        var suggestionOptions = '';
+                        $.each(data, function (index, value) {
+                            suggestionOptions += '<span class="suggestion-item" style="cursor: pointer">' + value + '</span><br>';
+                        });
+
+                        $('#suggestion-containerpe').html(suggestionOptions);
+                        $('#suggestion-containerpe').show();
+
+                        $('.suggestion-item').on('click', function () {
+                            var selectedValue = $(this).text();
+                            $('#PS_PE_Name').val(selectedValue);
+                            $.get('@Url.Action("GetClientEmail", "ProjectSurvey")', { clientName: selectedValue },
+                                function (data) {
+                                    $('#objProjectsurveymodel_PS_PE_Email').val(data);
+                                });
+                            $('#suggestion-containerpe').hide();
+                        });
+                    }
+                });
+            }
+        });
+
+        $('#PS_PE_Name').keyup(function () {
+            if ($(this).val() === '') {
+                $('#suggestion-containerpe').html('');
+                $('#suggestion-containerpe').hide();
+            }
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        $('#PS_HD_Name').keyup(function () {
+            var inputVal = $(this).val();
+            var URid = "4";
+            var arraylist = "";
+            if (inputVal.length == "0") {
+                $('#objProjectsurveymodel_PS_HD_Email').val('');
+                $('#suggestion-containerhd').html('');
+                $('#suggestion-containerhd').hide();
+            }
+
+            if (inputVal.length) {
+                $.get('@Url.Action("GetSuggestions", "ProjectSurvey")', { input: inputVal, URid: URid }, function (data) {
+                    if (data.length === 0) {
+                        $('#suggestion-containerhd').html('');
+                        $('#suggestion-containerhd').hide();
+                    } else {
+                        var suggestionOptions = '';
+                        $.each(data, function (index, value) {
+                            suggestionOptions += '<span class="suggestion-item" style="cursor: pointer">' + value + '</span><br>';
+                        });
+
+                        $('#suggestion-containerhd').html(suggestionOptions);
+                        $('#suggestion-containerhd').show();
+
+                        $('.suggestion-item').on('click', function () {
+                            var selectedValue = $(this).text();
+                            $('#PS_HD_Name').val(selectedValue);
+                            $.get('@Url.Action("GetClientEmail", "ProjectSurvey")', { clientName: selectedValue },
+                                function (data) {
+                                    $('#objProjectsurveymodel_PS_HD_Email').val(data);
+                                });
+                            $('#suggestion-containerhd').hide();
+                        });
+                    }
+                });
+            }
+        });
+
+        $('#PS_HD_Name').keyup(function () {
+            if ($(this).val() === '') {
+                $('#suggestion-containerhd').html('');
+                $('#suggestion-containerhd').hide();
+            }
+        });
+    });
+</script>
+
+
+
+<script>
+    $(document).ready(function () {
+        $('form').submit(function (event) {
+            event.preventDefault();
+           /* $('.loading-overlay').show();*/
+            var clname = document.getElementById("PS_ClientName").value;
+            var Prname = $('#objProjectsurveymodel_PS_ProjectName').val();
+            var Prcode = $('#objProjectsurveymodel_PS_ProjectCode').val();
+            var clEmail = $('#objProjectsurveymodel_PS_Client_Email').val();
+            var Pmname = $('#objProjectsurveymodel_PS_PM_Name').val();
+            var PmEmail = $('#objProjectsurveymodel_PS_PM_Email').val();
+            var Pename = $('#objProjectsurveymodel_PS_PE_Name').val();
+            var PeEmail = $('#objProjectsurveymodel_PS_PE_Email').val();
+            var Hdname = $('#objProjectsurveymodel_PS_HD_Name').val();
+            var Hdemail = $('#objProjectsurveymodel_PS_HD_Email').val();
+
+            if (clname == "" || Prname == "" || Prcode == "" || Prname == "" || clEmail == "" || Pmname == "" || PmEmail == "" || Pename == "" || PeEmail == "" || Hdname == "" || Hdemail == "" )
+            {
+                return false;
+            }
+            else {
+                $('.loading-overlay').show();
+                $.ajax({
+                type: 'POST',
+                url: '@Url.Action("ProjectSurveyAssign", "ProjectSurvey")',
+                data: $('form').serialize(),
+                success: function (response) {
+                    $('.loading-overlay').show();
+                    return true;
+                },
+                error: function (error) {
+                    // Handle error and hide loading overlay
+                    console.error('Error:', error);
+                    return true;
+                },
+                complete: function () {
+                    // Hide loading overlay when request is complete
+                    $('.loading-overlay').hide();
+                    location.href = '@Url.Action("GetCLData", "Questions")'
+                }
+            });
+            }
+
+        });
+    });
+</script>
+
+@*<script>
+    function showLoadingIcon() {
+        // Show loading overlay
+        $('.loading-overlay').show();
+        return true;
+    }
+</script>*@
+
+
+@*<script>
+        $(document).ready(function () {
+            $('form').submit(function (event) {
+                event.preventDefault();
+                $('.loading-overlay').show();
+            });
+        });
+    </script>
+    <script>
+        function showLoadingIcon() {
+            $('.loading-overlay').show();
+            return true;
+        }
+    </script>*@

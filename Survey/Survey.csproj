@@ -526,6 +526,7 @@
     <Content Include="Css\Ratepagenew.css" />
     <Content Include="Css\Ratingstylepage .css" />
     <Content Include="Css\util.css" />
+    <Content Include="DB Changes.txt" />
     <Content Include="fonts\font-awesome-4.7.0\css\font-awesome.css" />
     <Content Include="fonts\font-awesome-4.7.0\css\font-awesome.min.css" />
     <Content Include="fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.svg" />

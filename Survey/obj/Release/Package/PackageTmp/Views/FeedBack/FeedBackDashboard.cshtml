@@ -1,0 +1,319 @@
+﻿
+
+@model Survey.Models.AssignSurveyMasterModel
+@{
+    ViewBag.Title = "FeedBackDashboard";
+    Layout = "~/Views/Shared/_LayoutSurvey.cshtml";
+}
+
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<script src="~/Scripts/bootstrap.min.js"></script>
+<style>
+    .checbocn {
+        background: url(/images/but.png) no-repeat;
+        cursor: pointer;
+        border: none;
+        width: 100px;
+        height: 100px;
+    }
+
+    .nonep {
+        display: none;
+    }
+
+/*    #tbldocuments {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+        #tbldocuments td, #tbldocuments th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }*/
+
+        #tbldocuments tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #tbldocuments tr:hover {
+            background-color: #ddd;
+        }
+
+        /*#tbldocuments th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #3853a8;
+            color: white;
+        }*/
+
+    .danger {
+        background-color: #f44336;
+    }
+        /* Red */
+        .danger:hover {
+            background: #da190b;
+        }
+
+    .info {
+        background-color: #3853a8;
+        color: white;
+    }
+        /* Blue */
+        .info:hover {
+            background-color: #3853a8;
+            color: white;
+        }
+
+    .Delete {
+        background-color: brown;
+        color: white !important;
+        display: inline-block;
+        padding: 6px 12px;
+        margin-bottom: 0;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 1.42857143;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        touch-action: manipulation;
+        user-select: none;
+        background-image: none;
+        border: 1px solid transparent;
+        border-radius: 4px;
+    }
+
+    a.EditTd {
+        background: url(../Images/editun.png) no-repeat top left;
+        display: block;
+        width: 30px;
+        height: 30px;
+        text-indent: -9999px; /* hides the link text */
+    }
+
+    .EditTd1 {
+        background-image: url(/Images/editu.png);
+    }
+    .AddTraining {
+        background-color: #0296e0;
+        color: white;
+        display: inline-block;
+        padding: 6px;
+        width: 80px;
+        margin-bottom: 0;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 1.42857143;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        touch-action: manipulation;
+        user-select: none;
+        background-image: none;
+        border: 1px solid transparent;
+        border-radius: 4px;
+        float: right;
+    }
+
+    .AddTrainingSearch {
+        background-color: #F05A53;
+        color: white;
+        margin-left: 10%;
+        width: 50px;
+        height: 35px;
+        display: inline-block;
+        padding: 6px 12px;
+        margin-bottom: 0;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 1.42857143;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        touch-action: manipulation;
+        user-select: none;
+        background-image: none;
+        border: 1px solid transparent;
+        border-radius: 4px;
+    }
+
+    .dataTables_info {
+        float: right !important;
+    }
+
+    .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+        background: none;
+        color: black !important;
+        border-radius: 4px;
+        border: 1px solid #828282;
+    }
+
+    .dataTables_wrapper .dataTables_paginate .paginate_button:active {
+        background: none;
+        color: black !important;
+    }
+
+    .MobFeed {
+        display: none;
+    }
+</style>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#txtserach').val('');
+    });
+</script>
+
+
+<div class="form-horizontal" style="background-color:white;">
+    <br />
+    <div class="tab-content" style="background-color: white!important; border: none!important;    margin-top: 5px;">
+        <div class="col-lg-12">
+            <div class="col-lg-3" style="float:left;">
+                <h3 style="color: #3853a8;">Feedback Dashboard</h3>
+            </div>
+            <div class="col-lg-6" style="float:left;">
+                @Html.TextBoxFor(model => model.objFBModel.FD_Name, new { @class = "form-control", @maxlength = "80", @id = "txtserach", @placeholder = "Search by Name ", onkeypress = "return NuberandChracter(event)" })
+                <span id="error" style="color: Red; display: none">* Special Characters not allowed.</span>
+            </div>
+            <div class="btn" style="float:left;">
+                <a href="#" class="AddTrainingSearch" onclick="SearchRecords()" style="color: white; text-decoration: none;">
+                    <i class="fa fa-search" style="margin-top:4px;"></i>
+                </a>
+            </div>
+            <div class="Add" style="float: left; margin-top:6px;">
+                <a href="#" class="AddTraining theme-button" onclick="location.href='FeedBack'" style="color: white; text-decoration: none;">
+                    <span class="glyphicon glyphicon-search"></span>Add
+                </a>
+            </div>
+            @*<div class="col-lg-2" style="float:left;">
+            <span>
+                <a href="@Url.Action("WareHouse","WareHouse")" class="AddTraining" style="color: white; text-decoration: none;">Add Warehouse Details</a>
+            </span>
+        </div>*@
+        </div>
+
+        <br /><br /><br />
+        <div id="DataGirdDiv">
+            @Html.Partial("_FeedBack", Model)
+        </div>
+        @*</div>*@
+    </div>
+
+</div>
+
+
+
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+
+
+<script src="~/Content/assets/js/main.js"></script>
+<script src="~/Content/src/jquery.flashy.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="~/Content/assets/cssdatatable/jquery.dataTables.min.css" rel="stylesheet" />
+
+<script>
+            $(document).ready(function () {
+            $('#tbldocuments').DataTable({
+                "pagingType": "full_numbers",
+                "oLanguage": {
+                    "sLengthMenu": "Page Size: _MENU_"
+                },
+                columnDefs: [{ orderable: false, targets: [2, 3] }],
+                "searching": false
+            });
+
+            $("#tbldocuments_info").detach().prependTo('#tbldocuments_wrapper');
+            $("#tbldocuments_paginate").detach().prependTo('#tbldocuments_wrapper');
+        });
+
+        function SearchRecords() {
+            var Search = $("#txtserach").val();
+           /* alert(Search);*/
+            $.ajax({
+                type: "Post",
+                url: '@Url.Action("SearchRecords", "FeedBack")',
+                data: '{Value: "' + Search + '"}',
+                contentType: "application/json; charset=utf-8",
+                dataType: "html",
+                success: function (data) {
+
+                    $('#DataGirdDiv').html("");
+                    $('#DataGirdDiv').html(data);
+
+                    $('#tbldocuments').DataTable({
+                        "pagingType": "full_numbers",
+                        "oLanguage": {
+                            "sLengthMenu": "Page Size: _MENU_"
+                        },
+                        columnDefs: [{ orderable: false, targets: [2, 3] }],
+                        "searching": false
+                    });
+
+                    $("#tbldocuments_info").detach().prependTo('#tbldocuments_wrapper');
+                    $("#tbldocuments_paginate").detach().prependTo('#tbldocuments_wrapper');
+                }
+            });
+        }
+
+
+</script>
+
+<style type="text/css">
+    .dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+        font-weight: bold !important;
+        text-align: center !important;
+    }
+
+    .dataTables_wrapper .dataTables_paginate .paginate_button {
+        box-sizing: border-box !important;
+        display: inline-block !important;
+        min-width: 1.5em !important;
+        cursor: pointer !important;
+        color: #333 !important;
+    }
+</style>
+
+<style type="text/css">
+    @@media (max-width: 767px) {
+        .MobFeed {
+            display: block;
+        }
+
+        .DeskFeed {
+            display: none;
+        }
+        /* .selectrole {
+            margin-left: 42%;
+            margin-top: 2%
+        }
+
+        .filter {
+            margin-left: -50%;
+            margin-top: 13%;
+        }
+
+        #txtserach {
+            margin-top: 6%;
+        }*/
+
+        .btn {
+            margin-left: 2%;
+            margin-top: -2%;
+        }
+
+        .dataTables_wrapper .dataTables_info {
+            margin-top: 6%;
+        }
+    }
+</style>

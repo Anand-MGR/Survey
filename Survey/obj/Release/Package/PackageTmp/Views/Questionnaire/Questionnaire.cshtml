@@ -1,0 +1,91 @@
+﻿@model Survey.Models.QuestionMasterModel
+@{
+    ViewBag.Title = "Questionnaire";
+    Layout = "~/Views/Shared/_LayoutSurvey.cshtml";
+}
+
+<h2>Questionnaire</h2>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css">
+
+
+
+<div>
+    @foreach (var x in Model.AnswerQuestionLst)
+    {
+        <b>@x.Q_Question</b>
+        <br />
+        <div id="partialpageid" class="stars">
+            <div class="rating">
+                <input class="star star-5" id="star5.@x.SSD_ID" type="radio" name="rating.@x.SSD_ID" value="5" onclick="Rate(this)" />
+                <label class="star star-5" for="star5.@x.SSD_ID"></label>
+
+                <input class="star star-4" id="star4.@x.SSD_ID" type="radio" name="rating.@x.SSD_ID" value="4" onclick="Rate(this)" />
+                <label class="star star-4" for="star4.@x.SSD_ID"></label>
+
+                <input class="star star-3" id="star3.@x.SSD_ID" type="radio" name="rating.@x.SSD_ID" value="3" onclick="Rate(this)" />
+                <label class="star star-3" for="star3.@x.SSD_ID"></label>
+
+                <input class="star star-2" id="star2.@x.SSD_ID" type="radio" name="rating.@x.SSD_ID" value="2" onclick="Rate(this)" />
+                <label class="star star-2" for="star2.@x.SSD_ID"></label>
+
+                <input class="star star-1" id="star1.@x.SSD_ID" type="radio" name="rating.@x.SSD_ID" value="1" onclick="Rate(this)" />
+                <label class="star star-1" for="star1.@x.SSD_ID"></label>
+            </div>
+        </div>
+        <div id="current-rating_@x.SSD_ID"></div>
+        <span id="rateval" style="display:none;"></span>
+    }
+
+    <br />
+    <button type="button" id="submitbtnrate" class="btn btn-primary" onclick="submitbtnclick()">Submit</button>
+
+</div>
+
+<script type="text/javascript">
+    function Rate(this) {
+        alert("I am onclick star");
+        var ratingValue = '';
+        var final = '';
+
+        var ratingElements = document.getElementsByClassName("star");
+
+        for (var i = 0; i < ratingElements.length; i++) {
+            for (j = i; j = ratingElements[i].checked; j++) {
+                ratingValue = ratingElements[i].value;
+                final = final + ratingValue + '/';//output 3-1 /
+                break;
+            }
+
+        }
+        $('#selectedratings').text(final)
+    }
+
+</script>
+<script type="text/javascript">
+        function submitbtnclick() {
+
+            var finalselectedratings = document.getElementById("selectedratings").innerHTML;
+            //alert(finalselectedratings);
+            $.ajax({
+                type: "POST",
+                //url: '@Url.Action("SubmitRating", "Questionnaire")',
+                url: "/Questionnaire/SubmitRating",
+                //data: '{alldata:' + JSON.stringify(values) + '}',
+                data: '{Ratingandid: "' + finalselectedratings + '"}',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json"
+
+            });
+
+
+        }
+
+    </script>
+@*<script type="text/javascript">
+    function selecteddd() {
+        alert("values are submitted")
+        var values = document.getElementByClassName("stars").val();
+        alert(values);
+    }
+
+</script>*@
