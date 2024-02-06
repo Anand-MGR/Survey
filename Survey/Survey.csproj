@@ -69,6 +69,9 @@
     <Reference Include="FluentAssertions, Version=6.12.0.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
       <HintPath>..\packages\FluentAssertions.6.12.0\lib\netstandard2.0\FluentAssertions.dll</HintPath>
     </Reference>
+    <Reference Include="HtmlAgilityPack, Version=1.11.58.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.11.58\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
     <Reference Include="IdentityModel, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\IdentityModel.1.9.2\lib\net45\IdentityModel.dll</HintPath>
     </Reference>
@@ -347,7 +350,7 @@
       <HintPath>..\packages\Rotativa.1.7.4-rc\lib\net45\Rotativa.dll</HintPath>
     </Reference>
     <Reference Include="Rotativa.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Rotativa.Core.2.0.0\lib\net45\Rotativa.Core.dll</HintPath>
+      <HintPath>..\packages\Rotativa.Core.2.0.2.1\lib\net45\Rotativa.Core.dll</HintPath>
     </Reference>
     <Reference Include="Rotativa.MVC, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Rotativa.MVC.2.0.3\lib\net45\Rotativa.MVC.dll</HintPath>

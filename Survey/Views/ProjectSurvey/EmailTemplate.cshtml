@@ -41,9 +41,10 @@
 
     #btnCreateTemplate {
         margin-left: 55% !important;
-        background-color: blue;
+        background-color: forestgreen;
         color: white;
         border-radius: 6px;
+        padding: 7px;
         /* margin-top:4% !important;*/
     }
     #btnCanceltemplate {
@@ -73,6 +74,7 @@
     <button type="button" class="btn btn-primary" style="float: right; margin-top: 1%;" id="backtodashboard" onclick="location.href = '@Url.Action("EmailTemplateDashboard", "ProjectSurvey")';">Back To Dashboard</button>
     <br />
     <br />
+    <br />
     <hr />
     <div class="control-label">Template Name</div>
     <input type="text" id="templatename" value="@Model.TemplateName" />
@@ -82,12 +84,37 @@
         <p></p>
     </div>
 
-    <div id="Emailtemplatebuttons" style="margin-top:32%;">
-        <button id="btnCreateTemplate" onclick="updateOutput()">Create Template</button>
-        <button id="btnCanceltemplate" onclick="location.href = '@Url.Action("EmailTemplateDashboard", "ProjectSurvey")';">Cancel</button>
+    <input type="text" id="templateidformap" style="display:none;" value="@Model.TemplateId" />
+
+    <div id="Emailtemplatebuttons" style="margin-top:28%;">
+        @if (@ViewData["Mode"] == null)
+        {
+            <div class="btns">
+                <button class="btn-btnprimary" type="submit" id="save" name="Command" value="Add" style="background-color: forestgreen; color: white;padding: 8px; border: none; font-size: 14px; border-radius: 4px; " onclick="updateOutput()" { return false; }">Save</button>
+
+                <button class="btn-btnprimary" type="button" id="update" name="Command" value="Cancel" style="background-color: red; color: white; padding: 8px; border: none; font-size: 14px; border-radius: 4px;margin-left:30px; " onclick="location.href='EmailTemplateDashboard';">Cancel</button>
+
+                <button class="btn-btnprimary" type="button" id="clear" name="Command" value="Clear" style="background-color: darkorange; color: white; padding: 8px; border: none; font-size: 14px; border-radius: 4px;margin-left:30px; " onclick="clearscreen()">Clear</button>
+            </div>
+
+        }
+
+        else if (@ViewData["Mode"].ToString() == "edit")
+        {
+            <div class="btns">
+                <button class="btn-btnprimary" type="submit" id="save" name="Command" value="Add" style="background-color: forestgreen; color: white;padding: 8px; border: none; font-size: 14px; border-radius: 4px; " onclick="updateOutput()" { return false; }">Update</button>
+
+                <button class="btn-btnprimary" type="button" id="update" name="Command" value="Cancel" style="background-color: red; color: white; padding: 8px; border: none; font-size: 14px; border-radius: 4px;margin-left:30px; " onclick="location.href='EmailTemplateDashboard';">Cancel</button>
+
+                <button class="btn-btnprimary" type="button" id="clear" name="Command" value="Clear" style="background-color: darkorange; color: white; padding: 8px; border: none; font-size: 14px; border-radius: 4px;margin-left:30px; " onclick="clearscreen()">Clear</button>
+            </div>
+        }
+
+        @*<button id="btnCreateTemplate" onclick="updateOutput()">Create Template</button>
+            <button id="btnCanceltemplate" onclick="location.href = '@Url.Action("EmailTemplateDashboard", "ProjectSurvey")';">Cancel</button>*@
     </div>
 
-    <div id="output"><p>@Model.Body_Content</p></div>
+    <div id="output" style="display:none;"><p>@Model.Body_Content</p></div>
     <script>
         var editor;
 
@@ -108,34 +135,47 @@
 
         function updateOutput() {
             var templateName = document.getElementById('templatename').value;
+            var Id = document.getElementById('templateidformap').value;
             var bodyContent = editor.getData();
             if (!templateName || !bodyContent) {
                 alert('Template Name and Body Content cannot be null or empty.');
                 return false;
             }
-
-            // Make AJAX request to the controller
-            $.ajax({
-                url: '/Projectsurvey/EmailTemplate',
-                type: 'POST',
-                data: JSON.stringify({
-                    ETM: {
-                        TemplateName: templateName,
-                        Body_Content: bodyContent
+            else {
+                // Make AJAX request to the controller
+                $.ajax({
+                    url: '/Projectsurvey/EmailTemplate',
+                    type: 'POST',
+                    data: JSON.stringify({
+                        ETM: {
+                            TemplateName: templateName,
+                            Body_Content: bodyContent,
+                            TemplateId:Id
+                        }
+                    }),
+                    contentType: 'application/json',
+                    success: function (data) {
+                        // Handle success response
+                        console.log('Data sent successfully');
+                    },
+                    error: function (error) {
+                        // Handle error
+                        console.error('Error sending data:', error);
                     }
-                }),
-                contentType: 'application/json',
-                success: function (data) {
-                    // Handle success response
-                    console.log('Data sent successfully');
-                },
-                error: function (error) {
-                    // Handle error
-                    console.error('Error sending data:', error);
-                }
-            });
+                });
+                window.location.href = '@Url.Action("EmailTemplateDashboard", "ProjectSurvey")';
+            }
         }
 
+    </script>
+
+    <script>
+        function clearscreen() {
+       
+            /*   alert("hi");*/
+            $("#templatename").val('');
+            $("#editor").val('');
+        }
     </script>
 </body>
 </html>

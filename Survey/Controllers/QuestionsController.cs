@@ -378,7 +378,7 @@ namespace Survey.Controllers
             {
                 FileName = objSummary.ProjectName +"-"+ DateTime.Now.ToString("MM/dd/yyyy") +".pdf",
                 PageSize = Size.A4,
-                PageOrientation = Orientation.Vertical,
+                PageOrientation = (Rotativa.Options.Orientation?)Orientation.Vertical,
                 PageMargins = { Left = 10, Right = 10, Top = 10, Bottom = 10 },
             };
             return pdf;

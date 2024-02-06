@@ -18,6 +18,13 @@
     <tbody>
         @foreach (var x in Model.lstEmailTemplate)
         {
+            //var htmlString = x.Body_Content;
+
+            ////var temporaryElement = document.createElement("div");
+            ////temporaryElement.innerHTML = htmlString;
+
+            //var textWithoutTags = htmlString.textContent || htmlString.innerText || "";
+
             <tr>
                 <td>@x.TemplateId</td>
                 <td>@x.TemplateName</td>              
@@ -44,6 +51,8 @@
 <table id="tbldocuments1" class="MobQues">
     @foreach (var x in Model.lstEmailTemplate)
     {
+        
+
         <tr>
             <th>ID</th>
             <td>@x.TemplateId</td>
@@ -55,7 +64,8 @@
         <tr>
             <th>Questions</th>
             <td>@x.Body_Content</td>
-        </tr>     
+        </tr>
+
         <tr>
             <th>Status </th>
             <td>
@@ -79,9 +89,12 @@
                 &nbsp;
             </td>
         </tr>
+        
     }
 
 </table>
+
+
 
 
 <script type="text/javascript">

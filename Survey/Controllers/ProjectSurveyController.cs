@@ -485,7 +485,7 @@ namespace Survey.Controllers
             {
                 return RedirectToAction("Loginpage", "Login");
             }
-            ViewData["Modes"] = "edit";
+            ViewData["Mode"] = "edit";
             EmailTemplateModel ObjEmailTemplateModel = new EmailTemplateModel();
             ObjEmailTemplateModel = SuvEnt.Database.SqlQuery<EmailTemplateModel>("usp_ListEmailDashboardDetails @p0", TemplateId).FirstOrDefault();
             //TempData["ObjProjectSurveyMaster"] = ObjProjectSurveyMaster;
@@ -500,7 +500,7 @@ namespace Survey.Controllers
             {
                 return RedirectToAction("Loginpage", "Login");
             }
-            ViewData["Modes"] = "edit";
+            ViewData["Mode"] = "edit";
             EmailTemplateModel ObjEmailTemplateModel = new EmailTemplateModel();
             ObjEmailTemplateModel = SuvEnt.Database.SqlQuery<EmailTemplateModel>("usp_ListEmailMapDashboardDetails @p0", TemplateId).FirstOrDefault();
             ObjEmailTemplateModel.ddlQUserStatus = SuvEnt.Database.SqlQuery<QUserStatus>("usp_GetQtype").Select(x => new SelectListItem { Value = x.value, Text = x.Name }).ToList();

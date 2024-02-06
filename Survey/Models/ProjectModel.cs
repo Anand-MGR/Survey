@@ -176,7 +176,7 @@ namespace Survey.Models
     {
 
         public int TemplateId { get; set; }
-        public int TemplateMapId { get; set; }
+        public int? TemplateMapId { get; set; }
         public string TemplateName { get; set; }
         public string Q_type { get; set; }
 
