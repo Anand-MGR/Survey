@@ -2,13 +2,19 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Net;
-using System.Net.Mail;
+//using System.Net;
+//using System.Net.Mail;
 using System.Web.Mvc;
 using Survey.Models;
 using Survey.SurveyEntity;
 using System.Linq;
 using System.Configuration;
+//using System.Windows;
+using System.Windows.Forms;
+using Rotativa;
+using Size = Rotativa.Options.Size;
+//using Rotativa.MVC;
+//using System.Drawing.Imaging;
 
 namespace Survey.Controllers
 {
@@ -84,6 +90,7 @@ namespace Survey.Controllers
             objSummary.ProjectName = objSummary.LstReview.Select(o => o.PS_ProjectName).FirstOrDefault();
             objSummary.PS_Date = objSummary.LstReview.Select(o => o.PS_Date).FirstOrDefault();
             objSummary.PS_Status = objSummary.LstReview.Select(o => o.PS_Status).FirstOrDefault();
+            objSummary.PS_ID = objSummary.LstReview.Select(o => o.PS_ID).FirstOrDefault();
             string Id = "";
 
             if (objSummary.LstReview.Count > 0)
@@ -342,5 +349,42 @@ namespace Survey.Controllers
         }
 
         #endregion
+
+        #region ExportPDF
+        public ActionResult ReviewRatingPopupPDF(int id)
+        {
+            ReviewSummaryModel objSummary = new ReviewSummaryModel();
+            objSummary.LstReview = new List<ReviewModel>();
+            objSummary.LstReview = GetReviewDatas(id);
+            objSummary.Final = new List<string>();
+            objSummary.ProjectName = objSummary.LstReview.Select(o => o.PS_ProjectName).FirstOrDefault();
+            objSummary.PS_Date = objSummary.LstReview.Select(o => o.PS_Date).FirstOrDefault();
+            objSummary.PS_Status = objSummary.LstReview.Select(o => o.PS_Status).FirstOrDefault();
+            string Id = "";
+
+            if (objSummary.LstReview.Count > 0)
+            {
+                foreach (var i in objSummary.LstReview)
+                {
+                    Id = "star" + i.PSD_Rating + "-" + i.Q_Id;
+                    objSummary.Final.Add(Id);
+
+                }
+            }
+
+            ViewBag._Layout = false;
+            
+            var pdf = new ViewAsPdf("ReviewRatingPdf", objSummary)
+            {
+                FileName = objSummary.ProjectName +"-"+ DateTime.Now.ToString("MM/dd/yyyy") +".pdf",
+                PageSize = Size.A4,
+                PageOrientation = Orientation.Vertical,
+                PageMargins = { Left = 10, Right = 10, Top = 10, Bottom = 10 },
+            };
+            return pdf;
+            //return View(objSummary);
+        }
+        #endregion
+
     }
 }

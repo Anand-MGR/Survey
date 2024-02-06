@@ -45,22 +45,22 @@
             {
                 <div class="row">
                     <div class="col-sm p-3">
-                        <label style="margin-top:2%; white-space: nowrap;">Name:</label>
+                        <label style="margin-top:2%; white-space: nowrap;">Name</label>
                         @*<h3>@Session["UserName"].ToString()</h3>*@
                         @Html.EditorFor(model => model.objFBModel.FD_Name, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", id = "Name", style = " height: 35px; font-size: large;", @Value = Session["UserName"].ToString() } })
 
                         <div id="data-container"></div>
                     </div>
                     <div class="col-sm p-3">
-                        <label style="margin-top:2%; white-space: nowrap;">Date:</label>
-                        @Html.EditorFor(model => model.objFBModel.FD_Date, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", style = "width: 160px; height: 35px; font-size: large;", @Value = DateTime.Now.ToString("yyyy-MM-dd") } })
+                        <label style="margin-top:2%; white-space: nowrap;">Date</label>
+                        @Html.EditorFor(model => model.objFBModel.FD_Date, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", style = "width: 160px; height: 35px; font-size: large;", @Value = DateTime.Now.ToString("MM/dd/yyyy") } })
                         @Html.HiddenFor(model => model.objFBModel.FD_ID, new { htmlAttributes = new { @class = "form-control" } })
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label class="control-label col-md-2" for="objFBModel_FD_Subject">Subject:</label>
+                            <label class="control-label col-md-2" for="objFBModel_FD_Subject">Subject</label>
                             <div class="col-sm-8">
                                 @Html.EditorFor(model => model.objFBModel.FD_Subject, new { htmlAttributes = new { @class = "form-control", style = " height:55px;", id = "Fdsubject" } })
                                 @Html.ValidationMessageFor(model => model.objFBModel.FD_Subject, "", new { @class = "text-danger" })
@@ -72,7 +72,7 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label class="control-label col-md-2" for="objFBModel_FD_Description">Description:</label>
+                            <label class="control-label col-md-2" for="objFBModel_FD_Description">Description</label>
                             <div class="col-sm-8">
                                 @Html.TextAreaFor(model => model.objFBModel.FD_Description, new { @class = "form-control", style = " height:200px;", id = "Fddescription" })
                                 @Html.ValidationMessageFor(model => model.objFBModel.FD_Description, "", new { @class = "text-danger" })

@@ -11,7 +11,7 @@
             <th>Date</th>
             <th>Subject</th>
             <th>Description</th>
-            <th>response</th>
+            <th>Response</th>
             <th>Edit</th>
             @*<th>User Role</th>
                 <th>Depot</th>
@@ -26,7 +26,7 @@
         {
             <tr>
                 <td>@x.FD_Name</td>
-                <td>@x.FD_Date</td>
+                <td>@x.FD_Date.ToString("MM/dd/yyyy")</td>
                 <td>@x.FD_Subject</td>
                 <td>@x.FD_Description</td>
                 <td>@x.FD_Response</td>

@@ -36,6 +36,12 @@
     else
     { <p style="float: left; padding-left: 30%; color: red; font-family:'Times New Roman'; font-size: 15px; font-weight: bold; "> Status : Not Completed</p>}
     <p style="float: right; font-family: 'Times New Roman'; font-size: 20px;">Assigned Date:@Model.PS_Date.ToString("MM/dd/yyyy")</p><br /><br />
+
+    <button id="pdfButton" style=" float:right;margin-right:5%;border:none" onclick="generatePDF1(@Model.PS_ID)">
+        <img src="~/images/pdfimage.png" style="width: 50px; height: 50px;" />
+    </button>
+    <br />
+    <br />
 </div>
 
 <hr />
@@ -493,3 +499,13 @@
         font-weight: bold;
     }
 </style>
+
+
+<script type="text/javascript">
+
+    function generatePDF1(ID)
+    {
+        var url = '@Url.Action("ReviewRatingPopupPDF", "Questions")' + '?ID=' + ID;
+    window.location.href = url;
+    }
+</script>

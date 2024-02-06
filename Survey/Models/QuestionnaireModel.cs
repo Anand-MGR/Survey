@@ -133,7 +133,7 @@ namespace Survey.Models
         public List<ReviewModel> LstReview { get; set; }
         public string ProjectName { get; set; }
         public bool PS_Status { get; set; }
-
+        public int PS_ID { get; set; }
         //public QuestionnaireModel QuestionModel { get; set; }
         //public List<QuestionnaireObjectModel> QuestionnaireLst { get; set; }
     }

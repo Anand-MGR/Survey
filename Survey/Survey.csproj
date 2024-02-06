@@ -343,6 +343,15 @@
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
+    <Reference Include="Rotativa, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rotativa.1.7.4-rc\lib\net45\Rotativa.dll</HintPath>
+    </Reference>
+    <Reference Include="Rotativa.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rotativa.Core.2.0.0\lib\net45\Rotativa.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Rotativa.MVC, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rotativa.MVC.2.0.3\lib\net45\Rotativa.MVC.dll</HintPath>
+    </Reference>
     <Reference Include="Std.UriTemplate, Version=1.0.0.0, Culture=neutral, PublicKeyToken=c118b0afb4598f9a, processorArchitecture=MSIL">
       <HintPath>..\packages\Std.UriTemplate.0.0.46\lib\netstandard2.0\Std.UriTemplate.dll</HintPath>
     </Reference>
@@ -547,6 +556,7 @@
     <Content Include="images\office-365.jpg" />
     <Content Include="images\office.jpeg" />
     <Content Include="images\OnlyLogo.jpg" />
+    <Content Include="images\pdfimage.png" />
     <Content Include="images\Survey.jpg" />
     <Content Include="images\Thankyou img.jpg" />
     <Content Include="images\thankyou.png" />
@@ -554,6 +564,10 @@
     <Content Include="js\main.js" />
     <Content Include="js\map-custom.js" />
     <Content Include="Office365Integration.txt" />
+    <Content Include="Rotativa\help-wkhtmltoimage.txt" />
+    <Content Include="Rotativa\help-wkhtmltopdf.txt" />
+    <Content Include="Rotativa\wkhtmltoimage.exe" />
+    <Content Include="Rotativa\wkhtmltopdf.exe" />
     <Content Include="scripts\ai.0.22.9-build00167.js" />
     <Content Include="scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="scripts\bootstrap.js" />
@@ -614,6 +628,7 @@
     <Content Include="fonts\poppins\Poppins-Thin.ttf" />
     <Content Include="fonts\poppins\Poppins-ThinItalic.ttf" />
     <Content Include="appsettings.json" />
+    <Content Include="App_Browsers\qt.browser" />
     <None Include="Properties\PublishProfiles\PSurvey - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\PSurvey - ReadOnly - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\PSurvey - Web Deploy.pubxml" />
@@ -799,6 +814,7 @@
     <Content Include="Views\ProjectSurvey\_EmailMapDashboard.cshtml" />
     <Content Include="Views\Questions\ReviewRatingpage.cshtml" />
     <Content Include="Views\Questions\RatingPage.cshtml" />
+    <Content Include="Views\Questions\ReviewRatingPdf.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

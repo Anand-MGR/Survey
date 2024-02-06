@@ -57,3 +57,9 @@ D:\Projects\SurveyRating\SSO\Survey\Survey.BO\obj\Debug\Survey.BO.csproj.Assembl
 D:\Projects\SurveyRating\SSO\Survey\Survey.BO\obj\Debug\Survey.BO.csproj.CoreCompileInputs.cache
 D:\Projects\SurveyRating\SSO\Survey\Survey.BO\obj\Debug\Survey.BO.dll
 D:\Projects\SurveyRating\SSO\Survey\Survey.BO\obj\Debug\Survey.BO.pdb
+D:\Project Survey 15 jan 24\Survey feb 06 local repositary\Survey.BO\bin\Debug\Survey.BO.dll
+D:\Project Survey 15 jan 24\Survey feb 06 local repositary\Survey.BO\bin\Debug\Survey.BO.pdb
+D:\Project Survey 15 jan 24\Survey feb 06 local repositary\Survey.BO\obj\Debug\Survey.BO.csproj.AssemblyReference.cache
+D:\Project Survey 15 jan 24\Survey feb 06 local repositary\Survey.BO\obj\Debug\Survey.BO.csproj.CoreCompileInputs.cache
+D:\Project Survey 15 jan 24\Survey feb 06 local repositary\Survey.BO\obj\Debug\Survey.BO.dll
+D:\Project Survey 15 jan 24\Survey feb 06 local repositary\Survey.BO\obj\Debug\Survey.BO.pdb
