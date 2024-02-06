@@ -1,0 +1,332 @@
+﻿@model Survey.Models.AssignSurveyMasterModel
+@{
+    ViewBag.Title = "UserManagement";
+    Layout = "~/Views/Shared/_LayoutSurvey.cshtml";
+}
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+@*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" >*@
+@*<link href="~/Content/bootstrap.min.css" rel="stylesheet" />*@
+@*<style>
+       .col-sm-12 {
+           font-family: Helvetica NeueHelvetica, Arial, sans-serif;
+           color: #333;
+           background-color: #fff;
+           font-size: 14px;
+           line-height: 1.42857143;
+           margin: 0;
+           padding: 0;
+       }
+    </style>*@
+<style>
+    /* Add your custom styles here */
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .footer {
+        padding-top: 33% !important;
+    }
+
+    .col-md-6 {
+        width: 38%;
+        margin-left: 3%;
+        margin-top: 1%;
+        margin-right: 3%;
+        float: left;
+    }
+
+    /* Optional: Adjust styles for smaller screens */
+    @@media (max-width: 768px) {
+        .col-md-6 {
+            width: 100%;
+            float: none;
+        }
+    }
+</style>
+<script src="
+https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+<script src="
+https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+
+<script src="
+https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+@*<style type="text/css">
+        .col-sm-12 {
+            font-size: 18px;
+            color: black;
+            margin: 0.5%;
+            padding: 0.2%;
+        }
+
+        .form-control {
+            width: 80%;
+        }
+
+        .checkmark {
+            height: 25px;
+            width: 25px;
+            background-color: #eee;
+        }
+
+        .btn1 {
+            padding: 10px;
+            margin: 0.5%;
+            border: none;
+            border-radius: 3px;
+        }
+    </style>*@
+
+@using (Html.BeginForm("UserManagement", "User", FormMethod.Post, new { @id = "form2", @enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+
+        <div>
+            <form control="" class="form-group">
+
+                <div class="form-group">
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.objUserModel.U_FirstName, htmlAttributes: new { @class = "control-label" })
+                        @Html.HiddenFor(model => model.objUserModel.U_ID, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.objUserModel.U_FirstName, new { htmlAttributes = new { @class = "form-control", id = "FirstName" } })
+                        @Html.ValidationMessageFor(model => model.objUserModel.U_FirstName, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.objUserModel.U_LastName, htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.objUserModel.U_LastName, new { htmlAttributes = new { @class = "form-control", id = "LName" } })
+                        @Html.ValidationMessageFor(model => model.objUserModel.U_LastName, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.objUserModel.U_UserName, htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.objUserModel.U_UserName, new { htmlAttributes = new { @class = "form-control", id = "UName" } })
+                        @Html.ValidationMessageFor(model => model.objUserModel.U_UserName, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.objUserModel.U_Password, htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.objUserModel.U_Password, new { htmlAttributes = new { @class = "form-control", @type = "Password", @Value = "12345", @readonly = "readonly" } })
+                        @Html.ValidationMessageFor(model => model.objUserModel.U_Password, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.objUserModel.U_Email, htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.objUserModel.U_Email, new { htmlAttributes = new { @class = "form-control", id = "Email" } })
+                        @Html.ValidationMessageFor(model => model.objUserModel.U_Email, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.objUserModel.U_Mobile, htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.objUserModel.U_Mobile, new { htmlAttributes = new { @class = "form-control", id = "Mobile" } })
+                        @Html.ValidationMessageFor(model => model.objUserModel.U_Mobile, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.objUserModel.U_Role, htmlAttributes: new { @class = "control-label" })
+                        @Html.DropDownListFor(model => model.objUserModel.U_Role, Model.ddlUserStatus, new { @class = "form-control ", id = "Urole" })
+                        @Html.ValidationMessageFor(model => model.objUserModel.U_Role, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="col-md-6" style="margin-bottom:2%">
+                        @Html.LabelFor(model => model.objUserModel.ProfileImage, htmlAttributes: new { @class = "control-label" })
+                        <br />
+                        @Html.HiddenFor(model => model.objUserModel.ProfileImage)
+
+                        <input type="file" name="file_Uploader" id="imgfile" />
+
+                        @if (@ViewData["Mode"] == null)
+                        {
+
+                        }
+                        else if (@ViewData["Mode"].ToString() == "edit")
+                        {
+                            <img src='@Model.objUserModel.ProfileImage' style="width:50px;height:50px;" />
+                            @*@Html.EditorFor(model => model.B_Logo, new { htmlAttributes = new { @class = "form-control", @style = "display:none;", Value = Model.B_Logo } })*@
+                        }
+                    </div>
+                </div>
+
+                <div class="form-group">
+              
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.objUserModel.U_Status, htmlAttributes: new { @class = "control-label" })
+                        @Html.CheckBoxFor(model => model.objUserModel.U_Status, htmlAttributes: new { @checked = true })
+                        @Html.ValidationMessageFor(model => model.objUserModel.U_Status, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                @*<div class="form-group">
+
+                    <div class="col-sm-4">
+                        @Html.LabelFor(model => model.objUserModel.ProfileImage, htmlAttributes: new { @class = "control-label" })
+
+                    </div>
+                    <div class="col-md-8">
+                        @Html.HiddenFor(model => model.objUserModel.ProfileImage)
+
+                        <input type="file" name="file_Uploader" id="imgfile" />
+
+                        @if (@ViewData["Mode"] == null)
+                        {
+
+                        }
+                        else if (@ViewData["Mode"].ToString() == "edit")
+                        {
+                            <img src='@Model.objUserModel.ProfileImage' style="width:50px;height:50px;" />
+                            @Html.EditorFor(model => model.B_Logo, new { htmlAttributes = new { @class = "form-control", @style = "display:none;", Value = Model.B_Logo } })
+                        }
+
+                    </div>*@
+                    @*<div class="col-md-6">
+                <label for="imageInput">Choose the image: </label>
+                <input type="file" id="imageInput" name="imageFile" accept="image/*" style="display: none;" onchange="displaySelectedImage(this)">
+                <img id="selectedImage" alt="" style="max-width: 200px; max-height: 200px;">
+                @Html.HiddenFor(model => model.objUserModel.ProfileImage)
+                <button type="button" onclick="openImageInput()">Choose from File</button>
+                <button type="submit">Upload Image</button>
+            </div>*@
+                <!--</div>-->
+
+                <br />
+                <br />
+                <div class="form-group">
+                    <div class="col-md-6">
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-6">
+
+                    </div>
+                    <div class="col-md-6" style="float:right;margin-right:25%;">
+
+
+                        @if (@ViewData["Mode"] == null)
+                        {
+                            <div class="btns">
+                                <button class="btn-btnprimary" type="submit" id="save" name="Command" value="Add" style="background-color: forestgreen; color: white;padding: 8px; border: none; font-size: 14px; border-radius: 4px; " onclick="if(!Save()) { return false; }" { return false; }">Save</button>
+
+                                <button class="btn-btnprimary" type="button" id="update" name="Command" value="Cancel" style="background-color: red; color: white; padding: 8px; border: none; font-size: 14px; border-radius: 4px;margin-left:30px; " onclick="location.href='UserDashboard';">Cancel</button>
+
+                                <button class="btn-btnprimary" type="button" id="clear" name="Command" value="Clear" style="background-color: darkorange; color: white; padding: 8px; border: none; font-size: 14px; border-radius: 4px;margin-left:30px; " onclick="clearscreen()">Clear</button>
+                            </div>
+                        }
+
+                        else if (@ViewData["Mode"].ToString() == "edit")
+                        {
+                          <div class="btns">
+                            <button class="btn-btnprimary" type="submit" id="save" name="Command" value="Add" style="background-color: forestgreen; color: white;padding: 8px; border: none; font-size: 14px; border-radius: 4px; " onclick="if (Savenewuser(Submit)) { return false; }">Update</button>
+
+                            <button class="btn-btnprimary" type="button" id="update" name="Command" value="Cancel" style="background-color: red; color: white; padding: 8px; border: none; font-size: 14px; border-radius: 4px;margin-left:30px; " onclick="location.href='UserDashboard';">Cancel</button>
+
+                            <button class="btn-btnprimary" type="button" id="clear" name="Command" value="Clear" style="background-color: darkorange; color: white; padding: 8px; border: none; font-size: 14px; border-radius: 4px;margin-left:30px; " onclick="clearscreen()">Clear</button>
+                           </div>
+                        }
+                          
+
+                            </div>
+                        </div>
+            </form>
+        </div>
+    </div>
+
+
+}
+
+
+<script>
+    function clearscreen() {
+        /*   alert("hi");*/
+        $("#FirstName").val('');
+        $("#LName").val('');
+        $("#UName").val('');
+        $("#Email").val('');
+        $("#Mobile").val('');
+        $("#Urole").val('');
+
+    }
+</script>
+
+<style type="text/css">
+    @@media (max-width: 767px) {
+        #save {
+            margin-left: 30%;
+        }
+    }
+    @@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+        .btns {
+            float: right;
+        }
+    }
+</style>
+
+
+<script>
+    function openImageInput() {
+        // Trigger the click event of the file input
+        document.getElementById('imageInput').click();
+    }
+
+    function displaySelectedImage(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                // Display the selected image
+                document.getElementById('selectedImage').src = e.target.result;
+
+                // Update the hidden field with the base64-encoded image data
+                document.getElementById('U_ImageBase64').value = e.target.result;
+            };
+
+            // Read the selected file as a data URL (base64)
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
+
+<script>
+
+    function Save() {
+        var Getexten = $("#imgfile").val().split('.').pop();  //pdf
+        Getexten = Getexten.toLowerCase();
+
+        if (Getexten == "") {
+
+            // alert('Please select the specific file type');
+            document.getElementById("imgfile").focus();
+            document.getElementById("imgfile").style.border = '1px solid red';
+            alertify.alert('Confirm', "Please select the appropriate file type.", function () {
+
+            });
+            return false;
+        }
+        else if (Getexten == "jpg" || Getexten == "jpeg" || Getexten == "png") {
+            return true;
+        }
+        else {
+            // alert('Please select the specific file type');
+            document.getElementById("imgfile").focus();
+            document.getElementById("imgfile").style.border = '1px solid red';
+            alertify.alert('Confirm', "Only .jpg, .jpeg, .png files are allowed!", function () {
+
+            });
+            return false;
+        }
+    }
+</script>

@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ProjectSurveyModelStoreContainer" CdmEntityContainer="ProjectSurveyEntities">
+    <EntitySetMapping Name="AS_AssignSurvey">
+      <EntityTypeMapping TypeName="ProjectSurveyModel.AS_AssignSurvey">
+        <MappingFragment StoreEntitySet="AS_AssignSurvey">
+          <ScalarProperty Name="AS_ID" ColumnName="AS_ID" />
+          <ScalarProperty Name="AS_ProjectID" ColumnName="AS_ProjectID" />
+          <ScalarProperty Name="AS_ProjectName" ColumnName="AS_ProjectName" />
+          <ScalarProperty Name="AS_Customer" ColumnName="AS_Customer" />
+          <ScalarProperty Name="AS_ClientPM" ColumnName="AS_ClientPM" />
+          <ScalarProperty Name="AS_ClientPE" ColumnName="AS_ClientPE" />
+          <ScalarProperty Name="AS_HelpDeskPM" ColumnName="AS_HelpDeskPM" />
+          <ScalarProperty Name="AS_HelpDeskPE" ColumnName="AS_HelpDeskPE" />
+          <ScalarProperty Name="AS_PEPM" ColumnName="AS_PEPM" />
+          <ScalarProperty Name="AS_PMPE" ColumnName="AS_PMPE" />
+          <ScalarProperty Name="AS_SalePM" ColumnName="AS_SalePM" />
+          <ScalarProperty Name="AS_AssignDate" ColumnName="AS_AssignDate" />
+          <ScalarProperty Name="As_Status" ColumnName="As_Status" />
+          <ScalarProperty Name="AS_CreatedBY" ColumnName="AS_CreatedBY" />
+          <ScalarProperty Name="AS_CreatedDate" ColumnName="AS_CreatedDate" />
+          <ScalarProperty Name="AS_UpdatedBy" ColumnName="AS_UpdatedBy" />
+          <ScalarProperty Name="AS_UpdatedDate" ColumnName="AS_UpdatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="L_Login">
+      <EntityTypeMapping TypeName="ProjectSurveyModel.L_Login">
+        <MappingFragment StoreEntitySet="L_Login">
+          <ScalarProperty Name="L_ID" ColumnName="L_ID" />
+          <ScalarProperty Name="U_ID" ColumnName="U_ID" />
+          <ScalarProperty Name="L_Name" ColumnName="L_Name" />
+          <ScalarProperty Name="L_Password" ColumnName="L_Password" />
+          <ScalarProperty Name="L_Active" ColumnName="L_Active" />
+          <ScalarProperty Name="L_CreatedBY" ColumnName="L_CreatedBY" />
+          <ScalarProperty Name="L_CreatedDate" ColumnName="L_CreatedDate" />
+          <ScalarProperty Name="L_UpdatedBy" ColumnName="L_UpdatedBy" />
+          <ScalarProperty Name="L_UpdatedDate" ColumnName="L_UpdatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="P_Project">
+      <EntityTypeMapping TypeName="ProjectSurveyModel.P_Project">
+        <MappingFragment StoreEntitySet="P_Project">
+          <ScalarProperty Name="P_ID" ColumnName="P_ID" />
+          <ScalarProperty Name="P_Name" ColumnName="P_Name" />
+          <ScalarProperty Name="P_Discription" ColumnName="P_Discription" />
+          <ScalarProperty Name="P_PM" ColumnName="P_PM" />
+          <ScalarProperty Name="P_PE" ColumnName="P_PE" />
+          <ScalarProperty Name="P_SalesPM" ColumnName="P_SalesPM" />
+          <ScalarProperty Name="P_HPM" ColumnName="P_HPM" />
+          <ScalarProperty Name="P_HPE" ColumnName="P_HPE" />
+          <ScalarProperty Name="P_IsActive" ColumnName="P_IsActive" />
+          <ScalarProperty Name="P_CreatedBY" ColumnName="P_CreatedBY" />
+          <ScalarProperty Name="P_CreatedDate" ColumnName="P_CreatedDate" />
+          <ScalarProperty Name="P_UpdatedBy" ColumnName="P_UpdatedBy" />
+          <ScalarProperty Name="P_UpdatedDate" ColumnName="P_UpdatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Q_Questionnaire">
+      <EntityTypeMapping TypeName="ProjectSurveyModel.Q_Questionnaire">
+        <MappingFragment StoreEntitySet="Q_Questionnaire">
+          <ScalarProperty Name="Q_ID" ColumnName="Q_ID" />
+          <ScalarProperty Name="Q_Type" ColumnName="Q_Type" />
+          <ScalarProperty Name="Q_QuestionSequence" ColumnName="Q_QuestionSequence" />
+          <ScalarProperty Name="Q_Question" ColumnName="Q_Question" />
+          <ScalarProperty Name="Q_Status" ColumnName="Q_Status" />
+          <ScalarProperty Name="Q_CreatedBY" ColumnName="Q_CreatedBY" />
+          <ScalarProperty Name="Q_CreatedDate" ColumnName="Q_CreatedDate" />
+          <ScalarProperty Name="Q_UpdatedBy" ColumnName="Q_UpdatedBy" />
+          <ScalarProperty Name="Q_UpdatedDate" ColumnName="Q_UpdatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RO_Role">
+      <EntityTypeMapping TypeName="ProjectSurveyModel.RO_Role">
+        <MappingFragment StoreEntitySet="RO_Role">
+          <ScalarProperty Name="RO_ID" ColumnName="RO_ID" />
+          <ScalarProperty Name="RO_Name" ColumnName="RO_Name" />
+          <ScalarProperty Name="RO_Description" ColumnName="RO_Description" />
+          <ScalarProperty Name="RO_IsActive" ColumnName="RO_IsActive" />
+          <ScalarProperty Name="RO_CreatedBY" ColumnName="RO_CreatedBY" />
+          <ScalarProperty Name="RO_CreatedDate" ColumnName="RO_CreatedDate" />
+          <ScalarProperty Name="RO_UpdatedBy" ColumnName="RO_UpdatedBy" />
+          <ScalarProperty Name="RO_UpdatedDate" ColumnName="RO_UpdatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SS_SubmitSurvey">
+      <EntityTypeMapping TypeName="ProjectSurveyModel.SS_SubmitSurvey">
+        <MappingFragment StoreEntitySet="SS_SubmitSurvey">
+          <ScalarProperty Name="SS_ID" ColumnName="SS_ID" />
+          <ScalarProperty Name="SS_AS_ID" ColumnName="SS_AS_ID" />
+          <ScalarProperty Name="SS_P_ID" ColumnName="SS_P_ID" />
+          <ScalarProperty Name="SS_U_ID" ColumnName="SS_U_ID" />
+          <ScalarProperty Name="SS_U_Role" ColumnName="SS_U_Role" />
+          <ScalarProperty Name="SS_Status" ColumnName="SS_Status" />
+          <ScalarProperty Name="SS_IsActive" ColumnName="SS_IsActive" />
+          <ScalarProperty Name="SS_CreatedBY" ColumnName="SS_CreatedBY" />
+          <ScalarProperty Name="SS_CreatedDate" ColumnName="SS_CreatedDate" />
+          <ScalarProperty Name="SS_UpdatedBy" ColumnName="SS_UpdatedBy" />
+          <ScalarProperty Name="SS_UpdatedDate" ColumnName="SS_UpdatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="U_User">
+      <EntityTypeMapping TypeName="ProjectSurveyModel.U_User">
+        <MappingFragment StoreEntitySet="U_User">
+          <ScalarProperty Name="U_ID" ColumnName="U_ID" />
+          <ScalarProperty Name="U_FirstName" ColumnName="U_FirstName" />
+          <ScalarProperty Name="U_LastName" ColumnName="U_LastName" />
+          <ScalarProperty Name="U_Email" ColumnName="U_Email" />
+          <ScalarProperty Name="U_Mobile" ColumnName="U_Mobile" />
+          <ScalarProperty Name="U_Role" ColumnName="U_Role" />
+          <ScalarProperty Name="U_Status" ColumnName="U_Status" />
+          <ScalarProperty Name="U_CreatedBY" ColumnName="U_CreatedBY" />
+          <ScalarProperty Name="U_CreatedDate" ColumnName="U_CreatedDate" />
+          <ScalarProperty Name="U_UpdatedBy" ColumnName="U_UpdatedBy" />
+          <ScalarProperty Name="U_UpdatedDate" ColumnName="U_UpdatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

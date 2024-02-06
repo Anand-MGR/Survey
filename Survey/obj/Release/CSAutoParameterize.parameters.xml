@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="connectiondetails-Web.config Connection String" description="connectiondetails Connection String used in web.config by the application to access the database." defaultValue="Data Source=surveyspyder.database.windows.net;Initial Catalog=Survey;User ID=wesucceed;Password=spyder*154321;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="D:\\Projects\\SurveyRating\\SSO\\Survey\\Survey\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='connectiondetails']/@connectionString" />
+  </parameter>
+  <parameter name="ProjectSurveyEntities-Web.config Connection String" description="ProjectSurveyEntities Connection String used in web.config by the application to access the database." defaultValue="metadata=res://*/SurveyEntity.Survey.csdl|res://*/SurveyEntity.Survey.ssdl|res://*/SurveyEntity.Survey.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=surveyspyder.database.windows.net;initial catalog=Survey;user id=wesucceed;password=spyder*154321;MultipleActiveResultSets=True;App=EntityFramework&quot;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="D:\\Projects\\SurveyRating\\SSO\\Survey\\Survey\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='ProjectSurveyEntities']/@connectionString" />
+  </parameter>
+</parameters>

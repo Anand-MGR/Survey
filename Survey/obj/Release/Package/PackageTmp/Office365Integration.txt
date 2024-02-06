@@ -1,0 +1,64 @@
+﻿
+Offic365 integration in Webapplication and deployment in Azure
+
+1. appsettings.json
+2. LoginController   ---> SignIn & Login
+3. Startup.Auth.cs
+4. Startup.cs
+
+
+
+Application Configuration in Azure
+1. Create App registration
+2. Create Certificate to get the secret key
+3. Use the ClientId, TenentID, secret key in our appsettings file
+
+
+API Permission Left handside menu
+1. Add MS Graph API permission
+	1. email
+	2. offline_Access
+	3. Openid
+	4. User.Read
+
+Authentication lefthand side menu
+1. Add web URL's to page redirection after the success authentication
+
+
+Note : Any issue related to Validation then Add the below line to Global.ascx.cs
+ AntiForgeryConfig.UniqueClaimTypeIdentifier = ClaimsIdentity.DefaultNameClaimType;
+
+ *******************************************************************************************************
+ *******************************************************************************************************
+
+
+ WeSucceed SSO
+
+ appsettings.json
+ *******************************************************************************************************
+ {
+  "AzureAd": {
+    "Instance": "https://login.microsoftonline.com/",
+    "TenantId": "13c391bf-2e4d-4c3c-9c15-2db617943289",
+    "ClientId": "1066df50-90d6-49a4-ac9d-343f147b3aa3",
+    "RedirectUri": "https://bmwctest.azurewebsites.net/",
+    "ClientSecret": "ars8Q~IvxvCIXGeRxfSa0yT.fZYCeE2nVHLG1akY"
+
+    // "RedirectUri": "https://bmwctest.azurewebsites.net/",
+    // "RedirectUri": "https://localhost:44347/",
+  },
+  "CalledApi": {
+    "CalledApiScopes": "Mail.Read User.Read",
+    "CalledApiUrl": "https://graph.microsoft.com/"
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Warning",
+      "Microsoft.Identity.Web": "Debug"
+    }
+  },
+  "AllowedHosts": "*"
+}
+
+*******************************************************************************************************
+*******************************************************************************************************

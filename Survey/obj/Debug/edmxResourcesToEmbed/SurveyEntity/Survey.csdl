@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ProjectSurveyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="AS_AssignSurvey">
+    <Key>
+      <PropertyRef Name="AS_ID" />
+    </Key>
+    <Property Name="AS_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AS_ProjectID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="AS_ProjectName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="AS_Customer" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="AS_ClientPM" Type="Boolean" />
+    <Property Name="AS_ClientPE" Type="Boolean" />
+    <Property Name="AS_HelpDeskPM" Type="Boolean" />
+    <Property Name="AS_HelpDeskPE" Type="Boolean" />
+    <Property Name="AS_PEPM" Type="Boolean" />
+    <Property Name="AS_PMPE" Type="Boolean" />
+    <Property Name="AS_SalePM" Type="Boolean" />
+    <Property Name="AS_AssignDate" Type="DateTime" Precision="3" />
+    <Property Name="As_Status" Type="Boolean" />
+    <Property Name="AS_CreatedBY" Type="Int32" />
+    <Property Name="AS_CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="AS_UpdatedBy" Type="Int32" />
+    <Property Name="AS_UpdatedDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="L_Login">
+    <Key>
+      <PropertyRef Name="L_ID" />
+    </Key>
+    <Property Name="L_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="U_ID" Type="Int32" />
+    <Property Name="L_Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="L_Password" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="L_Active" Type="Boolean" />
+    <Property Name="L_CreatedBY" Type="Int32" />
+    <Property Name="L_CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="L_UpdatedBy" Type="Int32" />
+    <Property Name="L_UpdatedDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="P_Project">
+    <Key>
+      <PropertyRef Name="P_ID" />
+    </Key>
+    <Property Name="P_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="P_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="P_Discription" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="P_PM" Type="Int32" />
+    <Property Name="P_PE" Type="Int32" />
+    <Property Name="P_SalesPM" Type="Int32" />
+    <Property Name="P_HPM" Type="Int32" />
+    <Property Name="P_HPE" Type="Int32" />
+    <Property Name="P_IsActive" Type="Boolean" />
+    <Property Name="P_CreatedBY" Type="Int32" />
+    <Property Name="P_CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="P_UpdatedBy" Type="Int32" />
+    <Property Name="P_UpdatedDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="Q_Questionnaire">
+    <Key>
+      <PropertyRef Name="Q_ID" />
+    </Key>
+    <Property Name="Q_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Q_Type" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Q_QuestionSequence" Type="Int32" />
+    <Property Name="Q_Question" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+    <Property Name="Q_Status" Type="Boolean" />
+    <Property Name="Q_CreatedBY" Type="Int32" />
+    <Property Name="Q_CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="Q_UpdatedBy" Type="Int32" />
+    <Property Name="Q_UpdatedDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="RO_Role">
+    <Key>
+      <PropertyRef Name="RO_ID" />
+    </Key>
+    <Property Name="RO_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RO_Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="RO_Description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="RO_IsActive" Type="Boolean" />
+    <Property Name="RO_CreatedBY" Type="Int32" />
+    <Property Name="RO_CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="RO_UpdatedBy" Type="Int32" />
+    <Property Name="RO_UpdatedDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="SS_SubmitSurvey">
+    <Key>
+      <PropertyRef Name="SS_ID" />
+    </Key>
+    <Property Name="SS_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SS_AS_ID" Type="Int32" />
+    <Property Name="SS_P_ID" Type="Int32" />
+    <Property Name="SS_U_ID" Type="Int32" />
+    <Property Name="SS_U_Role" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="SS_Status" Type="Int32" />
+    <Property Name="SS_IsActive" Type="Boolean" />
+    <Property Name="SS_CreatedBY" Type="Int32" />
+    <Property Name="SS_CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="SS_UpdatedBy" Type="Int32" />
+    <Property Name="SS_UpdatedDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="U_User">
+    <Key>
+      <PropertyRef Name="U_ID" />
+    </Key>
+    <Property Name="U_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="U_FirstName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="U_LastName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="U_Email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="U_Mobile" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="U_Role" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="U_Status" Type="Boolean" />
+    <Property Name="U_CreatedBY" Type="Int32" />
+    <Property Name="U_CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="U_UpdatedBy" Type="Int32" />
+    <Property Name="U_UpdatedDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityContainer Name="ProjectSurveyEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AS_AssignSurvey" EntityType="Self.AS_AssignSurvey" />
+    <EntitySet Name="L_Login" EntityType="Self.L_Login" />
+    <EntitySet Name="P_Project" EntityType="Self.P_Project" />
+    <EntitySet Name="Q_Questionnaire" EntityType="Self.Q_Questionnaire" />
+    <EntitySet Name="RO_Role" EntityType="Self.RO_Role" />
+    <EntitySet Name="SS_SubmitSurvey" EntityType="Self.SS_SubmitSurvey" />
+    <EntitySet Name="U_User" EntityType="Self.U_User" />
+  </EntityContainer>
+</Schema>

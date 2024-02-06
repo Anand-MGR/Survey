@@ -1,0 +1,42 @@
+﻿
+<table id="tbldocuments" class="display">
+    <thead>
+        <tr>
+            <th>Project Name</th>
+            <th>User Name</th>
+            <th>Rating To</th>
+            <th>User role</th>
+            <th>Customer</th>
+            <th>Description</th>
+            <th>Get Survey</th>
+           
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var obj in Model.AssignSurveyLst)
+        {
+            <tr>
+                <td>@obj.P_Name</td>
+                <td>@obj.UserName</td>
+                <td>@obj.RatingTo</td>
+                <td>@obj.SS_U_Role</td>
+                <td>@obj.AS_Customer</td>
+                <td>@obj.SS_Description</td>
+                @*<td>
+                    @if (objWH.WH_Status == true)
+                    {
+                        <img src="~/Images/ExtensioImg/active.png" style="width: 25px;" />
+                    }
+                    else
+                    {
+                        <img src="~/Images/ExtensioImg/inactive.png" style="width: 25px;" />
+                    }
+                </td>*@
+                <td>
+                    @Html.ActionLink("Edit", "Questionnaire", "Questionnaire", new { id = obj.SS_ID }, new { @class = "EditTd" })
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>

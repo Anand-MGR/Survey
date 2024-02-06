@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="PSurvey" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^D:\\Projects\\SurveyRating\\Survey\ Completed\ Source\ 13-02-2023\ Night\\Survey\ feb\\Survey\\Survey\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^D:\\Projects\\SurveyRating\\Survey\ Completed\ Source\ 13-02-2023\ Night\\Survey\ feb\\Survey\\Survey\\obj\\Release\\Package\\PackageTmp$" />
+  </parameter>
+  <parameter name="connectiondetails-Web.config Connection String" description="" value="Data Source=tcp:cg6yl31sbg.database.windows.net,1433;Initial Catalog=ProjectSurvey;User ID=Wesucceed;Password=Pass@154321;" tags="">
+    <parameterEntry kind="XmlFile" scope="D:\\Projects\\SurveyRating\\Survey\ Completed\ Source\ 13-02-2023\ Night\\Survey\ feb\\Survey\\Survey\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='connectiondetails']/@connectionString" />
+  </parameter>
+  <parameter name="ProjectSurveyEntities-Web.config Connection String" description="" value="metadata=res://*/SurveyEntity.Survey.csdl|res://*/SurveyEntity.Survey.ssdl|res://*/SurveyEntity.Survey.msl;provider=System.Data.SqlClient;provider connection string=&quot;Data Source=tcp:cg6yl31sbg.database.windows.net,1433;Initial Catalog=ProjectSurvey;User ID=Wesucceed;Password=Pass@154321;MultipleActiveResultSets=True;Application Name=EntityFramework&quot;" tags="">
+    <parameterEntry kind="XmlFile" scope="D:\\Projects\\SurveyRating\\Survey\ Completed\ Source\ 13-02-2023\ Night\\Survey\ feb\\Survey\\Survey\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='ProjectSurveyEntities']/@connectionString" />
+  </parameter>
+</parameters>
