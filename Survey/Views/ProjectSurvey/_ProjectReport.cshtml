@@ -1,7 +1,24 @@
-﻿<div>
+﻿<style>
+    .w3-badge {
+        background-color: #000;
+        color: #fff;
+        padding: 6px 10px;
+        border-radius: 50%;
+    }
+
+    .w3-margin-left {
+        margin-left: 8px;
+    }
+
+    .w3-white {
+        background-color: #fff;
+        color: #000;
+    }
+</style>
+<div>
     <label class="collapsible theme-button" style="font-size: 27px; font-weight: bold; background-color: #f0f0f0; padding: 10px; display: block; border: 1px solid #ccc; border-radius: 5px; position: relative;" onclick="toggleArrow(this)">
         Project Name 
-        <span class="arrow" style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); font-size: 20px;">&#x25BC;</span>
+        <span class="arrow" style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); font-size: 20px;"> <span class="w3-badge w3-margin-left w3-white">@Model.ProjectCount</span> &#x25BC;</span>
     </label>
 
 
@@ -63,7 +80,7 @@
 
     <label class="collapsible" style="font-size: 27px; font-weight: bold; background-color: #f0f0f0; padding: 10px; display: block; border: 1px solid #ccc; border-radius: 5px; position: relative;" onclick="toggleArrow(this)">
         Project Manager 
-        <span class="arrow" style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); font-size: 20px;">&#x25BC;</span>
+        <span class="arrow" style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); font-size: 20px;"> <span class="w3-badge w3-margin-left w3-white">@Model.ProjectManagerCount</span> &#x25BC;</span>
     </label>
 
     @*<label class="collapsible" style="font-size:27px;font-weight:bold">Project Manager: </label>*@
@@ -115,7 +132,7 @@
 
     <label class="collapsible theme-button" style="font-size: 27px; font-weight: bold; background-color: #f0f0f0; padding: 10px; display: block; border: 1px solid #ccc; border-radius: 5px; position: relative;">
         Project Engineer
-        <span style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); font-size: 20px;">&#x25BC;</span>
+        <span style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); font-size: 20px;"> <span class="w3-badge w3-margin-left w3-white">@Model.ProjectEngineerCount</span> &#x25BC;</span>
     </label>
     @*<label class="collapsible" style="font-size:27px;font-weight:bold">Project Engineer : </label>*@
 
@@ -170,7 +187,7 @@
 
     <label class="collapsible theme-button" style="font-size: 27px; font-weight: bold; background-color: #f0f0f0; padding: 10px; display: block; border: 1px solid #ccc; border-radius: 5px; position: relative;">
         Solution Archetect
-        <span style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); font-size: 20px;">&#x25BC;</span>
+        <span style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); font-size: 20px;"> <span class="w3-badge w3-margin-left w3-white">@Model.SolutionArchitectCount</span> &#x25BC;</span>
     </label>
     @*<label class="collapsible" style="font-size:27px;font-weight:bold">Solution Archetect : </label>*@
 

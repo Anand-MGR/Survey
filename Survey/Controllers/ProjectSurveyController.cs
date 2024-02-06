@@ -277,6 +277,10 @@ namespace Survey.Controllers
             ObjSurveyMaster.LsttotalPMReport = SuvEnt.Database.SqlQuery<TotalPMReportModel>("usp_GetProjectManagerReport").ToList();
             ObjSurveyMaster.LsttotalPEReport = SuvEnt.Database.SqlQuery<TotalPEReportModel>("usp_GetProjectEngineerReport").ToList();
             ObjSurveyMaster.LsttotalSAReport = SuvEnt.Database.SqlQuery<TotalSAReportModel>("usp_GetSAReport").ToList();
+            ObjSurveyMaster.ProjectCount = ObjSurveyMaster.LsttotalReport.Count().ToString();
+            ObjSurveyMaster.ProjectManagerCount = ObjSurveyMaster.LsttotalPMReport.Count().ToString();
+            ObjSurveyMaster.ProjectEngineerCount = ObjSurveyMaster.LsttotalPEReport.Count().ToString();
+            ObjSurveyMaster.SolutionArchitectCount = ObjSurveyMaster.LsttotalSAReport.Count().ToString();
             return View(ObjSurveyMaster);
             //return View(ObjSurveyMaster);
         }
@@ -298,6 +302,10 @@ namespace Survey.Controllers
             ObjSurveyMaster.LsttotalPMReport = SuvEnt.Database.SqlQuery<TotalPMReportModel>("usp_GetProjectManagerReport @p0,@p1,@p2", selectedyear, startMonth, endMonth).ToList();
             ObjSurveyMaster.LsttotalPEReport = SuvEnt.Database.SqlQuery<TotalPEReportModel>("usp_GetProjectEngineerReport @p0,@p1,@p2", selectedyear, startMonth, endMonth).ToList();
             ObjSurveyMaster.LsttotalSAReport = SuvEnt.Database.SqlQuery<TotalSAReportModel>("usp_GetSAReport @p0,@p1,@p2", selectedyear, startMonth, endMonth).ToList();
+            ObjSurveyMaster.ProjectCount = ObjSurveyMaster.LsttotalReport.Count().ToString();
+            ObjSurveyMaster.ProjectManagerCount = ObjSurveyMaster.LsttotalPMReport.Count().ToString();
+            ObjSurveyMaster.ProjectEngineerCount = ObjSurveyMaster.LsttotalPEReport.Count().ToString();
+            ObjSurveyMaster.SolutionArchitectCount = ObjSurveyMaster.LsttotalSAReport.Count().ToString();
             return PartialView("_ProjectReport", ObjSurveyMaster);
         }
 

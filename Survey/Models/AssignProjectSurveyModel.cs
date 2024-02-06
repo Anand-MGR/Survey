@@ -171,6 +171,12 @@ namespace Survey.Models
         public List<SelectListItem> userRole { get; set; }
         public List<SelectListItem> ddlUserStatus { get; set; }
 
+        //added on feb 6 24 for showing the Count in the Project Report
+        public string ProjectCount { get; set; }
+        public string ProjectManagerCount { get; set; }
+        public string ProjectEngineerCount { get; set; }
+        public string SolutionArchitectCount { get; set; }
+
     }
 
     public class TotalReportModel

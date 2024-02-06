@@ -250,7 +250,6 @@ namespace Survey.Controllers
         }
 
         #region "Search"
-
         [HttpPost]
         public ActionResult SearchRecords(string Value,string Filterby)
         {
@@ -262,7 +261,19 @@ namespace Survey.Controllers
             ObjSurveyMaster.LstUserModel = SuvEnt.Database.SqlQuery<UserModel>("usp_GetUserDetails @p0,@p1", Value, Filterby).ToList();
             return PartialView("_UserDashboard", ObjSurveyMaster);
         }
+        #endregion
 
+        #region "Search User Roles"
+        [HttpPost]
+        public ActionResult SearchRecordsUserRole(string Value)
+        {
+            if (Session["UserName"] == null)
+            {
+                return RedirectToAction("Loginpage", "Login");
+            }
+            ObjSurveyMaster.LstUserRole = SuvEnt.Database.SqlQuery<UserRole>("Usp_GetRolesBasedOnSearch @p0", Value).ToList();
+            return PartialView("_UserRoleDashboard", ObjSurveyMaster);
+        }
         #endregion
 
         #region "Edit"
@@ -294,6 +305,7 @@ namespace Survey.Controllers
         }
 
         #endregion
+
         //#region "Delete"
 
         //public ActionResult DeleteGetCLData(int? PS_ID)

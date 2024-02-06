@@ -242,12 +242,10 @@
 
         function SearchRecords() {
             var Search = $("#txtserach").val();
-            var Selectedtype = document.getElementById("OrderList").value;
-          /*  alert(Search);*/
             $.ajax({
                 type: "Post",
-                url: '@Url.Action("SearchRecords", "User")',
-                data: '{Value: "' + Search + '",Filterby: "' + Selectedtype + '"}',
+                url: '@Url.Action("SearchRecordsUserRole", "User")',
+                data: '{Value: "' + Search + '"}',
                 contentType: "application/json; charset=utf-8",
                 dataType: "html",
                 success: function (data) {

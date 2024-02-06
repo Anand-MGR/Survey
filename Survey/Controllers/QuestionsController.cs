@@ -298,17 +298,16 @@ namespace Survey.Controllers
         }
 
         #region "Search"
-
         [HttpPost]
-        public ActionResult SearchRecords(string Value, string Fliterby)
+        public ActionResult SearchRecordsQuestions(string Value)
         {
             if (Session["UserName"] == null)
             {
                 return RedirectToAction("Loginpage", "Login");
             }
             // depot = Session["WareHouse"].ToString();
-            ObjProjectSurveyMaster.objQuestionsForm = SuvEnt.Database.SqlQuery<QuestionsForm>("usp_GetQuestionbysearch @p0,@p1", Value, Fliterby).ToList();
-            return PartialView("_QuestionDashboard", ObjProjectSurveyMaster);
+            ObjProjectSurveyMaster.LstQuestiontypeFrom = SuvEnt.Database.SqlQuery<QuestionsTypeForm>("Usp_GetQuestionsBasedonType @p0", Value).ToList();
+            return PartialView("_QuestionsTypeDashboard", ObjProjectSurveyMaster);
         }
 
         #endregion
