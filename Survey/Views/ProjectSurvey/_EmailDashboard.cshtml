@@ -17,18 +17,22 @@
 
     <tbody>
         @foreach (var x in Model.lstEmailTemplate)
-        {
-            //var htmlString = x.Body_Content;
-
-            ////var temporaryElement = document.createElement("div");
-            ////temporaryElement.innerHTML = htmlString;
-
-            //var textWithoutTags = htmlString.textContent || htmlString.innerText || "";
-
+        {         
             <tr>
                 <td>@x.TemplateId</td>
                 <td>@x.TemplateName</td>              
-                <td>@x.Body_Content</td>                
+                <td>
+                    @{
+                        string htmlContent = x.Body_Content;
+                        // Use HtmlAgilityPack to parse HTML
+                        HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+                        doc.LoadHtml(htmlContent);
+
+                        // Extracting text content
+                        string textContent = doc.DocumentNode.InnerText;
+                     }
+                    @textContent
+                </td>                
                 <td>
                     @if (@x.TemplateActiveStatus == true)
                     {
@@ -41,7 +45,7 @@
                 </td>
                 <td><i style='font-size:24px' class='far' onclick="EditEmailTemplate(@x.TemplateId)">&#xf044;</i></td>
             </tr>
-
+            
         }
 
     </tbody>
@@ -63,7 +67,18 @@
         </tr>
         <tr>
             <th>Questions</th>
-            <td>@x.Body_Content</td>
+            <td>
+                @{
+                    string htmlContent = x.Body_Content;
+                    // Use HtmlAgilityPack to parse HTML
+                    HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+                    doc.LoadHtml(htmlContent);
+
+                    // Extracting text content
+                    string textContent = doc.DocumentNode.InnerText;
+                }
+                @textContent
+            </td>
         </tr>
 
         <tr>
