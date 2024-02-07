@@ -67,6 +67,7 @@ namespace Survey.Models
     {
         public GetClDataModel SearchBy { get; set; }
         public List<GetClDataModel> ClList { get; set; }
+        public List<ProjectSurveyRemainder> surveyremainderlist { get; set; }
     }
     public class GetClDataModel
     {
@@ -97,6 +98,48 @@ namespace Survey.Models
 
     }
 
+    public class ProjectSurveyRemainder
+    {
+        public int PS_ID { get; set; }
+        public DateTime? PS_Date { get; set; }
+        public string PS_ProjectName { get; set; }
+        public string PS_ProjectCode { get; set; }
+        public string PS_ClientName { get; set; }
+        public string PS_Client_Email { get; set; }
+        public string PS_Client_PM_link { get; set; }
+        public bool? PS_Client_PM_Status { get; set; }
+        public string PS_Client_PE_link { get; set; }
+        public bool? PS_Client_PE_Status { get; set; }
+        public string PS_PM_Name { get; set; }
+        public string PS_PM_Email { get; set; }
+        public string PS_PM_link { get; set; }
+        public bool? PS_PM_Status { get; set; }
+        public string PS_PE_Name { get; set; }
+        public string PS_PE_Email { get; set; }
+        public string PS_PE_link { get; set; }
+        public bool? PS_PE_Status { get; set; }
+        public string PS_HD_Name { get; set; }
+        public string PS_HD_Email { get; set; }
+        public string PS_HD_PM_link { get; set; }
+        public bool? PS_HD_PM_Status { get; set; }
+        public string PS_HD_PE_link { get; set; }
+        public bool? PS_HD_PE_Status { get; set; }
+        public bool? PS_Status { get; set; }
+        public int? PS_CreatedBY { get; set; }
+        public DateTime? PS_CreatedDate { get; set; }
+        public bool? PS_ACTIVESTATUS { get; set; }
+        public bool? PS_IsDelete { get; set; }
+        public string PS_SA_Name { get; set; }
+        public string PS_SA_Email { get; set; }
+        public string PS_SA_PM_link { get; set; }
+        public bool? PS_SA_PM_Status { get; set; }
+        public bool? PS_SA_PE_Status { get; set; }
+        public string PS_SA_PE_link { get; set; }
+        public string PS_PM_SA_link { get; set; }
+        public bool? PS_PM_SA_Status { get; set; }
+        public string PS_PE_SA_link { get; set; }
+        public bool? PS_PE_SA_Status { get; set; }
+    }
 
     #endregion
 

@@ -210,18 +210,19 @@ namespace Survey.Controllers
             mail.Subject = project + " -  Project - How did we do?";
             mail.IsBodyHtml = true;
 
-            ObjprojectMaster.lstEmailTemplate = SuvEnt.Database.SqlQuery<EmailTemplateModel>("Usp_GetEmailTemplateDetails").ToList();
+            ObjprojectMaster.lstEmailTemplate = SuvEnt.Database.SqlQuery<EmailTemplateModel>("usp_ListEmailMapDashboardDetails @p0", "").ToList();
             foreach (var x in ObjprojectMaster.lstEmailTemplate.Where(x => x.Q_type == Qtype))
             {
                 string emailBody = x.Body_Content;
+                emailBody = $"{x.Body_Content} {recipientName}";
                 emailBody = emailBody.Replace(Environment.NewLine, "<br>");
-                emailBody = emailBody.Replace("[recipientName]", recipientName);
-                emailBody = emailBody.Replace("[project]", project);
+                emailBody = emailBody.Replace("{recipientName}", recipientName);
+                emailBody = emailBody.Replace("{project}", project);
                 //emailBody = emailBody.Replace("[link]", link);
-                emailBody = emailBody.Replace("[link]", $"<a href='{link}'>{project} Survey</a>");
-                emailBody = emailBody.Replace("[recipientRole]", recipientRole);
-                emailBody = emailBody.Replace("[personsName]", personsName);
-                emailBody = emailBody.Replace("[personsRole]", personsRole);
+                emailBody = emailBody.Replace("{link}", $"<a href='{link}'>{project} Survey</a>");
+                emailBody = emailBody.Replace("{recipientRole}", recipientRole);
+                emailBody = emailBody.Replace("{personsName}", personsName);
+                emailBody = emailBody.Replace("{personsRole}", personsRole);
                 //string emailBody = $"<p>Hi {recipientName},<br><br>" +
                 //    $"Thank you for your participation on the {project} project.<br><br>" +
                 //    "As part of our continuing efforts to provide the best experience for everyone involved, we are asking you to answer just a few questions about your experience and how we could be better.<br><br>" +
