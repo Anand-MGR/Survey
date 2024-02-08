@@ -216,28 +216,13 @@ namespace Survey.Controllers
                 string emailBody = x.Body_Content;
                 emailBody = $"{x.Body_Content} {recipientName}";
                 emailBody = emailBody.Replace(Environment.NewLine, "<br>");
-                emailBody = emailBody.Replace("{recipientName}", recipientName);
-                emailBody = emailBody.Replace("{project}", project);
+                emailBody = emailBody.Replace("recipentName", recipientName);
+                emailBody = emailBody.Replace("project", project);
                 //emailBody = emailBody.Replace("[link]", link);
-                emailBody = emailBody.Replace("{link}", $"<a href='{link}'>{project} Survey</a>");
-                emailBody = emailBody.Replace("{recipientRole}", recipientRole);
-                emailBody = emailBody.Replace("{personsName}", personsName);
-                emailBody = emailBody.Replace("{personsRole}", personsRole);
-                //string emailBody = $"<p>Hi {recipientName},<br><br>" +
-                //    $"Thank you for your participation on the {project} project.<br><br>" +
-                //    "As part of our continuing efforts to provide the best experience for everyone involved, we are asking you to answer just a few questions about your experience and how we could be better.<br><br>" +
-                //    $"These questions are related to you as the {recipientRole} and {personsName} as the {personsRole}.<br><br>" +
-                //    $"Please use the following link to answer a few questions about your experience:<br><br>" +
-                //    $"<a href='{link}'>{project} Survey</a><br><br>" +
-                //    "Thank you again for your time.<br>" +
-                //    "Please feel free to contact me for any reason.<br><br>" +
-                //    "<b style='color: orange;font-family: Arial, Helvetica, sans-serif; font-size:20px;'>Jacob Janik</b><br>" +
-                //    "Project Manager Lead<br>" +
-                //    "<b>Proven IT</b><br><br>" +
-                //    "<img src='~/images/smartphone_254638.png' style='width:10px;height:10px;'> <span style='color: black;'>(708) 407 - 2947</span><br>" +
-                //    "<img src='~/ images / pin_3177361.png' style='width:10px;height:10px;'> <span style='color: black;'>18450 Crossing Dr, Tinley Park, IL 60487</span><br>" +
-                //    $"<img src='link_logo_url' style='width:10px;height:10px;'> <a href='http://www.provenit.com' style='color: blue;'>www.provenit.com</a></p>";
-
+                emailBody = emailBody.Replace("link", link);
+                emailBody = emailBody.Replace("recipientRole", recipientRole);
+                emailBody = emailBody.Replace("personsName", personsName);
+                emailBody = emailBody.Replace("personsRole", personsRole);
                 mail.Body = emailBody;
 
                 System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12;

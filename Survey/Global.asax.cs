@@ -53,7 +53,7 @@ namespace Survey
             TimeSpan initialDelay = nextTwoMinutes - now;
 
             // Schedule the task to run every 2 minutes
-            _hourlyTimer = new Timer(SendRemainder, null, initialDelay, TimeSpan.FromMinutes(1));
+            //_hourlyTimer = new Timer(SendRemainder, null, initialDelay, TimeSpan.FromMinutes(1));
             #endregion
         }
 
