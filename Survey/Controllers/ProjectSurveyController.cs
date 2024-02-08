@@ -9,6 +9,7 @@ using System.Data;
 using System.Configuration;
 using System.Net;
 using System.Net.Mail;
+using static System.Windows.Forms.LinkLabel;
 
 //using System.IO;
 //using Newtonsoft.Json;
@@ -216,13 +217,12 @@ namespace Survey.Controllers
                 string emailBody = x.Body_Content;
                 emailBody = $"{x.Body_Content} {recipientName}";
                 emailBody = emailBody.Replace(Environment.NewLine, "<br>");
-                emailBody = emailBody.Replace("recipentName", recipientName);
-                emailBody = emailBody.Replace("project", project);
-                //emailBody = emailBody.Replace("[link]", link);
-                emailBody = emailBody.Replace("link", link);
-                emailBody = emailBody.Replace("recipientRole", recipientRole);
-                emailBody = emailBody.Replace("personsName", personsName);
-                emailBody = emailBody.Replace("personsRole", personsRole);
+                emailBody = emailBody.Replace("recipentName", $"<strong>{recipientName}</strong>");
+                emailBody = emailBody.Replace("project", $"<strong>{project}</strong>");
+                emailBody = emailBody.Replace("link", $"<a href='{link}'>{project}</a>");
+                emailBody = emailBody.Replace("recipientRole", $"<strong>{recipientRole}</strong>");
+                emailBody = emailBody.Replace("personsName", $"<strong>{personsName}</strong>");
+                emailBody = emailBody.Replace("personsRole", $"<strong>{personsRole}</strong>");
                 mail.Body = emailBody;
 
                 System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12;

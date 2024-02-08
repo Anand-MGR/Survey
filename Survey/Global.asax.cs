@@ -53,7 +53,7 @@ namespace Survey
             TimeSpan initialDelay = nextTwoMinutes - now;
 
             // Schedule the task to run every 2 minutes
-            //_hourlyTimer = new Timer(SendRemainder, null, initialDelay, TimeSpan.FromMinutes(1));
+            _hourlyTimer = new Timer(SendRemainder, null, initialDelay, TimeSpan.FromMinutes(1));
             #endregion
         }
 
@@ -174,13 +174,12 @@ namespace Survey
             {
                 string emailBody = x.Body_Content;
                 emailBody = emailBody.Replace(Environment.NewLine, "<br>");
-                emailBody = emailBody.Replace("recipentName", Name);
-                emailBody = emailBody.Replace("project", Project);
-                //emailBody = emailBody.Replace("[link]", link);
-                emailBody = emailBody.Replace("link", Link);
-                emailBody = emailBody.Replace("recipientRole", recipientRole);
-                emailBody = emailBody.Replace("personsName", Name);
-                emailBody = emailBody.Replace("personsRole", personsRole);
+                emailBody = emailBody.Replace("recipentName", $"<strong>{Name}</strong>");
+                emailBody = emailBody.Replace("project", $"<strong>{Project}</strong>");
+                emailBody = emailBody.Replace("link", $"<a href='{Link}'>{Project}</a>");
+                emailBody = emailBody.Replace("recipientRole", $"<strong>{recipientRole}</strong>");
+                emailBody = emailBody.Replace("personsName", $"<strong>{Name}</strong>");
+                emailBody = emailBody.Replace("personsRole", $"<strong>{personsRole}</strong>");
                 mail.Body = emailBody;
 
                 System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12;
