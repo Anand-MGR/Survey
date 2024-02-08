@@ -32,11 +32,11 @@ namespace Survey
             AntiForgeryConfig.UniqueClaimTypeIdentifier = ClaimsIdentity.DefaultNameClaimType;
 
             #region 30 Days Once
-            //TimeSpan reminderInterval = TimeSpan.FromDays(30);
-            //DateTime now = DateTime.Now;
-            //DateTime nextReminder = now.AddDays(30);
-            //TimeSpan initialDelay = nextReminder - now;
-            //_hourlyTimer = new Timer(SendRemainder, null, initialDelay, reminderInterval);
+            TimeSpan reminderInterval = TimeSpan.FromDays(3);
+            DateTime now = DateTime.Now;
+            DateTime nextReminder = now.AddDays(3);
+            TimeSpan initialDelay = nextReminder - now;
+            _hourlyTimer = new Timer(SendRemainder, null, initialDelay, reminderInterval);
             #endregion
 
             #region Hourly Basis
@@ -48,12 +48,12 @@ namespace Survey
 
             #region Min Basis
             // Calculate the initial delay to start the timer
-            DateTime now = DateTime.Now;
-            DateTime nextTwoMinutes = now.AddMinutes(1);
-            TimeSpan initialDelay = nextTwoMinutes - now;
+            //DateTime now = DateTime.Now;
+            //DateTime nextTwoMinutes = now.AddMinutes(1);
+            //TimeSpan initialDelay = nextTwoMinutes - now;
 
             // Schedule the task to run every 2 minutes
-            _hourlyTimer = new Timer(SendRemainder, null, initialDelay, TimeSpan.FromMinutes(1));
+            //_hourlyTimer = new Timer(SendRemainder, null, initialDelay, TimeSpan.FromMinutes(1));
             #endregion
         }
 
