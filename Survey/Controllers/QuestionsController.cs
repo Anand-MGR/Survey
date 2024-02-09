@@ -13,6 +13,7 @@ using System.Configuration;
 using System.Windows.Forms;
 using Rotativa;
 using Size = Rotativa.Options.Size;
+using static Microsoft.IdentityModel.Claims.ClaimTypes;
 //using Rotativa.MVC;
 //using System.Drawing.Imaging;
 
@@ -28,7 +29,7 @@ namespace Survey.Controllers
         ProjectSurveyEntities SuvEnt = new ProjectSurveyEntities();
 
         RatingPageModel objRatingPageModel = new RatingPageModel();
-
+        ReviewSummaryModel objSummary = new ReviewSummaryModel();
         List<ReviewModel> objRwviewlstmodel = new List<ReviewModel>();
         ProjectSurveyModel objProjectsurveymodel = new ProjectSurveyModel();
         QuestionsForm ObjquestionsForm = new QuestionsForm();
@@ -83,14 +84,17 @@ namespace Survey.Controllers
 
         public ActionResult ReviewRating(int id)
         {
+            var Role = Session["Role"].ToString();
             ReviewSummaryModel objSummary = new ReviewSummaryModel();
             objSummary.LstReview = new List<ReviewModel>();
             objSummary.LstReview = GetReviewDatas(id);
             objSummary.Final = new List<string>();
+            objSummary.LstQtype = SuvEnt.Database.SqlQuery<TotalQtype>("Usp_GetAllQTypes").ToList();
             objSummary.ProjectName = objSummary.LstReview.Select(o => o.PS_ProjectName).FirstOrDefault();
             objSummary.PS_Date = objSummary.LstReview.Select(o => o.PS_Date).FirstOrDefault();
             objSummary.PS_Status = objSummary.LstReview.Select(o => o.PS_Status).FirstOrDefault();
             objSummary.PS_ID = objSummary.LstReview.Select(o => o.PS_ID).FirstOrDefault();
+            objSummary.Role = Role;
             string Id = "";
 
             if (objSummary.LstReview.Count > 0)
@@ -108,6 +112,40 @@ namespace Survey.Controllers
 
         }
 
+        [HttpPost]
+        public ActionResult ReviewRating2(List<ReviewSummaryModel> ratings, string psId,string PSstatus)
+        {
+            DataTable dt = new DataTable();
+            dt.Columns.Add("Q_Id", typeof(int));
+            dt.Columns.Add("PSD_Rating", typeof(int));
+            dt.Columns.Add("PSD_Yesorno", typeof(string));
+            dt.Columns.Add("PSD_Mcq", typeof(string));
+
+            for (int i = 0; i < ratings.Count; i++)
+            {
+                DataRow dr = dt.NewRow();
+                dr["Q_Id"] = ratings[i].Question;
+                dr["PSD_Rating"] = ratings[i].Answer;
+                dt.Rows.Add(dr);
+            }
+
+
+            SqlCommand cmd = new SqlCommand("usp_ProjectSurveyReviewDetails", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@PS_ID", psId);
+            cmd.Parameters.AddWithValue("@PSstatus", PSstatus);
+            cmd.Parameters.AddWithValue("@TypeTable", dt);
+
+            con.Open();
+            cmd.ExecuteNonQuery();
+            con.Close();
+
+            return RedirectToAction("GetCLData");
+        }
+        public ActionResult CompleteReviewRating(int id)
+        {
+            return View();
+        }
         public ActionResult GetCLData()
         {
             if (Session["UserName"] == null)

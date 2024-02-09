@@ -170,6 +170,9 @@ namespace Survey.Models
 
     public class ReviewSummaryModel
     {
+        public string Question { get; set; }
+        public string Answer { get; set; }
+        public string Role { get; set; }
         public bool IsOpen { get; set; }
         public DateTime PS_Date { get; set; }
         public List<string> Final { get; set; }
@@ -177,6 +180,7 @@ namespace Survey.Models
         public string ProjectName { get; set; }
         public bool PS_Status { get; set; }
         public int PS_ID { get; set; }
+        public List<TotalQtype> LstQtype { get; set; }
         //public QuestionnaireModel QuestionModel { get; set; }
         //public List<QuestionnaireObjectModel> QuestionnaireLst { get; set; }
     }
