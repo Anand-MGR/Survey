@@ -12,3 +12,94 @@ Changes :
 Updated By : 
 Status : 
 ********************************************************************************************************************
+
+********************************************************************************************************************
+S.No:2 
+Date : 02/07/2024
+Procedure Name : Usp_InsertEmailTemplateMap
+Table Name : tbl_EmailTemplateMapping
+View Name :Email Template
+BackUp : 
+Version : V1
+Changes : created 
+Updated By : janagan
+Status : Deployed
+********************************************************************************************************************
+
+********************************************************************************************************************
+S.No:3 
+Date : 02/07/2024
+Procedure Name :Usp_InsertEmailTemplate
+Table Name : tbl_EmailTemplate
+View Name :Email Template
+BackUp : 
+Version : V1
+Changes : created 
+Updated By : janagan
+Status : Deployed
+********************************************************************************************************************
+********************************************************************************************************************
+S.No:4
+Date : 02/07/2024
+Procedure Name : usp_GetTemplateName
+Table Name : tbl_EmailTemplate
+View Name :Email Template
+BackUp : 
+Version : V1
+Changes : created 
+Updated By : janagan
+Status : Deployed
+********************************************************************************************************************
+
+********************************************************************************************************************
+S.No:5 
+Date : 02/07/2024
+Procedure Name :usp_ListEmailMapDashboardDetails
+Table Name : tbl_EmailTemplateMapping
+View Name :Email Template Mapping
+BackUp : 
+Version : V1
+Changes : created 
+Updated By : janagan
+Status : Deployed
+********************************************************************************************************************
+
+********************************************************************************************************************
+S.No:6
+Date : 02/07/2024
+Procedure Name : usp_ListEmailDashboardDetails
+Table Name : tbl_EmailTemplate
+View Name :Email Template
+BackUp : 
+Version : V1
+Changes : created 
+Updated By : janagan
+Status : Deployed
+********************************************************************************************************************
+
+********************************************************************************************************************
+S.No:7 
+Date : 02/09/2024
+Procedure Name :Usp_GetAllQTypes
+Table Name : tbl_Q_Type
+View Name :Review Rating
+BackUp : 
+Version : V1
+Changes : created 
+Updated By : sriram
+Status : Deployed
+********************************************************************************************************************
+*************************************************************************************************************
+
+********************************************************************************************************************
+S.No:3 
+Date : 02/09/2024
+Procedure Name : usp_ProjectSurveyReviewDetails
+Table Name : PSD_ProjectSurveyDetails
+View Name : Review Rating
+BackUp : 
+Version : V1
+Changes : created 
+Updated By : sriram
+Status : Deployed
+********************************************************************************************************************

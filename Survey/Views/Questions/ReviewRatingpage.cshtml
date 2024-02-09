@@ -41,432 +41,60 @@
 </div>
 
 <hr />
-
-
 <div>
+    <div id="selectedratings" style="display:none;"></div>
+    @*<button type="submit" id="submitRatings" class="btn btn-primary btn-lg" onclick="submitbtnclick()">Submit</button>*@
+    @*<button class="btn-btnprimary" type="submit" id="save" name="Command" value="Add" style="background-color: forestgreen; color: white;padding: 8px; border: none; font-size: 14px; border-radius: 4px; " onclick="if (Savenewuser(Submit)) { return false; }">Update</button>*@
     @if (Model.LstReview.Count() > 0)
     {
-        if (Model.LstReview.Where(o => o.PRType == "CLPM").Count() > 0)
+        foreach (var typeVal in Model.LstReview.Select(x => x.PRType).Distinct())
         {
-            <h2 style="font-family:'Times New Roman'; text-align: center;">Client Rating To Project Manager</h2>
-            <br />
-            <p class="firstP">Client  : @Model.LstReview.Where(o => o.PRType == "CLPM").Select(o => o.PR_From).FirstOrDefault()</p>
-            <p class="secondP">Project Manager: @Model.LstReview.Where(o => o.PRType == "CLPM").Select(o => o.PR_RatingTo).FirstOrDefault()</p>
-            <p class="Sdate">Submitted Date : @Model.LstReview.Where(o => o.PRType == "CLPM").Select(o => o.PSD_CreatedDate.ToString("MM/dd/yyyy")).FirstOrDefault()</p>
-            <br />
-            <br />
-            <hr />
 
-            <div>
-                @foreach (var x in Model.LstReview.Where(o => o.PRType == "CLPM"))
-                {
-                    <div>
-                        <br />
-                        <label>@x.Q_Question</label><br />
+            if (Model.LstReview.Where(o => o.PRType == typeVal).Count() > 0)
+            {
 
-                        <div class="stars">
-                            <form>
+                <h2 style="font-family: 'Times New Roman';text-align:center;">@Model.LstQtype.Where(objTotalQtype => objTotalQtype.Q_Qustionvalue == typeVal).Select(objTotalQtype => objTotalQtype.Q_Qus).FirstOrDefault()</h2>
 
-                                <input class="star star5" id="star5-@x.Q_Id" type="radio" name="star" value="5-@x.Q_Id" disabled />
+                <br />
+                <p class="firstP">Client  : @Model.LstReview.Where(o => o.PRType == typeVal).Select(o => o.PR_From).FirstOrDefault()</p>
+                <p class="secondP">Project Manager: @Model.LstReview.Where(o => o.PRType == typeVal).Select(o => o.PR_RatingTo).FirstOrDefault()</p>
+                <p class="Sdate">Submitted Date : @Model.LstReview.Where(o => o.PRType == typeVal).Select(o => o.PSD_CreatedDate.ToString("MM/dd/yyyy")).FirstOrDefault()</p>
+                <br />
+                <br />
+                <hr />
+
+                <div>
+
+                    @foreach (var x in Model.LstReview.Where(o => o.PRType == typeVal))
+                    {
+                        <div>
+                            <br />
+                            <label>@x.Q_Question</label><br />
+
+                            <div class="stars">
+                                <input class="star star5" id="star5-@x.Q_Id" type="radio" name="star-@x.Q_Id" value="5-@x.Q_Id" disabled />
                                 <label class="star star5" for="star5-@x.Q_Id"></label>
-                                <input class="star star4" id="star4-@x.Q_Id" type="radio" name="star" value="4-@x.Q_Id" disabled />
+                                <input class="star star4" id="star4-@x.Q_Id" type="radio" name="star-@x.Q_Id" value="4-@x.Q_Id" disabled />
                                 <label class="star star4" for="star4-@x.Q_Id"></label>
-                                <input class="star star3" id="star3-@x.Q_Id" type="radio" name="star" value="3-@x.Q_Id" disabled />
+                                <input class="star star3" id="star3-@x.Q_Id" type="radio" name="star-@x.Q_Id" value="3-@x.Q_Id" disabled />
                                 <label class="star star3" for="star3-@x.Q_Id"></label>
-                                <input class="star star2" id="star2-@x.Q_Id" type="radio" name="star" value="2-@x.Q_Id" disabled />
+                                <input class="star star2" id="star2-@x.Q_Id" type="radio" name="star-@x.Q_Id" value="2-@x.Q_Id" disabled />
                                 <label class="star star2" for="star2-@x.Q_Id"></label>
-                                <input class="star star1" id="star1-@x.Q_Id" type="radio" name="star" value="1-@x.Q_Id" disabled />
+                                <input class="star star1" id="star1-@x.Q_Id" type="radio" name="star-@x.Q_Id" value="1-@x.Q_Id" disabled />
                                 <label class="star star1" for="star1-@x.Q_Id"></label>
-                            </form>
-                        </div>
-                    </div>
-                }
-            </div>
-            <br />
-            <hr />
-        }
-
-        if (Model.LstReview.Where(o => o.PRType == "CLPE").Count() > 0)
-        {
-            <h2 style="font-family:'Times New Roman'; text-align: center;">Client Rating To Project Engineer</h2><br />
-            <p class="firstP">Client  : @Model.LstReview.Where(o => o.PRType == "CLPE").Select(o => o.PR_From).FirstOrDefault()</p>
-            <p class="secondP">Project Engineer: @Model.LstReview.Where(o => o.PRType == "CLPE").Select(o => o.PR_RatingTo).FirstOrDefault()</p>
-            <p class="Sdate">Submitted Date : @Model.LstReview.Where(o => o.PRType == "CLPE").Select(o => o.PSD_CreatedDate.ToString("MM/dd/yyyy")).FirstOrDefault()</p>
-            <br />
-            <br />
-            <hr />
-            <div>
-                @foreach (var x in Model.LstReview.Where(o => o.PRType == "CLPE"))
-                {
-                    <div>
-                        <br />
-                        <label>@x.Q_Question</label><br />
-
-                        <div class="stars">
-                            <form>
-
-                                <input class="star star5" id="star5-@x.Q_Id" type="radio" name="star" value="5-@x.Q_Id" disabled />
-                                <label class="star star5" for="star5-@x.Q_Id"></label>
-                                <input class="star star4" id="star4-@x.Q_Id" type="radio" name="star" value="4-@x.Q_Id" disabled />
-                                <label class="star star4" for="star4-@x.Q_Id"></label>
-                                <input class="star star3" id="star3-@x.Q_Id" type="radio" name="star" value="3-@x.Q_Id" disabled />
-                                <label class="star star3" for="star3-@x.Q_Id"></label>
-                                <input class="star star2" id="star2-@x.Q_Id" type="radio" name="star" value="2-@x.Q_Id" disabled />
-                                <label class="star star2" for="star2-@x.Q_Id"></label>
-                                <input class="star star1" id="star1-@x.Q_Id" type="radio" name="star" value="1-@x.Q_Id" disabled />
-                                <label class="star star1" for="star1-@x.Q_Id"></label>
-                            </form>
-                        </div>
-                    </div>
-                }
-            </div>
-
-            <br />
-            <hr />
-        }
-
-        if (Model.LstReview.Where(o => o.PRType == "HDPM").Count() > 0)
-        {
-            <h2 style="font-family:'Times New Roman'; text-align: center;">Help Desk Rating To Project Manager</h2><br />
-            <p class="firstP">Help Desk  :@Model.LstReview.Where(o => o.PRType == "HDPM").Select(o => o.PR_From).FirstOrDefault()</p>
-            <p class="secondP">Project Manager: @Model.LstReview.Where(o => o.PRType == "HDPM").Select(o => o.PR_RatingTo).FirstOrDefault()</p>
-            <p class="Sdate">Submitted Date : @Model.LstReview.Where(o => o.PRType == "HDPM").Select(o => o.PSD_CreatedDate.ToString("MM/dd/yyyy")).FirstOrDefault()</p>
-            <br />
-            <br />
-            <hr />
-            <div>
-                <div>
-                    @foreach (var x in Model.LstReview.Where(o => o.PRType == "HDPM"))
-                    {
-                        <div>
-                            <br />
-                            <label>@x.Q_Question</label><br />
-
-                            <div class="stars">
-                                <form>
-
-                                    <input class="star star5" id="star5-@x.Q_Id" type="radio" name="star" value="5-@x.Q_Id" disabled />
-                                    <label class="star star5" for="star5-@x.Q_Id"></label>
-                                    <input class="star star4" id="star4-@x.Q_Id" type="radio" name="star" value="4-@x.Q_Id" disabled />
-                                    <label class="star star4" for="star4-@x.Q_Id"></label>
-                                    <input class="star star3" id="star3-@x.Q_Id" type="radio" name="star" value="3-@x.Q_Id" disabled />
-                                    <label class="star star3" for="star3-@x.Q_Id"></label>
-                                    <input class="star star2" id="star2-@x.Q_Id" type="radio" name="star" value="2-@x.Q_Id" disabled />
-                                    <label class="star star2" for="star2-@x.Q_Id"></label>
-                                    <input class="star star1" id="star1-@x.Q_Id" type="radio" name="star" value="1-@x.Q_Id" disabled />
-                                    <label class="star star1" for="star1-@x.Q_Id"></label>
-                                </form>
                             </div>
                         </div>
                     }
                 </div>
-                <br />
 
-                <hr />
-            </div>
-
-        }
-
-        if (Model.LstReview.Where(o => o.PRType == "HDPE").Count() > 0)
-        {
-            <h2 style="font-family:'Times New Roman'; text-align: center;">Help Desk Rating To Project Engineer</h2><br />
-            <p class="firstP">Help Desk  : @Model.LstReview.Where(o => o.PRType == "HDPE").Select(o => o.PR_From).FirstOrDefault()</p>
-            <p class="secondP">Project Engineer:@Model.LstReview.Where(o => o.PRType == "HDPE").Select(o => o.PR_RatingTo).FirstOrDefault()</p>
-            <p class="Sdate">Submitted Date : @Model.LstReview.Where(o => o.PRType == "HDPE").Select(o => o.PSD_CreatedDate.ToString("MM/dd/yyyy")).FirstOrDefault()</p>
-            <br />
+            }
             <br />
             <hr />
-            <div>
-                <div>
-                    @foreach (var x in Model.LstReview.Where(o => o.PRType == "HDPE"))
-                    {
-                        <div>
-                            <br />
-                            <label>@x.Q_Question</label><br />
-
-                            <div class="stars">
-                                <form>
-
-                                    <input class="star star5" id="star5-@x.Q_Id" type="radio" name="star" value="5-@x.Q_Id" disabled />
-                                    <label class="star star5" for="star5-@x.Q_Id"></label>
-                                    <input class="star star4" id="star4-@x.Q_Id" type="radio" name="star" value="4-@x.Q_Id" disabled />
-                                    <label class="star star4" for="star4-@x.Q_Id"></label>
-                                    <input class="star star3" id="star3-@x.Q_Id" type="radio" name="star" value="3-@x.Q_Id" disabled />
-                                    <label class="star star3" for="star3-@x.Q_Id"></label>
-                                    <input class="star star2" id="star2-@x.Q_Id" type="radio" name="star" value="2-@x.Q_Id" disabled />
-                                    <label class="star star2" for="star2-@x.Q_Id"></label>
-                                    <input class="star star1" id="star1-@x.Q_Id" type="radio" name="star" value="1-@x.Q_Id" disabled />
-                                    <label class="star star1" for="star1-@x.Q_Id"></label>
-                                </form>
-                            </div>
-                        </div>
-                    }
-                </div>
-                <br />
-                <hr />
-            </div>
-        }
-
-        if (Model.LstReview.Where(o => o.PRType == "PEPM").Count() > 0)
-        {
-            <h2 style="font-family:'Times New Roman'; text-align: center;">Project Engineer Rating To Project Manager</h2><br />
-            <p class="firstP">Project Engineer: @Model.LstReview.Where(o => o.PRType == "PEPM").Select(o => o.PR_From).FirstOrDefault()</p>
-            <p class="secondP">Project Manager  : @Model.LstReview.Where(o => o.PRType == "PEPM").Select(o => o.PR_RatingTo).FirstOrDefault()</p>
-            <p class="Sdate">Submitted Date : @Model.LstReview.Where(o => o.PRType == "PEPM").Select(o => o.PSD_CreatedDate.ToString("MM/dd/yyyy")).FirstOrDefault()</p>
-            <br />
-            <br />
-            <hr />
-            <div>
-                <div>
-                    @foreach (var x in Model.LstReview.Where(o => o.PRType == "PEPM"))
-                    {
-                        <div>
-                            <br />
-                            <label>@x.Q_Question</label><br />
-
-                            <div class="stars">
-                                <form>
-
-                                    <input class="star star5" id="star5-@x.Q_Id" type="radio" name="star" value="5-@x.Q_Id" disabled />
-                                    <label class="star star5" for="star5-@x.Q_Id"></label>
-                                    <input class="star star4" id="star4-@x.Q_Id" type="radio" name="star" value="4-@x.Q_Id" disabled />
-                                    <label class="star star4" for="star4-@x.Q_Id"></label>
-                                    <input class="star star3" id="star3-@x.Q_Id" type="radio" name="star" value="3-@x.Q_Id" disabled />
-                                    <label class="star star3" for="star3-@x.Q_Id"></label>
-                                    <input class="star star2" id="star2-@x.Q_Id" type="radio" name="star" value="2-@x.Q_Id" disabled />
-                                    <label class="star star2" for="star2-@x.Q_Id"></label>
-                                    <input class="star star1" id="star1-@x.Q_Id" type="radio" name="star" value="1-@x.Q_Id" disabled />
-                                    <label class="star star1" for="star1-@x.Q_Id"></label>
-                                </form>
-                            </div>
-                        </div>
-                    }
-                </div>
-                <br />
-                <hr />
-            </div>
-        }
-
-        if (Model.LstReview.Where(o => o.PRType == "PMPE").Count() > 0)
-        {
-            <h2 style="font-family:'Times New Roman'; text-align: center;">Project Manager Rating To Project Engineer</h2><br />
-            <p class="firstP">Project Manager  : @Model.LstReview.Where(o => o.PRType == "PMPE").Select(o => o.PR_From).FirstOrDefault()</p>
-            <p class="secondP">Project Engineer: @Model.LstReview.Where(o => o.PRType == "PMPE").Select(o => o.PR_RatingTo).FirstOrDefault()</p>
-            <p class="Sdate">Submitted Date : @Model.LstReview.Where(o => o.PRType == "PMPE").Select(o => o.PSD_CreatedDate.ToString("MM/dd/yyyy")).FirstOrDefault()</p>
-            <br />
-            <br />
-            <hr />
-            <div>
-                <div>
-                    @foreach (var x in Model.LstReview.Where(o => o.PRType == "PMPE"))
-                    {
-                        <div>
-                            <br />
-                            <label>@x.Q_Question</label><br />
-
-                            <div class="stars">
-                                <form>
-
-                                    <input class="star star5" id="star5-@x.Q_Id" type="radio" name="star" value="5-@x.Q_Id" disabled />
-                                    <label class="star star5" for="star5-@x.Q_Id"></label>
-                                    <input class="star star4" id="star4-@x.Q_Id" type="radio" name="star" value="4-@x.Q_Id" disabled />
-                                    <label class="star star4" for="star4-@x.Q_Id"></label>
-                                    <input class="star star3" id="star3-@x.Q_Id" type="radio" name="star" value="3-@x.Q_Id" disabled />
-                                    <label class="star star3" for="star3-@x.Q_Id"></label>
-                                    <input class="star star2" id="star2-@x.Q_Id" type="radio" name="star" value="2-@x.Q_Id" disabled />
-                                    <label class="star star2" for="star2-@x.Q_Id"></label>
-                                    <input class="star star1" id="star1-@x.Q_Id" type="radio" name="star" value="1-@x.Q_Id" disabled />
-                                    <label class="star star1" for="star1-@x.Q_Id"></label>
-                                </form>
-                            </div>
-                        </div>
-                    }
-                </div>
-            </div>
-        }
-
-        if (Model.LstReview.Where(o => o.PRType == "SAPM").Count() > 0)
-        {
-            <h2 style="font-family:'Times New Roman'; text-align: center;">Solution Architect  Rating To Project Manager</h2><br />
-            <p class="firstP">Help Desk  :@Model.LstReview.Where(o => o.PRType == "SAPM").Select(o => o.PR_From).FirstOrDefault()</p>
-            <p class="secondP">Project Manager: @Model.LstReview.Where(o => o.PRType == "SAPM").Select(o => o.PR_RatingTo).FirstOrDefault()</p>
-            <p class="Sdate">Submitted Date : @Model.LstReview.Where(o => o.PRType == "SAPM").Select(o => o.PSD_CreatedDate.ToString("MM/dd/yyyy")).FirstOrDefault()</p>
-            <br />
-            <br />
-            <hr />
-            <div>
-                <div>
-                    @foreach (var x in Model.LstReview.Where(o => o.PRType == "SAPM"))
-                    {
-                        <div>
-                            <br />
-                            <label>@x.Q_Question</label><br />
-
-                            @if (x.Q_Ans_Type == "3")
-                            {
-                                <div id="QusId" style="display:none;">@x.Q_Id</div>
-                                <div class="multiple-choice">
-                                    <form>
-                                        @*<input type="radio" id="yes-@x.Q_Id" name="answer-@x.Q_Id" value="@x.Ans_Options1-@x.Q_Id" />
-                                            <label for="yes-@x.Q_Id">@x.Ans_Options1</label>
-                                            <input type="radio" id="yes-@x.Q_Id" name="answer-@x.Q_Id" value="@x.Ans_Options2-@x.Q_Id" />
-                                            <label for="yes-@x.Q_Id">@x.Ans_Options2</label>
-                                            <input type="radio" id="yes-@x.Q_Id" name="answer-@x.Q_Id" value="@x.Ans_Options3-@x.Q_Id" />
-                                            <label for="yes-@x.Q_Id">@x.Ans_Options3</label>
-                                            <input type="radio" id="yes-@x.Q_Id" name="answer-@x.Q_Id" value="@x.Ans_Options4-@x.Q_Id" />
-                                            <label for="yes-@x.Q_Id">@x.Ans_Options4</label>
-                                            <input type="radio" id="yes-@x.Q_Id" name="answer-@x.Q_Id" value="@x.Ans_Options5-@x.Q_Id" />
-                                            <label for="yes-@x.Q_Id">@x.Ans_Options5</label>*@
-
-                                        <input type="radio" id="yes-@x.Q_Id" name="answer-@x.Q_Id" value="@x.PSD_Mcq-@x.Q_Id" />
-                                        <label for="yes-@x.Q_Id">@x.PSD_Mcq</label>
-
-                                    </form>
-                                </div>
-                            }
-                            @if (x.Q_Ans_Type == "2")
-                            {
-                                <div class="yes-no">
-                                    <form>
-                                        <input type="radio" id="yes-@x.Q_Id" name="answer-@x.Q_Id" value="@x.PSD_Yesorno-@x.Q_Id" />
-                                        <label for="yes-@x.Q_Id">@x.PSD_Yesorno</label>
-                                    </form>
-                                </div>
-                            }
-                        </div>
-                    }
-                </div>
-                <br />
-
-                <hr />
-            </div>
-
-        }
-
-        if (Model.LstReview.Where(o => o.PRType == "SAPE").Count() > 0)
-        {
-            <h2 style="font-family:'Times New Roman'; text-align: center;">Solution Architect Rating To Project Engineer</h2><br />
-            <p class="firstP">Project Manager  : @Model.LstReview.Where(o => o.PRType == "SAPE").Select(o => o.PR_From).FirstOrDefault()</p>
-            <p class="secondP">Project Engineer: @Model.LstReview.Where(o => o.PRType == "SAPE").Select(o => o.PR_RatingTo).FirstOrDefault()</p>
-            <p class="Sdate">Submitted Date : @Model.LstReview.Where(o => o.PRType == "SAPE").Select(o => o.PSD_CreatedDate.ToString("MM/dd/yyyy")).FirstOrDefault()</p>
-            <br />
-            <br />
-            <hr />
-            <div>
-                <div>
-                    @foreach (var x in Model.LstReview.Where(o => o.PRType == "SAPE"))
-                    {
-                        <div>
-                            <br />
-                            <label>@x.Q_Question</label><br />
-
-                            <div class="stars">
-                                <form>
-
-                                    <input class="star star5" id="star5-@x.Q_Id" type="radio" name="star" value="5-@x.Q_Id" disabled />
-                                    <label class="star star5" for="star5-@x.Q_Id"></label>
-                                    <input class="star star4" id="star4-@x.Q_Id" type="radio" name="star" value="4-@x.Q_Id" disabled />
-                                    <label class="star star4" for="star4-@x.Q_Id"></label>
-                                    <input class="star star3" id="star3-@x.Q_Id" type="radio" name="star" value="3-@x.Q_Id" disabled />
-                                    <label class="star star3" for="star3-@x.Q_Id"></label>
-                                    <input class="star star2" id="star2-@x.Q_Id" type="radio" name="star" value="2-@x.Q_Id" disabled />
-                                    <label class="star star2" for="star2-@x.Q_Id"></label>
-                                    <input class="star star1" id="star1-@x.Q_Id" type="radio" name="star" value="1-@x.Q_Id" disabled />
-                                    <label class="star star1" for="star1-@x.Q_Id"></label>
-                                </form>
-                            </div>
-                        </div>
-                    }
-                </div>
-            </div>
-        }
-
-        if (Model.LstReview.Where(o => o.PRType == "PMSA").Count() > 0)
-        {
-            <h2 style="font-family:'Times New Roman'; text-align: center;">Project Manager Rating To Solution Architect</h2><br />
-            <p class="firstP">Project Manager  : @Model.LstReview.Where(o => o.PRType == "PMSA").Select(o => o.PR_From).FirstOrDefault()</p>
-            <p class="secondP">Project Engineer: @Model.LstReview.Where(o => o.PRType == "PMSA").Select(o => o.PR_RatingTo).FirstOrDefault()</p>
-            <p class="Sdate">Submitted Date : @Model.LstReview.Where(o => o.PRType == "PMSA").Select(o => o.PSD_CreatedDate.ToString("MM/dd/yyyy")).FirstOrDefault()</p>
-            <br />
-            <br />
-            <hr />
-            <div>
-                <div>
-                    @foreach (var x in Model.LstReview.Where(o => o.PRType == "PMSA"))
-                    {
-                        <div>
-                            <br />
-                            <label>@x.Q_Question</label><br />
-
-                            <div class="stars">
-                                <form>
-
-                                    <input class="star star5" id="star5-@x.Q_Id" type="radio" name="star" value="5-@x.Q_Id" disabled />
-                                    <label class="star star5" for="star5-@x.Q_Id"></label>
-                                    <input class="star star4" id="star4-@x.Q_Id" type="radio" name="star" value="4-@x.Q_Id" disabled />
-                                    <label class="star star4" for="star4-@x.Q_Id"></label>
-                                    <input class="star star3" id="star3-@x.Q_Id" type="radio" name="star" value="3-@x.Q_Id" disabled />
-                                    <label class="star star3" for="star3-@x.Q_Id"></label>
-                                    <input class="star star2" id="star2-@x.Q_Id" type="radio" name="star" value="2-@x.Q_Id" disabled />
-                                    <label class="star star2" for="star2-@x.Q_Id"></label>
-                                    <input class="star star1" id="star1-@x.Q_Id" type="radio" name="star" value="1-@x.Q_Id" disabled />
-                                    <label class="star star1" for="star1-@x.Q_Id"></label>
-                                </form>
-                            </div>
-                        </div>
-                    }
-                </div>
-            </div>
-        }
-
-        if (Model.LstReview.Where(o => o.PRType == "PESA").Count() > 0)
-        {
-            <h2 style="font-family:'Times New Roman'; text-align: center;">Project Engineer Rating To Solution Architect</h2><br />
-            <p class="firstP">Project Manager  : @Model.LstReview.Where(o => o.PRType == "PESA").Select(o => o.PR_From).FirstOrDefault()</p>
-            <p class="secondP">Project Engineer: @Model.LstReview.Where(o => o.PRType == "PESA").Select(o => o.PR_RatingTo).FirstOrDefault()</p>
-            <p class="Sdate">Submitted Date : @Model.LstReview.Where(o => o.PRType == "PESA").Select(o => o.PSD_CreatedDate.ToString("MM/dd/yyyy")).FirstOrDefault()</p>
-            <br />
-            <br />
-            <hr />
-            <div>
-                <div>
-                    @foreach (var x in Model.LstReview.Where(o => o.PRType == "PESA"))
-                    {
-                        <div>
-                            <br />
-                            <label>@x.Q_Question</label><br />
-
-                            <div class="stars">
-                                <form>
-
-                                    <input class="star star5" id="star5-@x.Q_Id" type="radio" name="star" value="5-@x.Q_Id" disabled />
-                                    <label class="star star5" for="star5-@x.Q_Id"></label>
-                                    <input class="star star4" id="star4-@x.Q_Id" type="radio" name="star" value="4-@x.Q_Id" disabled />
-                                    <label class="star star4" for="star4-@x.Q_Id"></label>
-                                    <input class="star star3" id="star3-@x.Q_Id" type="radio" name="star" value="3-@x.Q_Id" disabled />
-                                    <label class="star star3" for="star3-@x.Q_Id"></label>
-                                    <input class="star star2" id="star2-@x.Q_Id" type="radio" name="star" value="2-@x.Q_Id" disabled />
-                                    <label class="star star2" for="star2-@x.Q_Id"></label>
-                                    <input class="star star1" id="star1-@x.Q_Id" type="radio" name="star" value="1-@x.Q_Id" disabled />
-                                    <label class="star star1" for="star1-@x.Q_Id"></label>
-                                </form>
-                            </div>
-                        </div>
-                    }
-                </div>
-            </div>
+            @*<button type="submit">Submit</button>*@
+            @*</form>*@
         }
     }
-
-    else
-    {
-        <div>
-            <p style=" font-family:'Times New Roman'; text-align: center; font-size: 30px;">Survey Not Completed!!</p>
-        </div>
-    }
-
 </div>
-
 
 <style type="text/css">
     .backtodashboard {

@@ -142,10 +142,7 @@ namespace Survey.Controllers
 
             return RedirectToAction("GetCLData");
         }
-        public ActionResult CompleteReviewRating(int id)
-        {
-            return View();
-        }
+ 
         public ActionResult GetCLData()
         {
             if (Session["UserName"] == null)
@@ -179,9 +176,11 @@ namespace Survey.Controllers
             objSummary.LstReview = GetReviewDatas(Convert.ToInt16(PS_Id));
             objSummary.LstReview = objSummary.LstReview.Where(x => x.PRType == Qtype).ToList();
             objSummary.Final = new List<string>();
+            objSummary.LstQtype = SuvEnt.Database.SqlQuery<TotalQtype>("Usp_GetAllQTypes").ToList();
             objSummary.ProjectName = objSummary.LstReview.Select(o => o.PS_ProjectName).FirstOrDefault();
             objSummary.PS_Date = objSummary.LstReview.Select(o => o.PS_Date).FirstOrDefault();
             objSummary.PS_Status = objSummary.LstReview.Select(o => o.PS_Status).FirstOrDefault();
+            objSummary.Role = Role;
             string Id = "";
 
             if (objSummary.LstReview.Count > 0)
@@ -395,9 +394,11 @@ namespace Survey.Controllers
             objSummary.LstReview = new List<ReviewModel>();
             objSummary.LstReview = GetReviewDatas(id);
             objSummary.Final = new List<string>();
+            objSummary.LstQtype = SuvEnt.Database.SqlQuery<TotalQtype>("Usp_GetAllQTypes").ToList();
             objSummary.ProjectName = objSummary.LstReview.Select(o => o.PS_ProjectName).FirstOrDefault();
             objSummary.PS_Date = objSummary.LstReview.Select(o => o.PS_Date).FirstOrDefault();
             objSummary.PS_Status = objSummary.LstReview.Select(o => o.PS_Status).FirstOrDefault();
+            objSummary.Role = Role;
             string Id = "";
 
             if (objSummary.LstReview.Count > 0)
