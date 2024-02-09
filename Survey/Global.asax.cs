@@ -158,7 +158,7 @@ namespace Survey
 
         public void SendMail(string Name, string Link,string Project,string MailId,string recipientRole,string personsRole,string Qtype)
         {
-
+            var SigName = "Jacob Janik";
             ProjectMasterModel ObjprojectMaster = new ProjectMasterModel();
             ObjprojectMaster.lstEmailTemplate = SuvEnt.Database.SqlQuery<EmailTemplateModel>("usp_ListEmailMapDashboardDetails @p0","").ToList();
 
@@ -174,13 +174,13 @@ namespace Survey
             {
                 string emailBody = x.Body_Content;
                 emailBody = emailBody.Replace(Environment.NewLine, "<br>");
-                emailBody = emailBody.Replace("recipentName", $"<strong>{Name}</strong>");
-                emailBody = emailBody.Replace("project", $"<strong>{Project}</strong>");
-                emailBody = emailBody.Replace("link", $"<a href='{Link}'>{Project}</a>");
-                emailBody = emailBody.Replace("recipientRole", $"<strong>{recipientRole}</strong>");
-                emailBody = emailBody.Replace("personsName", $"<strong>{Name}</strong>");
-                emailBody = emailBody.Replace("personsRole", $"<strong>{personsRole}</strong>");
-                mail.Body = emailBody;
+                emailBody = emailBody.Replace("[recipentName]", $"<strong>{Name}</strong>");
+                emailBody = emailBody.Replace("[project]", $"<strong>{Project}</strong>");
+                emailBody = emailBody.Replace("[link]", $"<a href='{Link}'>{Project}</a>");
+                emailBody = emailBody.Replace("[recipientRole]", $"<strong>{recipientRole}</strong>");
+                emailBody = emailBody.Replace("[personsName]", $"<strong>{Name}</strong>");
+                emailBody = emailBody.Replace("[personsRole]", $"<strong>{personsRole}</strong>");
+                emailBody = emailBody.Replace("[SignatureName]", $"<strong><span style='color: orange;'>{SigName}</span></strong>");
 
                 System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12;
 

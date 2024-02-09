@@ -202,7 +202,7 @@ namespace Survey.Controllers
 
         public void SendEmail(string UserEmail, string link, string Subject, string project, string recipientName, string recipientRole, string personsName, string personsRole, string Qtype)
         {
-
+            var SigName = "Jacob Janik";
             MailMessage mail = new MailMessage();
             mail.To.Add(UserEmail);
             mail.From = new MailAddress("noreply@SurveySpyder.com");
@@ -217,13 +217,13 @@ namespace Survey.Controllers
                 string emailBody = x.Body_Content;
                 emailBody = $"{x.Body_Content} {recipientName}";
                 emailBody = emailBody.Replace(Environment.NewLine, "<br>");
-                emailBody = emailBody.Replace("recipentName", $"<strong>{recipientName}</strong>");
-                emailBody = emailBody.Replace("project", $"<strong>{project}</strong>");
-                emailBody = emailBody.Replace("link", $"<a href='{link}'>{project}</a>");
-                emailBody = emailBody.Replace("recipientRole", $"<strong>{recipientRole}</strong>");
-                emailBody = emailBody.Replace("personsName", $"<strong>{personsName}</strong>");
-                emailBody = emailBody.Replace("personsRole", $"<strong>{personsRole}</strong>");
-                mail.Body = emailBody;
+                emailBody = emailBody.Replace("[recipentName]", $"<strong>{recipientName}</strong>");
+                emailBody = emailBody.Replace("[project]", $"<strong>{project}</strong>");
+                emailBody = emailBody.Replace("[link]", $"<a href='{link}'>{project}</a>");
+                emailBody = emailBody.Replace("[recipientRole]", $"<strong>{recipientRole}</strong>");
+                emailBody = emailBody.Replace("[personsName]", $"<strong>{personsName}</strong>");
+                emailBody = emailBody.Replace("[personsRole]", $"<strong>{personsRole}</strong>");
+                emailBody = emailBody.Replace("[SignatureName]", $"<strong><span style='color: orange;'>{SigName}</span></strong>");
 
                 System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12;
 
