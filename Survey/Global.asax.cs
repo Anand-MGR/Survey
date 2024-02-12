@@ -47,13 +47,13 @@ namespace Survey
             #endregion
 
             #region Min Basis
-            // Calculate the initial delay to start the timer
-            //DateTime now = DateTime.Now;
-            //DateTime nextTwoMinutes = now.AddMinutes(1);
-            //TimeSpan initialDelay = nextTwoMinutes - now;
+            // //  Calculate the initial delay to start the timer
+           // DateTime now = DateTime.Now;
+           // DateTime nextTwoMinutes = now.AddMinutes(1);
+           // TimeSpan initialDelay = nextTwoMinutes - now;
 
-            // Schedule the task to run every 2 minutes
-            //_hourlyTimer = new Timer(SendRemainder, null, initialDelay, TimeSpan.FromMinutes(1));
+           ////// Schedule the task to run every 2 minutes
+           //_hourlyTimer = new Timer(SendRemainder, null, initialDelay, TimeSpan.FromMinutes(1));
             #endregion
         }
 
@@ -158,7 +158,9 @@ namespace Survey
 
         public void SendMail(string Name, string Link,string Project,string MailId,string recipientRole,string personsRole,string Qtype)
         {
-            var SigName = "Jacob Janik";
+           // var SigName = "Jacob Janik";
+           // var SigName = "Jacob Janik";
+            
             ProjectMasterModel ObjprojectMaster = new ProjectMasterModel();
             ObjprojectMaster.lstEmailTemplate = SuvEnt.Database.SqlQuery<EmailTemplateModel>("usp_ListEmailMapDashboardDetails @p0","").ToList();
 
@@ -180,7 +182,14 @@ namespace Survey
                 emailBody = emailBody.Replace("[recipientRole]", $"<strong>{recipientRole}</strong>");
                 emailBody = emailBody.Replace("[personsName]", $"<strong>{Name}</strong>");
                 emailBody = emailBody.Replace("[personsRole]", $"<strong>{personsRole}</strong>");
-                emailBody = emailBody.Replace("[SignatureName]", $"<strong><span style='color: orange;'>{SigName}</span></strong>");
+                // emailBody = emailBody.Replace("[SignatureName]", $"<strong><span style='color: orange;'>{SigName}</span></strong>");
+                emailBody = emailBody.Replace("[SignatureName]", $"<b style='color: orange;font-family: Arial, Helvetica, sans-serif; font-size:20px;'>Jacob Janik</b><br>" +
+                "Project Manager Lead<br>" +
+                "<b>Proven IT</b><br><br>" +
+                "<img src='~/images/smartphone_254638.png' style='width:10px;height:10px;'> <span style='color: black;'>(708) 407 - 2947</span><br>" +
+                "<img src='~/images/pin_3177361.png' style='width:10px;height:10px;'> <span style='color: black;'>18450 Crossing Dr, Tinley Park, IL 60487</span><br>" +
+                "<img src='link_logo_url' style='width:10px;height:10px;'> <a href='http://www.provenit.com' style='color: blue;'>www.provenit.com</a></p>");
+                mail.Body = emailBody;
 
                 System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12;
 

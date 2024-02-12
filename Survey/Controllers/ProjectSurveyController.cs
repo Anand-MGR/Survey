@@ -224,6 +224,7 @@ namespace Survey.Controllers
                 emailBody = emailBody.Replace("[personsName]", $"<strong>{personsName}</strong>");
                 emailBody = emailBody.Replace("[personsRole]", $"<strong>{personsRole}</strong>");
                 emailBody = emailBody.Replace("[SignatureName]", $"<strong><span style='color: orange;'>{SigName}</span></strong>");
+                mail.Body = emailBody;
 
                 System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12;
 
